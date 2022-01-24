@@ -1,0 +1,59 @@
+# 스프링의 지식체계 계열화
+1. 환경설정에 대한 이해
+	- view : 
+		front단 처리
+		jquery + bootstrap
+		
+2. 스프링의 기본적인 처리 순서.
+	web.xml ==> dispatcher-servlet.xml ==> controller ==> view 호출..
+	1) 스프링 MVC 초기화면 호출.
+		- controller 생성
+			- urlpattern 설정, 기능 메서드 호출.
+			- @Controller 설정.
+			- model 데이터,
+			- view단 호출.
+		- dispatcher-servlet.xml에 controller 등록
+		- view단 모델 데이터 호출..
+		- controller에 설정되어 있는 url 패턴으로 호출하여 화면 로딩 처리..
+			
+3. DI에 대한 이해 및 처리.
+
+4. spring MVC
+	1) controller 호출 방식
+		- url 패턴
+		- 요청값 처리.
+	2) model 처리
+	
+	3) view단 처리..
+	
+	4)
+	
+5. databbase 처리를 위한 mybatis framework 활용
+
+6. AOP
+
+7. 기타 실무 예제.. 
+
+
+# 스프링 기본 호출 처리. 
+1. controller 클래스 만들기
+2. @Annotation Controller 설정
+3. dispatcher-servlet에 controller 등록하기..
+4. @RequestMapping("/gogo.do")
+	함께하는 기능메서드 선언 : 주의 /gogo2.do 기존의 이름이 아니어야 한다.
+5. 메서드 선언
+	public String 메서드명(){
+		return "리턴할 view";
+	}
+6. 요청값 형식 설정
+	?name=himan&pass=7777
+	public String 메서드명(@RequestParam("name") String name,
+						   @RequestParam("pass") String pass,
+						   @RequestParam("age") int age
+	){
+	요청값은 매개변수로 @RequestParam("요청키") 받을데이터유형 변수명
+
+7. 위 url + 요청값으로 포함해서.
+	http://localhost:7080/springweb/gogo2.do?name=himan&pass=7777
+	으로 해서 위의 기능 메서드를 호출하여 처리한다.
+	

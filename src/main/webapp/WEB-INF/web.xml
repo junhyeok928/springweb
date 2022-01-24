@@ -12,7 +12,11 @@
 <!-- 
   # 스프링에서 지원하는 공통 servlet 설정
   	url주소로 @@@.do 라고 마지막에 붙을 때, spring의 공통 controller인
-  	DispatcherServlet을 수행 처리 한다.
+  		DispatcherServlet을 수행 처리 한다.
+  		- front 컨트롤단이 설정이 되고, 이에대한 구체적으로 configuration 설정을
+  		따로 xml로 선언하여 사용하여야 한다.
+  		- default 컨테이너 이름 : dispatcher-servlet.xml
+  			ex) dispatcher를 dispatcher2라고 했다면 dispatcher2-servlet.xml
   # 요청값에 대한 한글 encoding를 filter객체로 처리
 -->
 	<servlet>
