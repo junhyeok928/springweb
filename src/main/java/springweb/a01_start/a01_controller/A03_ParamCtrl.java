@@ -4,6 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import springweb.vo.Person;
+import springweb.vo.Product;
+
 // springweb.a01_start.a01_controller.A03_ParamCtrl
 @Controller
 public class A03_ParamCtrl {
@@ -34,5 +37,30 @@ public class A03_ParamCtrl {
 		System.out.println("cal="+cal);
 		return "WEB-INF\\views\\a05_gogo.jsp";
 	}
-
+	/*
+	# 요청값은 객체로 setXXXX(데이터)에 맞게 처리하면 받을 수 있다.
+	url?id=himan&pass=8888
+	
+	setId(String id){}, setPass(String pass)가 있는 객체를
+	매개변수로 선언하면 데이터를 받을 수 있다.
+	 */
+	// 객체를 통한 내용을 요청값이 없더라도 일단 로딩이되고,
+	// 타입에 맞는 데이터를 처리하여야 한다.
+	// http://localhost:7080/springweb/objParam.do?name=%ED%99%8D%EA%B8%B8%EB%8F%99&age=25&loc=%EC%84%9C%EC%9A%B8
+	@RequestMapping("/objParam.do")
+	public String objParam(Person p01) {
+		System.out.println("# 객체를 통한 요청값 #");
+		System.out.println(p01.getName());
+		System.out.println(p01.getAge());
+		System.out.println(p01.getLoc());
+		return "";
+	}
+	@RequestMapping("/buyProduct.do")
+	public String objbuy(Product p02) {
+		System.out.println("# 객체를 통한 요청값 #");
+		System.out.println(p02.getName());
+		System.out.println(p02.getPrice());
+		System.out.println(p02.getCnt());
+		return "";
+	}
 }

@@ -27,9 +27,19 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<bean class="springweb.a01_start.a01_controller.A01_StartController"></bean>
-	<bean class="springweb.a01_start.a01_controller.A02_StartExp"></bean>
-	<bean class="springweb.a01_start.a01_controller.A03_ParamCtrl"></bean>
-	<bean class="springweb.a01_start.a01_controller.A04_MemberCtrl"></bean>
-	<bean class="springweb.a01_start.a01_controller.A05_ModelCtrl"></bean>
+	<!-- 
+	# 생성자의 활용
+	1. 생성자의 속성 설정
+		1) constructor-arg
+		2) 순서로 설정 옵션
+		AirPlane ap = new AirPlane("K104","대한항공");
+	 -->
+	 <bean id="ap" class="a01_diexp.vo.AirPlane">
+	 	<constructor-arg value="K104"/>
+	 	<constructor-arg value="대한항공" />
+	 </bean>
+	 <bean id="am" class="a01_diexp.vo.Apartment">
+	 	<constructor-arg value="103"/>
+	 	<constructor-arg value="707"/>
+	 </bean>
 </beans>

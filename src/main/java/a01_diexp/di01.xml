@@ -27,9 +27,27 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<bean class="springweb.a01_start.a01_controller.A01_StartController"></bean>
-	<bean class="springweb.a01_start.a01_controller.A02_StartExp"></bean>
-	<bean class="springweb.a01_start.a01_controller.A03_ParamCtrl"></bean>
-	<bean class="springweb.a01_start.a01_controller.A04_MemberCtrl"></bean>
-	<bean class="springweb.a01_start.a01_controller.A05_ModelCtrl"></bean>
+	<!-- 
+	# container에서 객체 생성과 메서드 활용
+	1. 객체 생성
+		1) vo클래스를 선언, 패키지명.클래스명 복사.
+		2) class="패키지명.클래스"
+			컨테이너안에서 Person p01 = new Person();
+	2. 기능 메서드의 활용
+		1) property name = "set프로퍼티명" value="할당데이터"
+			p01.setName("홍길동");
+	 -->
+	 <bean id="f01" class="a01_diexp.vo.Fruit">
+	 	<property name="name" value="사과"/>
+	 	<property name="price" value="2000"/>
+	 	<property name="prodLoc" value="대구"/>
+	 </bean>
+	 <!-- 
+	 ex) a01_diexp.vo 안에 Duck 클래스를 선언하고, 오리의 종류와 색상의 필드로
+	 선언하여, DI로 호출하여 main에서 출력하세요
+	  -->
+	  <bean id="d01" class="a01)diexp.vo.Duck">
+	  	<property name="kind" value="청둥오리"></property>
+	  	<property name="color" value="회색"></property>
+	  </bean>
 </beans>

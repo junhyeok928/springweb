@@ -27,9 +27,5 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<bean class="springweb.a01_start.a01_controller.A01_StartController"></bean>
-	<bean class="springweb.a01_start.a01_controller.A02_StartExp"></bean>
-	<bean class="springweb.a01_start.a01_controller.A03_ParamCtrl"></bean>
-	<bean class="springweb.a01_start.a01_controller.A04_MemberCtrl"></bean>
-	<bean class="springweb.a01_start.a01_controller.A05_ModelCtrl"></bean>
+
 </beans>

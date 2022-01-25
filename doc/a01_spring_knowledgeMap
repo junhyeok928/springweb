@@ -1,24 +1,53 @@
 # 스프링의 지식체계 계열화
 1. 환경설정에 대한 이해
-	- view : 
-		front단 처리
+	- view :
+		front단 처리 
 		jquery + bootstrap
-		
+
 2. 스프링의 기본적인 처리 순서.
 	web.xml ==> dispatcher-servlet.xml ==> controller ==> view 호출..
+	웹서버를 기동하고, 브라우저 주소값을 입력하고 서버에 접속할 때, web.xml에
+	가장 먼저 접근한다.
+	web.xml에서 설정한 내용을 기동한다.
+	1. 초기 default 화면 로딩 : <welcome-file-list>
+		http://localhost:7080/springweb/ 으로 호출되는 파일 순서 리스트
+	2. front controller 설정
+		*.do 끝나면 스프링 프레임워크 환경으로 호출되게 설정
+		DispatcherServlet ==> 사용자정의 controller를 호출.
+	3. DispatcherServlet 선언과 함께, WAS로 통해 사용할 객체들과 설정 내용을
+		dispatcher-servlet.xml 안에 선언하고, 이 선언된 내용을 
+		첫번째 url을 호출할 때, 메모리에 로딩 된다.
+	4. 메모리에 로딩된 객체들 중에 url 패턴이 맞는 controller 안에 기능 메서드를 호출한다.
+		1) 요청하는 url
+			서버내용 동일한 url pattern을 설정하면 에러가 발생한다.
+			@RequestMapping("/start.do")
+		2) 요청값 즉, query string에 대한 처리
+		3) model 데이터 설정 처리
+		4) 호출한 view을 forward방식으로 호출
+			cf) redirect방식과 forward 방식의 차이..
+				redirect : request,response 객체를 포함시키지 않고 호출하기에	
+						모델데이터를 처리할 수 없다.
+				forward : request, response 객체를 포함시키면서 호출하기에 
+						요청값, 모델데이터를 처리할 수 있다.
+		@RequestMapping("/start.do")
+		public String start() {
+			return "WEB-INF\\views\\a01_springStart.jsp";
+		}		 
+	
+	
+	
 	1) 스프링 MVC 초기화면 호출.
 		- controller 생성
-			- urlpattern 설정, 기능 메서드 호출.
+			- urlpattern 설정, 기능메서드 호출.
 			- @Controller 설정.
 			- model 데이터,
 			- view단 호출.
 		- dispatcher-servlet.xml에 controller 등록
 		- view단 모델 데이터 호출..
 		- controller에 설정되어 있는 url 패턴으로 호출하여 화면 로딩 처리..
-			
 3. DI에 대한 이해 및 처리.
 
-4. spring MVC
+4. spring MVC 
 	1) controller 호출 방식
 		- url 패턴
 		- 요청값 처리.
@@ -26,34 +55,45 @@
 	
 	3) view단 처리..
 	
-	4)
-	
-5. databbase 처리를 위한 mybatis framework 활용
+	4) 
+
+5. database 처리를 위한  mybatis framework 활용
+
 
 6. AOP
 
-7. 기타 실무 예제.. 
+
+7. 기타 실무 예제..
 
 
-# 스프링 기본 호출 처리. 
+
+# 스프링 기본 호출 처리.
 1. controller 클래스 만들기
-2. @Annotation Controller 설정
+2. @Annotation Controller 설정.
 3. dispatcher-servlet에 controller 등록하기..
-4. @RequestMapping("/gogo.do")
-	함께하는 기능메서드 선언 : 주의 /gogo2.do 기존의 이름이 아니어야 한다.
-5. 메서드 선언
+4. @RequestMapping("/gogo2.do")
+   함께하는 기능메서드 선언 : 주의	/gogo2.do 기존의 이름이 아니어야 한다.
+5. 메서드 선언.
 	public String 메서드명(){
 		return "리턴할 view";
-	}
+	}   
 6. 요청값 형식 설정
-	?name=himan&pass=7777
+	?name=himan&pass=7777&age=25
 	public String 메서드명(@RequestParam("name") String name,
-						   @RequestParam("pass") String pass,
-						   @RequestParam("age") int age
-	){
+					     @RequestParam("pass") String pass,
+					     @RequestParam("age") int age
+					      
+		){	
+	
 	요청값은 매개변수로 @RequestParam("요청키") 받을데이터유형 변수명
-
-7. 위 url + 요청값으로 포함해서.
+7. 위 url + 요청값으로 호함해서.
 	http://localhost:7080/springweb/gogo2.do?name=himan&pass=7777
 	으로 해서 위의 기능 메서드를 호출하여 처리한다.
+	
+	
+	
+	
+	
+
+
 	
