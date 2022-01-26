@@ -27,5 +27,88 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-
+	<!-- 
+	# 1:다 관계 객체 선언과 활용.
+	1. 마트에서 여러가지 물건을 구매할 수 있듯이, 객체는 1:다 관계로 설정하여 사용할 수 있다.
+	2. 선언 순서
+		1) 포함될 객체
+			물건객체 - 생성자를 통해서 선언하되 id값을 여러가지로 선언하여 사용할 수 있다.
+		2) 포함할 객체
+			마트객체
+				마트명, ArrayList<Product> 형태로 필드를 선언한다.
+				위에 선언한 물건 객체를 setList(ArrayList<Product> plist)로 담을 수 있다.
+		3) di의 xml 형태로 다중의 객체 할당하기..
+			property name="list"
+				list
+					ref bean = "선언된 객체의 참조변수1"
+					ref bean = "선언된 객체의 참조변수2"
+					ref bean = "선언된 객체의 참조변수3"
+		 -->
+	<!-- 구매할 객체 선언 -->
+	<bean id = "prod01" class="a01_diexp.vo.Product">
+		<constructor-arg value="사과"/>
+		<constructor-arg value="2000"/>
+	</bean>
+	<bean id = "prod02" class="a01_diexp.vo.Product">
+		<constructor-arg value="바나나"/>
+		<constructor-arg value="4000"/>
+	</bean>
+	<bean id = "prod03" class="a01_diexp.vo.Product">
+		<constructor-arg value="딸기"/>
+		<constructor-arg value="12000"/>
+	</bean>
+	<!-- 
+	Product prod01 = new Product("사과",3000);
+	Product prod02 = new Product("바나나",4000);
+	Product prod03 = new Product("딸기",12000);
+	
+	포함할 객체 선언 
+	Mart mt = new Mart("행복마트");
+	ArrayList<Product> plist = new ArrayList<Product>();
+	plist.add(prod01);
+	plist.add(prod02);
+	plist.add(prod03);
+	mt.setPlist(plist);
+	-->
+	<bean id="mt" class="a01_diexp.vo.Mart">
+		<constructor-arg value="행복마트"/>
+		<property name="plist">
+			<list>	<!-- 해당 메서드를 통해서 들어올 수 있는 객체가 ArrayList형이기에 선언 -->
+				<ref bean="prod01"/>	<!-- 추가 되는 내용이 객체형일  -->
+				<ref bean="prod02"/>	<!-- 추가 되는 내용이 객체형일  -->
+				<ref bean="prod03"/>	<!-- 추가 되는 내용이 객체형일  -->
+			</list>
+		</property>
+	</bean>
+	<!-- 
+	ex) Bus-버스번호, ArrayList<Passenger>
+		void showPassenger()
+			@@ 번 버스의 탑승자들..
+		Passenger(승객)-이름, 나이
+		1) VO클래스 선언. : Passenger. Bus
+		2) 컨테이너에서 호출
+		3) main()에서 Bus id로 호출.. 
+		-->
+	<bean id="pass1" class="a01_diexp.vo.Passenger">
+		<constructor-arg value="홍길동"/>
+		<constructor-arg value="25"/>
+	</bean>
+	<bean id="pass2" class="a01_diexp.vo.Passenger">
+		<constructor-arg value="김길동"/>
+		<constructor-arg value="27"/>
+	</bean>
+	<bean id="pass3" class="a01_diexp.vo.Passenger">
+		<constructor-arg value="마길동"/>
+		<constructor-arg value="32"/>
+	</bean>
+	<bean id="b01" class="a01_diexp.vo.Bus">
+		<constructor-arg value="3030"/>
+		<property name="passList">
+			<list>
+				<ref bean="pass1"/>
+				<ref bean="pass2"/>
+				<ref bean="pass3"/>
+			</list>
+		</property>
+	</bean>
 </beans>

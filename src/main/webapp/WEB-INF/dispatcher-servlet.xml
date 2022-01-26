@@ -32,4 +32,5 @@
 	<bean class="springweb.a01_start.a01_controller.A03_ParamCtrl"></bean>
 	<bean class="springweb.a01_start.a01_controller.A04_MemberCtrl"></bean>
 	<bean class="springweb.a01_start.a01_controller.A05_ModelCtrl"></bean>
+	<bean class="springweb.a01_start.a01_controller.A06_ModelAttributeCtrl"></bean>
 </beans>

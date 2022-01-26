@@ -3,7 +3,6 @@ package a01_diexp;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import a01_diexp.vo.GentleMan;
-import springweb.vo.Person;
 
 public class DIExp_03 {
 

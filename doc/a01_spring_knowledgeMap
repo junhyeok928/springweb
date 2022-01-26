@@ -46,7 +46,9 @@
 		- view단 모델 데이터 호출..
 		- controller에 설정되어 있는 url 패턴으로 호출하여 화면 로딩 처리..
 3. DI에 대한 이해 및 처리.
-
+	dispatcher-servlet.xml의 스프링에서 사용되는 컨테이너 메모리의 사용방법을
+	xml파일과 main()메서드가 있는 클래스를 통해 연습한다.
+	이 후, 전체 컨테이너 설정 및 활용을 하고자 한다.
 4. spring MVC 
 	1) controller 호출 방식
 		- url 패턴

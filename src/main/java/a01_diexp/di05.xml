@@ -27,5 +27,69 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	<!-- 
+	# 다양한 구조체의 컨테이너 설정..
+	1. list : 배열, ArrayList 객체를 설정할 때, 사용된다.
+	2. set : 중복을 하지 않지만, 순서를 확보 못하는 구조체 객체..
+		property="agent"		
+			set
+				value 입력
+		public void setAgent(Set<String> agent)
+	3. map : key/value 형식의 데이터를 할당할 때 사용되는 객체
+		Map<key, valueObj>
+		map
+			entry
+				key/value
+		public void setConfig(Map<String, Integer> config)
+	4. Properties : key/value 형식 데이터 등록
+		props
+			prop key="키" value="값"
+	
+	 -->
+	 <bean id="sensor01" class="a01_diexp.vo.Sensor">
+		<!-- void setAgent(Set<String> agent) -->
+	 	<property name="agent">
+	 		<set>
+	 			<value>주식매매</value>
+	 			<value>주시매매</value>
+	 			<value>자산관리</value>
+	 			<value>자산관리</value>
+	 			<value>주식매매</value>
+	 			<value>주식매매</value>
+	 			<value>보험관리</value>
+	 		</set>
+	 	</property>
+	 	<!-- void setAddInfo(Properties addInfo) -->
+	 	<property name="addInfo">
+	 		<props>
+	 			<prop key="threshold">1500</prop>
+	 			<prop key="retry">3</prop>
+	 		</props>
+	 	</property>
+	 </bean>
+	 <!-- 
+	 # 선수지식
+	 1. Set객체에 대한 이해.
+	 2. Properties에 대한 이해
+	 3. class에서 포함되는 객체의 관계 설정.. -->
+	 <bean id="fs" class="a01_diexp.vo.FruitShop">
+	 	<property name="fnames"> <!-- setFnames(Set<String> fnames -->
+	 		<set>
+	 			<value>사과</value>
+	 			<value>사과</value>
+	 			<value>바나나</value>
+	 			<value>바나나</value>
+	 			<value>딸기</value>
+	 			<value>딸기</value>
+	 		</set>
+	 	</property>
+	 	<property name="fruitInfos"> <!-- setFruitInfos(Properties fruitInfos -->
+	 		<props>
+	 			<prop key="사과">1500</prop>
+	 			<prop key="바나나">4500</prop>
+	 			<prop key="딸기">25000</prop>
 
+	 		</props>
+	 	</property>
+	 </bean>
 </beans>

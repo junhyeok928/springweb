@@ -50,4 +50,16 @@
 	  	<property name="kind" value="청둥오리"></property>
 	  	<property name="color" value="회색"></property>
 	  </bean>
+	  <!-- 
+	  bean id= "f01" class="a01_diexp.vo.Fruit"
+	  Fruit f01 = new Fruit();
+	  
+	  property : 클래스 선언 바로 밑에 있는 필드를 지칭하는 것이 아니고,
+	  	setXXX, getXXX 메서드에 set/get빼고, 모두 소문자로 변경된 명칭을 말한다.
+	  	이것을 쓰이는 이유는 encapsulation로 필드값에 대한 보안상 보호를 위해서 한다.
+	  	setName, getName ==> set/get를 빼고 Name을 소문자로 바꾼 name이 프로퍼티 이다.
+	  	일반적으로 접근 제어자인 private로 설정한 private String name과 동일해서
+	  	오인을 하지만, 반드시, 접근제어자 public에 의해 저장 및 읽기를 하는 set/get
+	  	메서드를 호출하는 것을 기억하여야 한다.
+	   -->
 </beans>
