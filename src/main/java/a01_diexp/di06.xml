@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 # xml의 dtd 선언 부분
-1. dtd : 상단의 어떤 태그를 사용할지를 선언하는 부분,
+1. dtd : 상단에 어떤 태그를 사용할지를 선언하는 부분.
 2. dtd에 맞는 태그를 활용 할 수 있다.
 # 스프링은 이 dispacher-servlet.xml에서 선언한 클래스들을 
 객체로 컨테이너에서 로딩 후, 해당 객체들을 url 패턴으로 호출하여 처리한다.
@@ -27,47 +27,50 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<!-- 
-	# autowire
-	1. 컨테이너 내부에 객체가 메모리 로딩될때, 연관되는 메서드가 있으면 자동으로 객체가 할당되게
-		처리 하는 것을 말한다.
-		(객체1) (객체2)
-		메모리가 메소드나 기타 속성으로 의존관계에 있으면 자동할당.
-	2. public void setProd(Product prod)가 되어 있어서, 객체를 할당할 수 있으면
-		설정옵션 autowire에 의해 객체가 자동 할당된다.
-	3. autowire="byType" 객체가 자동 할당된다.
-		autowire 속성값
-		1) byType : 메서드를 통해서 해당 객체의 type이 정의 될 때, 자동으로 할당.
-		2) byName : 메서드를 통해서 해당 객체의 type이 있고,
-			참조변수가 메서드 property와 동일할 때 자동으로 할당 된다.
-			(객체1)		(객체2)		(객체3)
-			Product		Product		Mart	setProduct(Product pr)
-			Product1	Product		autowire="byName" 메서드의 property가 같은
-														객체2의 참조변수가 할당된다.
-		3) constructor : 생성자가 정의로 해당 type이 있을 때.
-		4) autodetect : 생성자나 메서드가 해당 type이 있을 때, 자동으로 할당된다.
-	 -->
-	 <bean id ="han" class="a01_diexp.vo.HandPhone">
-	 	<constructor-arg value="갤럭시20"/>
-	 	<constructor-arg value="삼성전자"/>
-	 </bean>
-	 <!-- 
-	 autowire="byType" 를 통해서 스프링 컨테이너 메모리가 해당 객체 타입으로 들어올 수
-	 있는 메서드가 정의가 되면 자동으로 할당이 되게 처리하는 것을 말한다.
-	 명시적으로 property를 선언하지 않더라도 할당이 되는 것을 말한다.
-	  -->
-	 <bean id="gt" class="a01_diexp.vo.GentleMan" autowire="byType">
-	 	<constructor-arg value="마길동"/>
-	 </bean>
-	 <!-- 
-	 ex) 로미오객체 줄리엣객체를 만들고, 줄리엣 객체 안에 로미오 객체를 선언하여
-	 autowire로 해당 객체가 자동으로 설정되어 출력되게 하세요..
-	  -->
-	 <bean id ="rom" class="a01_diexp.vo.Romeo">
-	 	<constructor-arg value="로미오"/>
-	 	<constructor-arg value="24"/>
-	 </bean>
-	 <bean id="jul" class="a01_diexp.vo.Juliet" autowire="byType">
-	 	<constructor-arg value="25"/>
-	 </bean>
+<!-- 
+ 	# autowire
+ 	1. 컨테이너 내부에 객체가 메모리 로딩될때, 연관되는 메서드가 있으면 자동으로 객체가 할당되게 
+ 	`	처리 하는 것을 말한다.
+ 		(객체1)  (객체2)
+ 		메모리가 메소드나 기타 속성으로 의존관계에 있으면 자동할당.
+ 	2. public void setProd(Product prod)가 되어 있어서, 객체를 할당할 수 있으면 
+ 		설정옵션 autowire에 의해 객체가 자동 할당된다.
+ 	3. autowire="byType" 객체가 자동할당된다.
+ 	 	autowire 속성값
+ 	 	1) byType : 메서드를 통해서 해당 객체의 type이 정의될 때, 자동으로 할당.
+ 	 	2) byName : 메서드를 통해서 해당 객체의 type이 있고,
+ 	 		참조변수가 메서드 property와 동일할 때 자동으로 할당 된다.
+ 	 		 (객체1)     (객체2)     (객체3)
+ 	 		 Product    Product    Mart  setProduct(Product pr)
+ 	 		 product1   product    autowire="byName"  메서드의 property가 같은 
+ 	 		 						객체2의 참조변수가 할당된다.
+ 	 	3) constructor : 생성자가 정의로 해당 type이 있을 때.
+ 	 	4) autodetect : 생성자나 메서드가 해당 type이 있을 때, 자동으로 할당된다.	 	
+ -->
+ 	<bean id="han" class="a01_diexp.vo.HandPhone">
+ 		<constructor-arg value="갤럭시20"/>
+ 		<constructor-arg value="삼성전자"/>
+ 	</bean>		
+ 	<!-- 
+ 	autowire="byType" 를 통해서 스프링 컨테이너 메모리가 해당 객체 타입으로 들어올 수
+ 	있는 메서드가 정의가 되면 자동으로 할당이 되게 처리하는 것을 말한다.
+ 	명시적으로 property를 선언하지 않더라도 할당이 되는 것을 말한다.
+ 	 -->
+ 	<bean id="gt" class="a01_diexp.vo.GentleMan" autowire="byType" >
+ 		<constructor-arg value="마길동"/>
+ 	</bean>		
+ 	<!-- 
+ 	ex) 로미오객체 줄리엣객체를 만들고, 줄리엣 객체 안에 로미오 객체를 선언하여
+ 	autowire로 해당 객체가 자동으로 설정되어 출력되게 하세요..
+ 	
+ 	 -->
+ 	
+ 	<bean id="juliet" class="a01_diexp.vo.Juliet" autowire="byType">
+		<constructor-arg value="줄리엣"/>
+	</bean>
+	<!-- autowire를 처리하여, 자동으로 객체와 객체가 연관되게 처리.. 
+	
+	-->
+	<bean id="romeo" class="a01_diexp.vo.Romeo" autowire="byType"/>
+ 	
 </beans>

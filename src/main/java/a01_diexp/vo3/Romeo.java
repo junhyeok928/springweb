@@ -1,7 +1,19 @@
-package a01_diexp.vo;
+package a01_diexp.vo3;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 // a01_diexp.vo.Romeo
+/*
+# 컨테이너라는 메모리 공간에
+
+클래스를 선언하면	(로미오객체)	(줄리엣객체)
+이렇게 객체가 생성이된다.
+ */
+@Component("r01")
 public class Romeo {
 	private String name;
+	@Autowired
 	private Juliet juliet;
 	public Romeo() {
 		this.name="로미오";

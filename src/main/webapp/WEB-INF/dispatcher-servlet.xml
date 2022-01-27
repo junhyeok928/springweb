@@ -27,10 +27,19 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<bean class="springweb.a01_start.a01_controller.A01_StartController"></bean>
-	<bean class="springweb.a01_start.a01_controller.A02_StartExp"></bean>
-	<bean class="springweb.a01_start.a01_controller.A03_ParamCtrl"></bean>
-	<bean class="springweb.a01_start.a01_controller.A04_MemberCtrl"></bean>
-	<bean class="springweb.a01_start.a01_controller.A05_ModelCtrl"></bean>
-	<bean class="springweb.a01_start.a01_controller.A06_ModelAttributeCtrl"></bean>
+		<!--  springweb 하위에 있는 패키지는 자동 등록 처리
+			Component controller, service, dao
+			
+			springweb 하위 패키지에 있는 @Controller,
+			@Service, @Repository가 선언되어 있으면 객체를 선언하여 로딩이
+			된 상황과 동일하다..
+			
+			웹서버가 기동이 되면 모든 springweb에 있는 객체가 로딩이 된다.
+			(A01_StartController)	(A01_StartService)
+		 -->
+		<context:component-scan base-package="springweb">
+			<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+			<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+			<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+		</context:component-scan>
 </beans>

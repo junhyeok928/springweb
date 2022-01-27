@@ -1,7 +1,13 @@
-package a01_diexp.vo;
+package a01_diexp.vo3;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 // a01_diexp.vo.Juliet
+@Component("j01")
 public class Juliet {
 	private String name;
+	@Autowired
 	private Romeo romeo;
 	public Juliet() {
 		super();

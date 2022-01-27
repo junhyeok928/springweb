@@ -27,5 +27,37 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-
+	<!-- 
+	# 소스를 통한 autowiring 처리
+	1. 컨테이너에서는 객체 생성만 하고, 연관관계 설정은 객체에 선언으로 처리할 수 있다.
+	2. 처리 순서
+		1) 스프링 컨테이너는 객체 생성.
+		2) 생성된 객체에서 autowiring annotation 선언..
+		3) main()에서 해당 객체를 통해 연관 관계 할당 여부 확인..
+	3. 주의 사항.
+		1) injection(의존성 주입) 은 접근제어자 상관없이 처리가 가능하다.
+			- 필드, 메서드에서 가능하다.
+		2) 의존성 주입으로 인해 객체생성을 하지 않고, 컨테이너 객체들끼리 할당이 가능하다. 
+	-->
+	<!--  버젼에 따라서 소스상 autowiring을 할 때, 필요하다. -->
+	<context:annotation-config/>
+	<bean id="gm" class="a01_diexp.vo.GentleMan">
+		<constructor-arg value="홍신사"/>
+	</bean>	 
+	
+	<bean id="hp" class="a01_diexp.vo.HandPhone">
+		<constructor-arg value="아이폰13"/>
+		<constructor-arg value="apple"/>
+	</bean>
+	<!-- 
+	ex) 클래스 선언 GiftSender: 이름, Product,
+	 -->
+	<bean id="gs" class="a01_diexp.vo.GiftSender">
+		<constructor-arg value="전준혁"/>
+	</bean>	 
+	
+	<bean id="pr" class="a01_diexp.vo.Product">
+		<constructor-arg value="신발"/>
+		<constructor-arg value="300000"/>
+	</bean>
 </beans>

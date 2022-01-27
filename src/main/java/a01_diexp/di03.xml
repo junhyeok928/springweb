@@ -53,6 +53,12 @@
 		<!-- 객체가 할당될 때는 ref(reference)라는 참조 속성을 설정하여
 			처리한다. -->
 	</bean>
+	<bean id ="juliet" class="a01_diexp.vo.Juliet">
+		<constructor-arg value="줄리엣"/>
+	</bean>
+	<bean id = "romeo" class="a01_diexp.vo.Romeo">
+		<property name="juliet" ref="juliet"/>
+	</bean>
 </beans>
 
 

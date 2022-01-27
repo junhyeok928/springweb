@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 # xml의 dtd 선언 부분
-1. dtd : 상단의 어떤 태그를 사용할지를 선언하는 부분,
+1. dtd : 상단에 어떤 태그를 사용할지를 선언하는 부분.
 2. dtd에 맞는 태그를 활용 할 수 있다.
 # 스프링은 이 dispacher-servlet.xml에서 선언한 클래스들을 
 객체로 컨테이너에서 로딩 후, 해당 객체들을 url 패턴으로 호출하여 처리한다.
@@ -27,5 +27,46 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-
+	<!-- 
+	# byName에 대한 의존성 자동 주입설정하기..
+	1. 하나의 컨테이너에 동일한 type의 여러 객체가 선언되어 있을 때, 해당 타입으로만으로
+		의존성 자동 주입에 대하여 모호성일 발생한다.
+	2. 이 때, 메서드의 set property와 동일한 이름으로 id를 식별자 설정하면 해당하는 객체가 설정이 되어
+		처리 된다.	
+	 -->	
+	<bean id="r01" class="a01_diexp.vo.Romeo">
+		<constructor-arg value="김로미오"/>
+	</bean>	 
+	 
+	<bean id="romeo" class="a01_diexp.vo.Romeo">
+		<constructor-arg value="신로미오"/>
+	</bean>	 
+	<bean id="r03" class="a01_diexp.vo.Romeo">
+		<constructor-arg value="오로미오"/>
+	</bean>
+		
+	<!-- byType을 하면 같은 컨테이너에 여러개의 객체가 할당이 가능하여 식별이 불가능하다. 
+	
+		setRomeo 가 있기에 id는 remoe가 있으면 그 객체가 할당이 된다.
+	--> 
+	<bean id="j01" class="a01_diexp.vo.Juliet" autowire="byName"/>
+	<!-- 
+	ex) WorkLocation - 필드로 일하는 위치(서울/대구../미국)
+	    Worker - 이름, 	WorkLocation	
+		클래스를 만들고, 각 객체를 할당하는 부분을 설정하여 처리하세요.
+			WorkLocation 3개 선언, byName에 의해 자동 주입처리.
+		3조제출, 다하신조/풀이가 필요하신 조 손들기
+	 --> 
+	<bean id="wl01" class="a01_diexp.vo.WorkLocation">
+		<constructor-arg value="서울"/>
+	</bean>	 
+	<bean id="wl02" class="a01_diexp.vo.WorkLocation">
+		<property name="loc" value="대구"/>
+	</bean>	 
+	<bean id="loc" class="a01_diexp.vo.WorkLocation">
+		<property name="loc" value="광주"/>
+	</bean>	 
+	<bean id="w01" class="a01_diexp.vo.Worker" autowire="byName">
+		<constructor-arg value="홍길동"/>
+	</bean>	 
 </beans>

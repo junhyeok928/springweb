@@ -5,7 +5,10 @@
 		jquery + bootstrap
 
 2. 스프링의 기본적인 처리 순서.
-	web.xml ==> dispatcher-servlet.xml ==> controller ==> view 호출..
+	http://locahost:7080/springweb
+	web.xml ==> front 컨트롤단(*.do) DispatcherServlet 
+		dispatcher-servlet.xml(사용할 객체가 메모리에 로딩된 스프링 컨테이너 선언)
+		 ==> controller(RequstMapping("@@@.do")선언된 메서드 호출 ==> view 호출..
 	웹서버를 기동하고, 브라우저 주소값을 입력하고 서버에 접속할 때, web.xml에
 	가장 먼저 접근한다.
 	web.xml에서 설정한 내용을 기동한다.
@@ -33,7 +36,9 @@
 		public String start() {
 			return "WEB-INF\\views\\a01_springStart.jsp";
 		}		 
-	
+		주의) WEB-INF는 보안 폴드이기에 직접적인 호출은 불가능하게 되어 있다.
+			스프링의 경로 보안을 위해 controller 단위 url를 통해서만 view단이 호출되게 처리
+			
 	
 	
 	1) 스프링 MVC 초기화면 호출.
