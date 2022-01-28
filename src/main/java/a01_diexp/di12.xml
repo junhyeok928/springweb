@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 # xml의 dtd 선언 부분
-1. dtd : 상단에 어떤 태그를 사용할지를 선언하는 부분.
+1. dtd : 상단의 어떤 태그를 사용할지를 선언하는 부분,
 2. dtd에 맞는 태그를 활용 할 수 있다.
 # 스프링은 이 dispacher-servlet.xml에서 선언한 클래스들을 
 객체로 컨테이너에서 로딩 후, 해당 객체들을 url 패턴으로 호출하여 처리한다.
@@ -27,39 +27,32 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
+	
 	<!-- 
-	# 컨테이너 안에 객체 vs 객체 관계 설정과 사용
-	1. VO 클래스 선언
-		1:1 연관 관계가 있는 클래스 선언.
-		HandPhone   GentleMan
-		기종, 회사	이름, HandPhone
-	2. 객체 생성.
-		- 포함되는 객체 선언
-		- 포함하는 객체 선언 - 객체를 설정하는 메서드는 ref로 객체의 참조값을 설정한다.						
-	3. main()에서 포함하는 객체의 참조변수 호출하여, 기능 메서드 호출..
-	 -->
-	<bean id="ph" class="a01_diexp.vo.HandPhone">
-		<constructor-arg  value="갤럭시20"/>
-		<constructor-arg  value="삼성전자"/>
-	</bean>	 
-	<bean id="gt" class="a01_diexp.vo.GentleMan">
-		<constructor-arg value="홍길동"/>
-		<property name="handPhone" ref="ph"/>
-		<!-- 객체가 할당될 때는 ref(reference)라는 참조 속성을 설정하여
-			처리한다. -->
-	</bean>		
-	<!-- 
-		HandPhone ph = new HandPhone("갤럭시20","삼성전자");
-		GentleMan gt = new GentleMan("홍길동");
-		gt.setHandPhone(ph);
-	 -->	
-	<bean id="juliet" class="a01_diexp.vo.Juliet">
-		<constructor-arg value="줄리엣"/>
+	# 공통 설정 파일 호출 처리.
+	1. 개발 소스 안에서 여러개에 흩어진 설정내용을 한 곳에서 파일로 관리하기 위하여, 설정하는 것을
+	말한다. 일반적으로 DB서버 정보, 파일서버 정보, 공통사용할 메시지 정보들을 말한다.
+	2. 처리 방법
+		1) 특정 위치에 text 파일로 설정명= 설정값 형식으로 지정한다.
+		2) 컨테이너에 context:property-placeholder location="classpath://
+			로 지정한다
+		3) 컨테이너 컨테이너 내부 또는 class에서 해당 설정명으로 호출하여 사용된다
+	-->
+	<!-- 공통 정보 파일 로딩 -->
+	<context:property-placeholder location="classpath:/resource/config, classpath:/resource/msg"/>
+	
+	<bean id="dao" class="a01_diexp.vo3.Dao">
+		<property name="url" value="${url}"/>	<!-- 설정된 key를 통해 데이터값을 기능 메서드에 할당 -->
+		<property name="user" value="${user}"/>
+		<property name="pass" value="${pass}"/>
 	</bean>
-	<bean id="romeo" class="a01_diexp.vo.Romeo">
-		<property name="juliet" ref="juliet"/>
+	<bean id="student" class="a01_diexp.vo3.Student">
+		<property name="name" value="${name}"/>
+		<property name="kor" value="${kor}"/>
+		<property name="math" value="${math}"/>
+		<property name="eng" value="${eng}"/>
 	</bean>
+	
+	
+	
 </beans>
-
-
-

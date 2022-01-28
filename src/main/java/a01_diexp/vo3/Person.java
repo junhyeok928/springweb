@@ -1,12 +1,16 @@
 package a01_diexp.vo3;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 //springweb.vo.Person
 @Component
 public class Person {
+	@Value("${name01}")
 	private String name;
+	@Value("${age}")
 	private int age;
+	@Value("${loc}")
 	private String loc;
 	public Person() {
 		super();

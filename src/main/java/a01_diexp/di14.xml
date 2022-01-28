@@ -27,39 +27,6 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<!-- 
-	# 컨테이너 안에 객체 vs 객체 관계 설정과 사용
-	1. VO 클래스 선언
-		1:1 연관 관계가 있는 클래스 선언.
-		HandPhone   GentleMan
-		기종, 회사	이름, HandPhone
-	2. 객체 생성.
-		- 포함되는 객체 선언
-		- 포함하는 객체 선언 - 객체를 설정하는 메서드는 ref로 객체의 참조값을 설정한다.						
-	3. main()에서 포함하는 객체의 참조변수 호출하여, 기능 메서드 호출..
-	 -->
-	<bean id="ph" class="a01_diexp.vo.HandPhone">
-		<constructor-arg  value="갤럭시20"/>
-		<constructor-arg  value="삼성전자"/>
-	</bean>	 
-	<bean id="gt" class="a01_diexp.vo.GentleMan">
-		<constructor-arg value="홍길동"/>
-		<property name="handPhone" ref="ph"/>
-		<!-- 객체가 할당될 때는 ref(reference)라는 참조 속성을 설정하여
-			처리한다. -->
-	</bean>		
-	<!-- 
-		HandPhone ph = new HandPhone("갤럭시20","삼성전자");
-		GentleMan gt = new GentleMan("홍길동");
-		gt.setHandPhone(ph);
-	 -->	
-	<bean id="juliet" class="a01_diexp.vo.Juliet">
-		<constructor-arg value="줄리엣"/>
-	</bean>
-	<bean id="romeo" class="a01_diexp.vo.Romeo">
-		<property name="juliet" ref="juliet"/>
-	</bean>
+	<context:component-scan base-package="a01_diexp.db"/>
+	 
 </beans>
-
-
-
