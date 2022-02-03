@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 # xml의 dtd 선언 부분
-1. dtd : 상단의 어떤 태그를 사용할지를 선언하는 부분,
+1. dtd : 상단에 어떤 태그를 사용할지를 선언하는 부분.
 2. dtd에 맞는 태그를 활용 할 수 있다.
 # 스프링은 이 dispacher-servlet.xml에서 선언한 클래스들을 
 객체로 컨테이너에서 로딩 후, 해당 객체들을 url 패턴으로 호출하여 처리한다.
@@ -31,7 +31,7 @@
 	# 다양한 구조체의 컨테이너 설정..
 	1. list : 배열, ArrayList 객체를 설정할 때, 사용된다.
 	2. set : 중복을 하지 않지만, 순서를 확보 못하는 구조체 객체..
-		property="agent"		
+		property="agent"
 			set
 				value 입력
 		public void setAgent(Set<String> agent)
@@ -39,57 +39,68 @@
 		Map<key, valueObj>
 		map
 			entry
-				key/value
-		public void setConfig(Map<String, Integer> config)
+				key/value 
+		public void setConfig(Map<String, Integer> config)	
 	4. Properties : key/value 형식 데이터 등록
 		props
-			prop key="키" value="값"
+			prop key="키" value="값"		
+	
+	
+	 -->		
+	<bean id="sensor01" class="a01_diexp.vo.Sensor">
+		<!-- void setAgent(Set<String> agent) -->
+		<property name="agent">
+			<set>
+				<value>주식매매</value>
+				<value>주시매매</value>
+				<value>자산관리</value>
+				<value>자산관리</value>
+				<value>주식매매</value>
+				<value>주식매매</value>
+				<value>보험관리</value>
+			</set>
+		</property>
+		<!-- void setAddInfo(Properties addInfo) -->
+		<property name="addInfo">
+			<props>
+				<prop key="threshold">1500</prop>
+				<prop key="retry">3</prop>
+			</props>
+			
+		</property>
+	</bean>
+	<!-- 
+	# 선수지식
+	1. Set객체에 대한 이해.
+	2. Properties에 대한 이해
+	3. class 에서 포함되는 객체의 관계 설정..
+	
+	FruitShop
+		set으로 물건명을 담는 객체와 메서드 선언.
+		properties로 물건명과 가격을 담는 객체와 메서드를 선언.
+	컨테이너에서 호출하여 할당하는 내용츨 처리하세요..
+	
+	4조 제출하시고, 손들어 주세요..	
 	
 	 -->
-	 <bean id="sensor01" class="a01_diexp.vo.Sensor">
-		<!-- void setAgent(Set<String> agent) -->
-	 	<property name="agent">
-	 		<set>
-	 			<value>주식매매</value>
-	 			<value>주시매매</value>
-	 			<value>자산관리</value>
-	 			<value>자산관리</value>
-	 			<value>주식매매</value>
-	 			<value>주식매매</value>
-	 			<value>보험관리</value>
-	 		</set>
-	 	</property>
-	 	<!-- void setAddInfo(Properties addInfo) -->
-	 	<property name="addInfo">
-	 		<props>
-	 			<prop key="threshold">1500</prop>
-	 			<prop key="retry">3</prop>
-	 		</props>
-	 	</property>
-	 </bean>
-	 <!-- 
-	 # 선수지식
-	 1. Set객체에 대한 이해.
-	 2. Properties에 대한 이해
-	 3. class에서 포함되는 객체의 관계 설정.. -->
-	 <bean id="fs" class="a01_diexp.vo.FruitShop">
-	 	<property name="fnames"> <!-- setFnames(Set<String> fnames -->
-	 		<set>
-	 			<value>사과</value>
-	 			<value>사과</value>
-	 			<value>바나나</value>
-	 			<value>바나나</value>
-	 			<value>딸기</value>
-	 			<value>딸기</value>
-	 		</set>
-	 	</property>
-	 	<property name="fruitInfos"> <!-- setFruitInfos(Properties fruitInfos -->
-	 		<props>
-	 			<prop key="사과">1500</prop>
-	 			<prop key="바나나">4500</prop>
-	 			<prop key="딸기">25000</prop>
-
-	 		</props>
-	 	</property>
-	 </bean>
+	<bean id="fs" class="a01_diexp.vo.FruitShop">
+		<property name="fnames"> <!--  setFnames(Set<String> fnames)  -->
+			<set>
+				<value>사과</value>
+				<value>사과</value>
+				<value>바나나</value>
+				<value>나나나</value>
+				<value>딸기</value>
+			</set>
+		</property>
+		<property name="fruitInfos"><!-- setFruitInfos(Properties fruitInfos)  -->
+			<props>
+				<prop key="사과">1500</prop>
+				<prop key="바나나">4500</prop>
+				<prop key="딸기">25000</prop>
+			</props>
+		</property>
+	</bean>	
+		
+		
 </beans>

@@ -1,5 +1,5 @@
 package a01_diexp.vo3;
-
+// a01_diexp.vo3.Dao
 public class Dao {
 	private String ip;
 	private String url;

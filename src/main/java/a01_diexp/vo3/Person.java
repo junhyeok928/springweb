@@ -3,7 +3,6 @@ package a01_diexp.vo3;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-//springweb.vo.Person
 @Component
 public class Person {
 	@Value("${name01}")
@@ -40,5 +39,6 @@ public class Person {
 	public void setLoc(String loc) {
 		this.loc = loc;
 	}
+	
 	
 }

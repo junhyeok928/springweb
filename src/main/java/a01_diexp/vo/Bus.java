@@ -14,7 +14,7 @@ public class Bus {
 		this.no = no;
 	}
 	public void showPassenger() {
-		System.out.println(no+"번 버스의 탑승객");
+		System.out.println( no+"번 버스의 탑승객 ");
 		if(passList!=null) {
 			System.out.println("이름\t나이");
 			for(Passenger pass:passList) {
@@ -23,7 +23,11 @@ public class Bus {
 		}else {
 			System.out.println("탑승객에 없습니다.");
 		}
+		
 	}
+	
+	
+	
 	public int getNo() {
 		return no;
 	}
@@ -37,4 +41,5 @@ public class Bus {
 		this.passList = passList;
 	}
 
+	
 }

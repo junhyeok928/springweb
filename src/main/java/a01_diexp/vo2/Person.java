@@ -2,7 +2,6 @@ package a01_diexp.vo2;
 
 import org.springframework.stereotype.Component;
 
-//springweb.vo.Person
 @Component
 public class Person {
 	private String name;
@@ -36,5 +35,6 @@ public class Person {
 	public void setLoc(String loc) {
 		this.loc = loc;
 	}
+	
 	
 }

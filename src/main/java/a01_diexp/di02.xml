@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 # xml의 dtd 선언 부분
-1. dtd : 상단의 어떤 태그를 사용할지를 선언하는 부분,
+1. dtd : 상단에 어떤 태그를 사용할지를 선언하는 부분.
 2. dtd에 맞는 태그를 활용 할 수 있다.
 # 스프링은 이 dispacher-servlet.xml에서 선언한 클래스들을 
 객체로 컨테이너에서 로딩 후, 해당 객체들을 url 패턴으로 호출하여 처리한다.
@@ -29,17 +29,44 @@
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
 	<!-- 
 	# 생성자의 활용
-	1. 생성자의 속성 설정
+	1. 생성자의 속성 설정.
 		1) constructor-arg
 		2) 순서로 설정 옵션
-		AirPlane ap = new AirPlane("K104","대한항공");
+		AirPlane ap = new AirPlane("K104","대한항공");	
+	 -->	
+	<bean id="ap" class="a01_diexp.vo.AirPlane">
+		<constructor-arg value="K104"/>
+		<constructor-arg value="대한항공" />
+	</bean>		
+	<!-- 
+	bean id="ap" class="a01_diexp.vo.AirPlane
+	
+	1. constructor-arg 없는 객체를 생성할 때..
+		AirPlane ap = new AirPlane() : 
+	2. constructor-arg가 하위에 있으면, 생성자의 매개변수의 순서로 데이터
+		할당되면서 객체 생성을 한다.
+		만일 1개만 있으면 : 반드시 사전 vo객체에서 매개변수가 1개만 있는 생성자를 선언했을 때.
+			constructor-arg value="K104"
+			AirPlane ap = new AirPlane("K104")
+		만일 2개 있으면..
+			constructor-arg value="K104"
+			constructor-arg value="대한항공"
+			
+			AirPlane ap = new AirPlane("K104","대한항공")
+	
+	
+	ex) vo로 Apartment로 선언하고 동/호수를 속성으로 설정하여 생성자로 할당하고
+		호출하세요..
 	 -->
-	 <bean id="ap" class="a01_diexp.vo.AirPlane">
-	 	<constructor-arg value="K104"/>
-	 	<constructor-arg value="대한항공" />
-	 </bean>
-	 <bean id="am" class="a01_diexp.vo.Apartment">
-	 	<constructor-arg value="103"/>
-	 	<constructor-arg value="707"/>
-	 </bean>
+	<bean id="am" class="a01_diexp.vo.Apartment">
+		<constructor-arg value="103"/>
+		<constructor-arg value="707"/>
+	</bean>	  
+	
 </beans>
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-package a01_diexp.db;
+package springweb.vo;
 
 public class Dept {
 	private int deptno;

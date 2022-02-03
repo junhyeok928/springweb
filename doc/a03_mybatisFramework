@@ -19,26 +19,94 @@
 			드라이버
 			DB 서버 정보(ip, port, sid, 계정/비번)
 		# mybatis sql의 처리를 위한 방법 이해
+			컨테이너 안에서 프레임웍에 있는 객체를 생성 활용
 			xml
 			실제 dao(repository 객체)
 	3) 개발 순서 이해과 실습
 		sql 작성
 		vo 작성(입력, 리턴)
 		기능 메서드 선언(인터페이스)
+		공통설정 파일 변경(mybatis.Sprong.mxl)
+			- vo객체의 alias
+			- XXXMapper.xml을 지정..
 		XXXMapper.xml의 작성
 		- 기능 메서드와 연동할 수 있게 처리
+			id, parameterType, resultType
 		- 입력받는 매개변수 처리와 리턴할 객체 선언.
 		service단 repository 호출
 		controller단 service 호출 및 model 데이터 선언
 		view단 model 호출 및 출력
 	4) 테스트 및 주로 나오는 에러에 대한 대비	
 		
-		
-		
-		
-		
-		 
+
+
+# 사원정보 리스트 예제 같이 해보기..
+1. sql
+	select *
+	from emp02
+	where ename like '%'||''||'%'
+	and job like '%'||''||'%';
+2. vo 작성 (입력/리턴값)
+	springweb.vo.Emp
 	
+3. 인터페이스 선언
+	1) 스프링 컨테이너에서 dao 패키지 위치 선언..
+	2) 인터페이스 EmpDao
+	3) 메서드 public ArrayList<Emp> empList(Emp sch);
+	// springweb.a02_mvc.a03_dao.A01_EmpDao
+	// ArrayList<Emp> getEmpList(Emp sch);
+	
+4. 공통 mybatis 선언(resource/mybatis.Spring.xml)
+	1) vo의 alias 선언
+	2) XXXMapper.sml 위치 선언.
+5. XXXMapper.xml 생성과 선언
+	선언된 dao 인터페이스와 연동
+	
+6. service단 호출.
+	a02_service 하위에 A01_EmpService.java
+	
+7. controller단 호출
+	model 데이터 처리
+8. view단 작성.
+	요청값
+	모델데이터 처리 및 출력
+		
+		
+# mybatis의 dao와 XXXMapper.xml 처리 연습
+1. sql
+	select count(*) cnt
+	from emp02
+	where deptno = 10;
+	ex1)
+	select count(*) cnt
+	from emp02
+	where job like '%'||''||'%'
+	ex2)
+	select *
+	from emp02
+	where empno = @@@;
+2. dao
+	public int getCount(int deptno);
+	public int getJobCount(String job);
+	public Emp getEmpDetail(int empno);
+	// 한 row의 여러유형의 데이터를 처리할려면 필요한 내용?
+3. XXXMapper.xml
+	<select id = "getCount" parameterType="int" resultType="int">
+		select count(*) cnt
+		from emp02
+		where deptno = #{deptno}
+	</select>
+	<select id = "getJobCount" parameterType="String" resultType="int">
+		select count(*) cnt
+		from emp02
+		where job like '%'||'#{job}'||'%'
+	</select>
+	<select id="getEmpDetail" resultType="emp" parameterType="int">
+		select *
+		from emp02
+		where empno = #{empno};	
+	</select>
+4. start.do를 통해 에러없이 나오면 정상 처리된다.
 	
 	
 	

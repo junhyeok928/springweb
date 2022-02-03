@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 # xml의 dtd 선언 부분
-1. dtd : 상단의 어떤 태그를 사용할지를 선언하는 부분,
+1. dtd : 상단에 어떤 태그를 사용할지를 선언하는 부분.
 2. dtd에 맞는 태그를 활용 할 수 있다.
 # 스프링은 이 dispacher-servlet.xml에서 선언한 클래스들을 
 객체로 컨테이너에서 로딩 후, 해당 객체들을 url 패턴으로 호출하여 처리한다.
@@ -27,32 +27,43 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	
 	<!-- 
 	# 공통 설정 파일 호출 처리.
-	1. 개발 소스 안에서 여러개에 흩어진 설정내용을 한 곳에서 파일로 관리하기 위하여, 설정하는 것을
-	말한다. 일반적으로 DB서버 정보, 파일서버 정보, 공통사용할 메시지 정보들을 말한다.
+	1. 개발 소스 안에서 여러개에 흩어진 공통 설정내용을 한 곳에서 파일로 관리하기 위하여, 설정하는 것을
+		말한다. 일반적으로 DB서버 정보, 파일서버 정보, 공통사용할 메시지 정보 등을 말한다.
 	2. 처리 방법
-		1) 특정 위치에 text 파일로 설정명= 설정값 형식으로 지정한다.
-		2) 컨테이너에 context:property-placeholder location="classpath://
-			로 지정한다
-		3) 컨테이너 컨테이너 내부 또는 class에서 해당 설정명으로 호출하여 사용된다
-	-->
-	<!-- 공통 정보 파일 로딩 -->
-	<context:property-placeholder location="classpath:/resource/config, classpath:/resource/msg"/>
-	
-	<bean id="dao" class="a01_diexp.vo3.Dao">
-		<property name="url" value="${url}"/>	<!-- 설정된 key를 통해 데이터값을 기능 메서드에 할당 -->
-		<property name="user" value="${user}"/>
-		<property name="pass" value="${pass}"/>
-	</bean>
-	<bean id="student" class="a01_diexp.vo3.Student">
-		<property name="name" value="${name}"/>
-		<property name="kor" value="${kor}"/>
-		<property name="math" value="${math}"/>
-		<property name="eng" value="${eng}"/>
-	</bean>
-	
-	
-	
+		1) 특정 위치에 text 파일로 설정명=설정값 형식으로 지정한다.
+		2) 컨테이너에 context:property-placeholder location="classpath://특정한 경로 파일
+			로 지정한다.
+		3) 컨테이너 내부 또는 class에서 해당 설정명으로 호출하여 사용한다.	
+	 -->
+	 <!-- 공통 정보 파일 로딩 -->
+	 <!-- 
+	 <context:property-placeholder location="classpath:/resource/config"/>
+	 
+
+	  -->
+	 <!-- 
+	 ex) resource/msg 파일을 만들고, 이름/국어/영어/수학을 설정하고..
+	 context:property-placeholder를 호출하게 한후,
+	  vo3하위에 Student 클래스를 선언하고, 이름/국어/영어/수학 필드와 프로퍼티를
+	  만들고, 현재 container 에서 할당하게 하고, main()을 통해서 출력하게 하세요
+	  4조 제출하시고, 손들어 주세요. 
+	  -->
+	  
+	 <context:property-placeholder 
+	location="classpath:/resource/config, classpath:/resource/msg"/>
+	 <bean id="dao" class="a01_diexp.vo3.Dao">
+	 	<property name="url" value="${url}"/> <!-- 설정된 key을 통해 데이터값을 기능 메서드에 할당. -->
+	 	<property name="user" value="${user}"/>
+	 	<property name="pass" value="${pass}"/>
+	 </bean> 
+	 <bean id="stud" class="a01_diexp.vo3.Student">
+	 	<property name="name" value="${name}" />
+	 	<property name="kor"  value="${kor}" />
+	 	<property name="eng"  value="${eng}" />
+	 	<property name="math"  value="${math}" />
+	 </bean>
+	 
+	 
 </beans>

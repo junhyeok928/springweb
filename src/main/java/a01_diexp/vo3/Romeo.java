@@ -7,9 +7,14 @@ import org.springframework.stereotype.Component;
 /*
 # 컨테이너라는 메모리 공간에
 
-클래스를 선언하면	(로미오객체)	(줄리엣객체)
-이렇게 객체가 생성이된다.
- */
+클래스를 선언하면     (로미오객체)    (줄리엣객체)
+이렇게 객체가 생성이 된다.
+
+ex) pool (수영장) 
+
+ * */
+
+
 @Component("r01")
 public class Romeo {
 	private String name;

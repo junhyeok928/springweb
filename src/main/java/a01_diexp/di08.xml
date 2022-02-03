@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 # xml의 dtd 선언 부분
-1. dtd : 상단의 어떤 태그를 사용할지를 선언하는 부분,
+1. dtd : 상단에 어떤 태그를 사용할지를 선언하는 부분.
 2. dtd에 맞는 태그를 활용 할 수 있다.
 # 스프링은 이 dispacher-servlet.xml에서 선언한 클래스들을 
 객체로 컨테이너에서 로딩 후, 해당 객체들을 url 패턴으로 호출하여 처리한다.
@@ -29,35 +29,39 @@
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
 	<!-- 
 	# 소스를 통한 autowiring 처리
-	1. 컨테이너에서는 객체 생성만 하고, 연관관계 설정은 객체에 선언으로 처리할 수 있다.
+	1. 컨테이너에서는 객체 생성만 하고, 연관관계 설정는 객체에 선언으로 처리 할 수 있다.
 	2. 처리 순서
-		1) 스프링 컨테이너는 객체 생성.
+		1) 스프링 컨테이는 객체 생성.
 		2) 생성된 객체에서 autowiring annotation 선언..
-		3) main()에서 해당 객체를 통해 연관 관계 할당 여부 확인..
+		3) main()에서 해당 객체를 통해 연관관계 할당 여부 확인..
 	3. 주의 사항.
-		1) injection(의존성 주입) 은 접근제어자 상관없이 처리가 가능하다.
+		1) injection(의존성 주입)은 접근제어자 상관없이 처리가 가능하다.
 			- 필드, 메서드에서 가능하다.
-		2) 의존성 주입으로 인해 객체생성을 하지 않고, 컨테이너 객체들끼리 할당이 가능하다. 
-	-->
-	<!--  버젼에 따라서 소스상 autowiring을 할 때, 필요하다. -->
-	<context:annotation-config/>
-	<bean id="gm" class="a01_diexp.vo.GentleMan">
-		<constructor-arg value="홍신사"/>
-	</bean>	 
-	
-	<bean id="hp" class="a01_diexp.vo.HandPhone">
-		<constructor-arg value="아이폰13"/>
-		<constructor-arg value="apple"/>
-	</bean>
-	<!-- 
-	ex) 클래스 선언 GiftSender: 이름, Product,
+		2) 의존성 주입으로 인해 객체생성을 하지 않고, 컨테이너 객체들끼리 할당이 가능하다.	
 	 -->
+	 <!-- 버젼에 따라서 소스상 autowiring을 할 때, 필요하다. 
+	ex) 수영장(컨테이너 메모리)
+	 -->
+	 <context:annotation-config/>
+	 <bean id="gm" class="a01_diexp.vo.GentleMan">
+	 	<constructor-arg value="홍신사"/>
+	 </bean>		
+	 <bean id="hp" class="a01_diexp.vo.HandPhone">
+	 	<constructor-arg value="아이폰12"/>
+	 	<constructor-arg value="apple"/>
+	 </bean>
+	 
+	 <!-- 
+	 ex) 클래스 선언 -  GiftSender: 이름, Product, 메서드 sendGift
+	 	GiftSender에서 소스상으로 autowiring을 처리하여, @@가 @@@을 보낸다는 메서드와
+	 	함께 출력하세요
+	 	4조 제출, 손들기
+	  -->	
+	<bean class="a01_diexp.vo.Product">
+		<constructor-arg value="사과"/>
+		<constructor-arg value="3000"/>
+	</bean>	
 	<bean id="gs" class="a01_diexp.vo.GiftSender">
-		<constructor-arg value="전준혁"/>
-	</bean>	 
-	
-	<bean id="pr" class="a01_diexp.vo.Product">
-		<constructor-arg value="신발"/>
-		<constructor-arg value="300000"/>
-	</bean>
+		<constructor-arg value="김길동"/>
+	</bean>	
 </beans>

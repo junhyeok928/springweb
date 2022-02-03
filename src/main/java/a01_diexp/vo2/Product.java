@@ -7,16 +7,17 @@ public class Product {
 	private String name;
 	private int price;
 	private int cnt;
+	public Product() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Product(String name, int price, int cnt) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.cnt = cnt;
 	}
-	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+
 	public String getName() {
 		return name;
 	}

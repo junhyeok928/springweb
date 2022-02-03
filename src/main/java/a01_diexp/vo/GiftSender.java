@@ -1,7 +1,7 @@
 package a01_diexp.vo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+// a01_diexp.vo.GiftSender
 public class GiftSender {
 	private String name;
 	@Autowired
@@ -10,20 +10,21 @@ public class GiftSender {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public void sendGift() {
-		System.out.println("선물 받는 사람:"+name);
-		if(product!=null) {
-			System.out.println("물건 정보는?");
-			System.out.println("이름:"+product.getName());
-			System.out.println("가격:"+product.getPrice());
-		}else { 
-			System.out.println("선물이 없어요!!");
-		}
-	}
 	public GiftSender(String name) {
 		super();
 		this.name = name;
 	}
+	public void showSendInfo() {
+		System.out.println(name+"님이 선물을 보낼려고 합니다.");
+		if(product!=null) {
+			System.out.println("#선물 정보#");
+			System.out.println("물건명:"+product.getName());
+			System.out.println("가격:"+product.getPrice());
+		}else {
+			System.out.println("보낼 선물이 없습니다.");
+		}
+	}
+	
 	public String getName() {
 		return name;
 	}

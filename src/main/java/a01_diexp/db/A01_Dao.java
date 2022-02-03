@@ -9,9 +9,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
-// mybatis에서는 xml파일과 인터페이스에 의해 아래의 객체를 자동으로 생성한다.
+
+// mybatis에서는 xml파일와 인터페이스에 의해 아래의 객체를 자동으로 생성한다.
 @Component
-public class A01_Dao implements A02_EmpDao {
+public class A01_Dao implements A02_EmpDao{
 	// ex) 연결 처리 객체 만들기.
 	// ~12:20
 	// 1. 공통 필드 선언
@@ -232,7 +233,6 @@ public class A01_Dao implements A02_EmpDao {
 		}
 		return dlist;
 	}
-	
 	// ex) A03_DatabaseDao.java를 만들고, 
 	//     필드, 공통메서드, public void deptList()로 선언하여
 	//     sql을 select * from dept로 처리된 행을 출력하는 내용까지 처리하세요.

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 # xml의 dtd 선언 부분
-1. dtd : 상단의 어떤 태그를 사용할지를 선언하는 부분,
+1. dtd : 상단에 어떤 태그를 사용할지를 선언하는 부분.
 2. dtd에 맞는 태그를 활용 할 수 있다.
 # 스프링은 이 dispacher-servlet.xml에서 선언한 클래스들을 
 객체로 컨테이너에서 로딩 후, 해당 객체들을 url 패턴으로 호출하여 처리한다.
@@ -27,8 +27,5 @@
        http://www.springframework.org/schema/util/spring-util.xsd
    		http://www.springframework.org/schema/websocket
 		http://www.springframework.org/schema/websocket/spring-websocket.xsd" >
-	<context:component-scan base-package="a01_diexp.vo3"></context:component-scan>
-	<!--  해당폴더에 있는 객체들은 @Component라고 선언만하면
-		현재 xml에서 선언하여 메모리로 사용하는 것과 동일한 효과를 가져온다 
-		-->
+
 </beans>

@@ -1,9 +1,12 @@
 package a01_diexp;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import a01_diexp.vo3.Dao;
 import a01_diexp.vo3.Student;
+
 
 public class DIExp_12 {
 
@@ -13,17 +16,21 @@ public class DIExp_12 {
 		String path = "a01_diexp\\di12.xml";
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(path);
 		// 컨테이너에 객체의 생성과 설정을 확인할 수 있다.
-		// default로 id값이 지정되어 있지 않으면 클래스명의 소문자로 식별한다
-		Dao dao = ctx.getBean("dao",Dao.class);
-		System.out.println(dao.getUrl());
-		System.out.println(dao.getUser());
-		System.out.println(dao.getPass());
 		
-		Student student = ctx.getBean("student",Student.class);
-		System.out.println(student.getName());
-		System.out.println(student.getKor());
-		System.out.println(student.getMath());
-		System.out.println(student.getEng());
+		Dao dao = ctx.getBean("dao", Dao.class);
+		System.out.println(dao.getUrl());	
+		System.out.println(dao.getUser());	
+		System.out.println(dao.getPass());
+			
+		Student stud = ctx.getBean("stud",Student.class);
+		System.out.println(stud.getName());
+		System.out.println(stud.getKor());
+		System.out.println(stud.getEng());
+		System.out.println(stud.getMath());
+		
+
+		
+		ctx.close();
 	}
 
 }

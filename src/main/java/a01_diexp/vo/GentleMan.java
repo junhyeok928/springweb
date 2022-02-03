@@ -2,15 +2,18 @@ package a01_diexp.vo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+// a01_diexp.vo.GentleMan
 public class GentleMan {
 	private String name;
 	
 	// 소스상에 autowiring 설정..
 	// 메모리상에 객체가 있으면 자동으로 주입이 된다.
-	// 1. 필드, 메서드에서도 선언이 가능
-	// 2. 접근제어자 상관없이 객체가 있으면 할당이 된다
+	// 1. 필드, 메서드에도 선언이 가능.
+	// 2. 접근제어자 상관없이 객체가 있으면 할당이 된다.
 	@Autowired
-	private HandPhone handPhone;
+	private HandPhone handPhone; 
+	// 실제 객체가 할당될려면 new HandPhone(); 하여야 되지만,
+	// 스프링컨테이너(수영장)
 	public GentleMan() {
 		super();
 		// TODO Auto-generated constructor stub

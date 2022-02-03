@@ -1,7 +1,8 @@
 package a01_diexp.vo3;
 
 import org.springframework.stereotype.Component;
-// 이름을 설정하면 식별 id가 mem으로 처리된다
+
+// 이름을 설정하면 식별 id가 mem으로 처리된다.
 @Component("mem")
 public class Member {
 	private String id;

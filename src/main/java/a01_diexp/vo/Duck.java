@@ -1,11 +1,10 @@
 package a01_diexp.vo;
-
+// a01_diexp.vo.Duck
 public class Duck {
 	private String kind;
 	private String color;
 	public Duck() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Duck(String kind, String color) {
 		super();
@@ -24,5 +23,4 @@ public class Duck {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
 }

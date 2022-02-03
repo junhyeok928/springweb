@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--// springweb.a02_mvc.a03_dao.A01_EmpDao : dao의 이너페이스명
+	// ArrayList<Emp> getEmpList(Emp sch); 
+	1. 메서드의 명 : id
+	2. 리턴타입 : resultType : mybatis.Spring.xml에 선언된 alias로 선언 가능
+	3. 매개변수 : parameterType
+	이렇게 연동관계를 설정하여 dao와 sql을 연동하여 결과를 처리한다.
+	-->
+<mapper namespace="springweb.a02_mvc.a03_dao.A01_EmpDao">
+	<select id="getEmpList" resultType="emp" parameterType="emp">
+		select *
+		from emp02
+		where ename like '%'||#{ename}||'%'
+		and job like '%'||#{job}||'%'
+	</select>
+	<select id = "getCount" parameterType="int" resultType="int">
+		select count(*) cnt
+		from emp02
+		where deptno = #{deptno}
+	</select>
+	<select id = "getJobCount" parameterType="String" resultType="int">
+		select count(*) cnt
+		from emp02
+		where job like '%'||#{job}||'%'
+	</select>
+	<select id="getEmpDetail" resultType="emp" parameterType="int">
+		select *
+		from emp02
+		where empno = #{empno};	
+	</select>
+</mapper>

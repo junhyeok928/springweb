@@ -13,10 +13,11 @@ public class DIExp_08 {
 		String path = "a01_diexp\\di08.xml";
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(path);
 		// 컨테이너에 객체의 생성과 설정을 확인할 수 있다.
-		GentleMan gm = ctx.getBean("gm",GentleMan.class);
+		GentleMan gm = ctx.getBean("gm", GentleMan.class);
 		gm.showInfo();
-		GiftSender gs = ctx.getBean("gs",GiftSender.class);
-		gs.sendGift();
+		GiftSender gs = ctx.getBean("gs", GiftSender.class);
+		gs.showSendInfo();
+		
 		
 		ctx.close();
 	}
