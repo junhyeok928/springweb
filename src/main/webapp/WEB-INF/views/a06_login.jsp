@@ -31,7 +31,7 @@
 		});	
 		<%-- 
 		결과값을 받아 로그인 성공과 실패를 처리하게 한다.
-		--%>
+		--%>	
 		var result="${result}"; // 모델 데이터를 설정 처리
 		if(result!=""){
 			alert(result);
@@ -41,13 +41,13 @@
 </head>
 
 <body>
-<%-- action에 호출할 controller의 url을 지정하여 submit를 통해 요청값을 전달할 수 있게 처리.. --%>
 <div class="container">
     <h2 align='center'>{{msg}}</h2>
-	<form id="frm01" class="form-inline" action="${path}/login.do" method="post">
+    <%-- action에 호출할 controller의 url를 지정하여 submit를 통해 요청값을 전달할 수 있게 처리.. --%>
+	<form id="frm01" action="${path}/login.do" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	    <input class="form-control mr-sm-2" placeholder="아이디" name="id"/>
-	    <input class="form-control mr-sm-2" placeholder="패스워드" name="pass" type="password"/>
+	    <input type="password" class="form-control mr-sm-2" placeholder="패스워드" name="pass"/>
 	    <button class="btn btn-info" type="submit">로그인</button>
  	</nav>
 	</form>

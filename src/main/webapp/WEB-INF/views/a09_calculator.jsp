@@ -39,19 +39,19 @@
 <body>
 <div class="jumbotron text-center">
   <h2 data-toggle="modal" data-target="#exampleModalCenter">타이틀</h2>
-  	<h3>${calculator.num01} + ${calculator.num02} = ${calculator.num01+calculator.num02} </h3>
-  	<h3>${calculator.num01} - ${calculator.num02} = ${calculator.num01-calculator.num02} </h3>
-  	<h3>${calculator.num01} * ${calculator.num02} = ${calculator.num01*calculator.num02} </h3>
-  	<h3>${calculator.num01} / ${calculator.num02} = ${calculator.num01/calculator.num02} </h3>
+	<h3>${calculator.num01} + ${calculator.num02} = ${calculator.num01+calculator.num02}</h3>
+	<h3>${calculator.num01} - ${calculator.num02} = ${calculator.num01-calculator.num02}</h3>
+	<h3>${calculator.num01} * ${calculator.num02} = ${calculator.num01*calculator.num02}</h3>
+	<h3>${calculator.num01} / ${calculator.num02} = ${calculator.num01/calculator.num02}</h3>
 
 </div>
 <div class="container">
     <h2 align='center'>{{msg}}</h2>
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="첫번째 수" name="num01"/>
-	    <input class="form-control mr-sm-2" placeholder="두번째 수" name="num02"/>
-	    <button class="btn btn-info" type="submit">Search</button>
+	    <input class="form-control mr-sm-2" name="num01" placeholder="첫번째수" />
+	    <input class="form-control mr-sm-2" name="num02" placeholder="두번째수" />
+	    <button class="btn btn-info" type="submit">계산</button>
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
@@ -91,10 +91,10 @@
 		<form id="frm02" class="form"  method="post">
 	     <div class="row">
 	      <div class="col">
-	        <input type="text" class="form-control" placeholder="첫번째 수" name="num01">
+	        <input type="text" class="form-control" placeholder="사원명 입력" name="ename">
 	      </div>
 	      <div class="col">
-	        <input type="text" class="form-control" placeholder="두번째 수" name="num02">
+	        <input type="text" class="form-control" placeholder="직책명 입력" name="job">
 	      </div>
 	     </div>
 	    </form> 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >		
+<!--
+public interface A03_SalgradeDao {
+
+	public Salgrade getSalgrade(int grade);
+	-->	
+<mapper namespace="springweb.a02_mvc.a03_dao.A03_SalgradeDao">
+	<select id="getSalgrade" resultType="salgrade" parameterType="int">
+		 select *
+		 from salgrade
+		 where grade = #{grade}
+	</select>
+</mapper>

@@ -38,12 +38,13 @@
 
 <body>
 <div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">타이틀</h2>
+  <h2 data-toggle="modal" data-target="#exampleModalCenter">모델데이터 연습</h2>
   <h3>모델변수1:${var01}</h3>
   <h3>모델변수2:${var02}, ${var02+10}</h3>
   <h3>모델변수3:${obj01.name}</h3>
   <h3>모델변수3:${obj01.age}</h3>
   <h3>모델변수3:${obj01.loc}</h3>
+
 </div>
 <div class="container">
     <h2 align='center'>{{msg}}</h2>

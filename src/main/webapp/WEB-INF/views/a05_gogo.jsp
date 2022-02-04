@@ -43,7 +43,7 @@
 </div>
 <div class="container">
     <h2 align='center'>{{msg}}</h2>
-	<form id="frm01" class="form-inline" action="${path}/gogo5.do"method="post">
+	<form id="frm01" class="form-inline" action="${path}/gogo5.do" method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	    <input name="num01" class="form-control mr-sm-2" placeholder="첫번째 숫자" />
 	    <input name="num02" class="form-control mr-sm-2" placeholder="두번째 숫자" />

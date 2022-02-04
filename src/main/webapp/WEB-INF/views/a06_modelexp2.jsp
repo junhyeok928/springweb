@@ -39,13 +39,12 @@
 <body>
 <div class="jumbotron text-center">
   <h2 data-toggle="modal" data-target="#exampleModalCenter">모델데이터연습</h2>
-  <h3>물건명:${name}</h3>
-  <h3>가격:${price}</h3>
-  <h3>갯수:${cnt}</h3>
-  <h3>총계:${price*cnt}</h3>
-  <h3>선수명:${player.name}</h3>
-  <h3>선수성적:${player.record}</h3>
-
+	<h3>물건명:${name}</h3>
+	<h3>가격:${price}</h3>
+	<h3>갯수:${cnt}</h3>
+	<h3>총계:${price*cnt}</h3>
+	<h3>선수명:${player.name}</h3>
+	<h3>선수성적:${player.record}</h3>
 </div>
 <div class="container">
     <h2 align='center'>{{msg}}</h2>

@@ -1,49 +1,31 @@
 # 주요학습범위
-1. 스프링 리뷰
-2. 데이터 베이스 설정과 활용 dao작성
-
+1. 데이터 베이스 설정과 활용 dao작성
+2. on promise 개발 환경
 # 생각해봅시다.
-1. 스프링의 MVC에서 DB 연결 구조는 어떤 것인가?
-	controller
-		메서드별로 url 매핑
-		model ==> sevice ==> dao(인터페이스) ==> mybatis프레임워크(xml) ==> DB서버 
-		view
-			VUE
-2. 스프링의 mybatis DAO처리는 어떤 패턴으로 개발은 진행하는 것인가?
-	1) sql 작성 
-		프로그래밍 --> sql 실행(입력값) --> 그 결과를 프로그래밍의 객체로 받아오는 처리.
-	2) 입력/리턴값을 확인 및 객체화
-		1) 입력값 : where조건문, insert의 values, update/delete의 조건 및
-			set 컬럼=입력데이터
-		2) 리턴값 : select의 경우 변수/단일VO객체/테이블형태의 데이터
-		3) 객체화
-			public ArrayList<Emp> getEmpList(Emp sch){
-				- DB연결
-				- sql 처리
-				- 결과값 처리
-				- 자원해제
-				- 예외 처리...
-			}
-	3) mybatis 프레임웍크
-		1) body({})가 없는 추상메서드만 선언
-			public ArrayList<Emp> getEmpList(Emp sch);
-		2) xml에서 위 추상메서드와 연결되는 설정 처리 + sql
-			<select id="getEmpList" parameterType="emp" resultType="emp">
-				select *
-				from emp
-				where ename like '%'||#{ename}||'%'
-				and job like '%'||#{job}||'%'
-		3) 위에서 선언한 추상메서드가 있는 인터페이스 + xml로 mybatis에 
-			의해 자동으로 상속받은 실제객체를 내부적으로 만들어서 최종적으로
-			결과값을 리턴한다.		
-						
-		
-			
+1. 동적 쿼리란 무엇인가?
+	조건이나 반복문에 의해서 sql 처리 구문이 변경되는 것을 말한다.
+	예를들어 사원번호가 없을 때는 전체 사원정보를 출력하게끔 처리할 때를 말한다.
+	보통, 이러한 동적 쿼리는 mybatis에서 사용하는 ognl 방식(jstl)으로 
+	조건문을 활용하여 처리하는 것을 말한다.
 
-
+2. 웹 개발 환경은 어떻게 구축되어 있을까? 
+	개발 환경
+		개발자가 eclipse/툴 설치 개인 pc를 통해 개발 DB서버에 접속하여
+		프로그래밍을 개발하는 환경을 말한다.
+	테스트 환경
+		공통된 svn, git 서버를 만들어 개발환경을 통해서 만들어진 소스를 특정 서버(svn/git)에
+		올려서, bulding(컴파일)을 하여 테스트 was(tomcat/jeuse/weblogic 등)에 올려서 처리하는
+		것을 말한다.		
+		- 개발 서버 : 개발 DB서버, 개발 WAS서버, svn/git, 빌딩도구(젠킨스)
+		- 테스트1 서버 : 테스트1 DB서버, 테스트1 WAS서버, svn, 빌딩도구(젠킨스)
+		- 테스트2 서버 : 테스트2 DB서버, 테스트2 WAS서버, svn, 빌딩도구(젠킨스)		
+	운영 환경
+		- 운영 서버 : 운영 DB서버, 운영 WAS서버, svn/git(최종소스), 빌딩도구
 
 # 학습목표
 1. 스프링의 mybatis dao와 xml연결 구조를 알고 사용할 수 있다.
+
+2. 개발 환경을 이해하고 구축할 수 있다.
  	
 # 주요핵심 keyword
 

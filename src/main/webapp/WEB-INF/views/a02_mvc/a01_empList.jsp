@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
 <style type="text/css">
 	td{text-align:center;}
-	
 </style>
 <script src="${path}/a00_com/jquery.min.js"></script>
 <script src="${path}/a00_com/popper.min.js"></script>
@@ -46,7 +45,6 @@
 
 </div>
 <div class="container">
-    <h2 align='center'>{{msg}}</h2>
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	    <input class="form-control mr-sm-2" placeholder="사원명" 
@@ -62,7 +60,6 @@
    	<col width="20%">
    	<col width="20%">
    	<col width="20%">
-
     <thead>
       <tr class="table-success text-center">
         <th>사원번호</th>
@@ -73,10 +70,10 @@
       </tr>
     </thead>	
     <tbody>
-    <c:forEach var="emp" items="${emplist}">
-    <tr><td>${emp.empno}</td><td>${emp.ename}</td><td>${emp.job}</td>
-    <td><fmt:formatNumber value="${emp.sal}"/></td><td>${emp.deptno}</td></tr>
-    </c:forEach>
+    	<c:forEach var="emp" items="${emplist}">
+    	<tr><td>${emp.empno}</td><td>${emp.ename}</td><td>${emp.job}</td>
+    	<td><fmt:formatNumber value="${emp.sal}"/></td><td>${emp.deptno}</td></tr>
+    	</c:forEach>
     </tbody>
 	</table>    
     

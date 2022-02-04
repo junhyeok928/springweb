@@ -1,34 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<!--// springweb.a02_mvc.a03_dao.A01_EmpDao : dao의 이너페이스명
-	// ArrayList<Emp> getEmpList(Emp sch); 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >		
+<!--// springweb.a02_mvc.a03_dao.A01_EmpDao : dao의 인터페이스명
+	// ArrayList<Emp> getEmpList(Emp sch);	
 	1. 메서드의 명 : id
 	2. 리턴타입 : resultType : mybatis.Spring.xml에 선언된 alias로 선언 가능
 	3. 매개변수 : parameterType
 	이렇게 연동관계를 설정하여 dao와 sql을 연동하여 결과를 처리한다.
-	-->
+	-->	
 <mapper namespace="springweb.a02_mvc.a03_dao.A01_EmpDao">
 	<select id="getEmpList" resultType="emp" parameterType="emp">
 		select *
 		from emp02
 		where ename like '%'||#{ename}||'%'
-		and job like '%'||#{job}||'%'
+		and job like '%'||#{job}||'%'		
 	</select>
-	<select id = "getCount" parameterType="int" resultType="int">
+	<!-- 
+	int getCount(int deptno);
+	 -->
+	<select id="getCount" parameterType="int" resultType="int">
+		select count(*) cnt
+			from emp02
+		where deptno = #{deptno}		
+	</select>	
+	<select id="getJobCount" parameterType="String" resultType="int">
 		select count(*) cnt
 		from emp02
-		where deptno = #{deptno}
-	</select>
-	<select id = "getJobCount" parameterType="String" resultType="int">
-		select count(*) cnt
-		from emp02
-		where job like '%'||#{job}||'%'
-	</select>
+		where job like '%'||#{job}||'%'		
+	</select>	
 	<select id="getEmpDetail" resultType="emp" parameterType="int">
 		select *
 		from emp02
-		where empno = #{empno};	
-	</select>
+		where empno = #{empno}		
+	</select>	
+	<!-- 
+	public DeptSal getDeptSal(int deptno);
+	 -->
+	 <select id="getDeptSal" resultType="deptsal" parameterType="int">
+		select deptno, max(sal) mxsal, min(sal) misal
+		 from emp
+		group by deptno
+		having deptno = #{deptno}
+	 
+	 </select>
+	 <!-- 
+Emp getStaticsEmp(String div);	 
+	  -->
+	 <select id="getStaticsEmp" resultType="emp" parameterType="string">
+		SELECT *
+		FROM emp
+		WHERE sal IN ( select max(sal) 
+		            	from emp
+		            	group by to_char(hiredate,'Q')
+		            	having to_char(hiredate,'Q') = #{div}
+		              UNION all
+					  select min(sal) mnsal
+		            	from emp
+		            	group by to_char(hiredate,'Q')
+		            	having to_char(hiredate,'Q') = #{div}
+		              UNION all
+		 			  select avg(sal) mnsal
+		            	from emp
+		            	group by to_char(hiredate,'Q')
+		            	having to_char(hiredate,'Q') = #{div} )	 
+	 </select>
+<!-- 
+public List<String> getEnames(int deptno);
+ -->
+ 	<select id="getEnames" resultType="string" parameterType="int">
+ 		select ename
+ 		from emp
+ 		where deptno = #{deptno}
+ 	</select>	 
+<!-- 
+List<Integer> getEmpnos(String job)
+ -->
+ 	<select id="getEmpnos" resultType="int" parameterType="string">
+ 		select empno
+ 		from emp
+ 		where job=#{job}
+ 	</select> 	
+<!-- 
+List<DeptEmp> getDeptEmp();
+ -->	
+ 	<select id="getDeptEmp" resultType="deptemp">
+		 SELECT dname, empno, ename name, job, to_char(hiredate, 'Q') div, 
+			nvl(sal,0)+nvl(comm,0) tsal
+		 FROM emp e, dept d
+		 WHERE e.deptno = d.deptno	
+ 	
+ 	</select>	
+<!-- 
+List<EmpGrade> getEmpGrade();
+ -->
+ 	<select id="getEmpGrade" resultType="empgrade">
+		 SELECT empno,  ename, sal, grade
+		 FROM emp e, salgrade s
+		 WHERE sal BETWEEN losal AND hisal	
+ 	</select>
+ 	
+ <!-- 
+ public List<Emp2> getEmpList2();
+	private int no;
+	private String name;
+	private String job;
+	private String mgrno;
+	private Date hiredate;
+	private double salary; 
+	컴럼명과 property명이 다르게 설정하여 연결할 때, 활용된다.
+  -->
+  <resultMap type="emp2" id="emp2Rst">
+  	<result column="empno" property="no"/>
+  	<result column="ename" property="name"/>
+  	<result column="mgr" property="mgrno"/>
+  	<result column="sal" property="salary"/>
+  </resultMap>
+  <select id="getEmpList2" resultMap="emp2Rst">
+  	select *
+  	from emp
+  </select>	
 </mapper>
