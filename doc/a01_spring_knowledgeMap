@@ -75,20 +75,45 @@
 		- url 패턴
 		- 요청값 처리.
 	2) model 처리
-	
+		- service ==> dao ==> XXXMapper.xml 을 통해서 요청값을 넘긴 후, 다시 (매개변수 전달)
+		- XXXMapper.xml ==> dao ==> service ==> controller 모델 데이터 설정.
 	3) view단 처리..
-	
+		- form 하위 요소 객체 : 입력을 통해 요청값 처리(query string)
+		- table 리스트 처리 : 모델데이터를 통해서 el/jstl을 활용하여 출력 처리
+		- css/html 화면 구성
+		- js, jquery를 통해서 유효성 check, 동적인 이벤트 처리..
 	4) 
 
 5. database 처리를 위한  mybatis framework 활용
-
+	1) dao, mapper 연결 규칙 알기..
+		# dao
+		public ArrayList<Emp> empList(Emp sch);
+		# XXXMapper.xml
+		<mapper namespace="패키지명.EmpDao"
+		<select id="empList" parameterType="emp" resultType="emp"
+			패키지명+인터페이스명 = namespace 속성
+			메서드명 = id 속성값
+			매개변수 객체(Emp sch) = parameterType 속성값
+			리턴 객체(ArrayList<Emp>) = resultType 속성값
+			
+	2) dao 인터페이스의 내부적인 결과 생성과정에 대한 이해.
+		XXXMapper.xml + interface ==> 실제 객체가 mybatis를 통해서 만들어 진다.
+		EmpDao empdao = new EmpDaoObj();
+		class EmpDaoObj implements EmpDao{
+		
+		}
+	
 
 6. AOP
 
 
 7. 기타 실무 예제..
-
-
+	파일업로드
+	ajax 처리 : fullcalendar(jquery lib)
+	다국어 처리
+	채팅
+	배치프로그래밍	
+	게시판(파일업로드, 페이징 처리)
 
 # 스프링 기본 호출 처리.
 1. controller 클래스 만들기

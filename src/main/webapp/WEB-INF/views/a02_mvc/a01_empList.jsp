@@ -32,6 +32,11 @@
 			el:".container",
 			data:{msg:"시작!!(뷰와함께)"}
 		});	
+		$("#regBtn").click(function(){
+			if(confirm("등록하시겠습니다.")){
+				$("#frm02").submit;	//frm02
+			}
+		});
 		<%-- 
 		
 		--%>	
@@ -41,7 +46,7 @@
 
 <body>
 <div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">사원정보조회</h2>
+  <h2 >사원정보조회</h2>
 
 </div>
 <div class="container">
@@ -52,6 +57,8 @@
 	    <input class="form-control mr-sm-2" placeholder="직책명" 
 	    	name="job" value="${emp.job}"/>
 	    <button class="btn btn-info" type="submit">Search</button>
+	    <button data-toggle="modal" data-target="#exampleModalCenter"
+	    	class="btn btn-success" type="button">등록</button>
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
@@ -82,13 +89,13 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">타이틀</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">사원정보등록</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-		<form id="frm02" class="form"  method="post">
+		<form id="frm02" class="form" action="${path}/insertEmp.do}" method="post">
 	     <div class="row">
 	      <div class="col">
 	        <input type="text" class="form-control" placeholder="사원명 입력" name="ename">
@@ -97,11 +104,32 @@
 	        <input type="text" class="form-control" placeholder="직책명 입력" name="job">
 	      </div>
 	     </div>
+	     <div class="row">
+	      <div class="col">
+	        <input type="text" class="form-control" placeholder="입사일 입력" name="hiredate">
+	      </div>
+	      <div class="col">
+	        <input type="text" class="form-control" placeholder="관리자 번호" name="mgr">
+	      </div>
+	     </div>
+	     <div class="row">
+	      <div class="col">
+	        <input type="text" class="form-control" placeholder="급여 입력" name="sal">
+	      </div>
+	      <div class="col">
+	        <input type="text" class="form-control" placeholder="보너스 입력" name="comm">
+	      </div>
+	     </div>
+		<div class="row">
+	      <div class="col">
+	        <input type="text" class="form-control" placeholder="부서번호 입력" name="deptno">
+	      </div>
+	     </div>
 	    </form> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" id="regBtn" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

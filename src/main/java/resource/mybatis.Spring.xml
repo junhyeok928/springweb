@@ -6,9 +6,12 @@
 		<typeAlias alias="emp" type="springweb.vo.Emp"/>
 		<typeAlias alias="emp2" type="springweb.vo.Emp2"/>
 		<typeAlias alias="dept" type="springweb.vo.Dept"/>
+		<typeAlias alias="dept2" type="springweb.vo.Dept2"/>
 		<typeAlias alias="salgrade" type="springweb.vo.Salgrade"/>
+		<typeAlias alias="salgrade2" type="springweb.vo.Salgrade2"/>
 		<typeAlias alias="deptsal" type="springweb.vo.DeptSal"/>
 		<typeAlias alias="deptemp" type="springweb.vo.DeptEmp"/>
+		<typeAlias alias="empgrade" type="springweb.vo.EmpGrade"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="resource/EmpMapper.xml"/>

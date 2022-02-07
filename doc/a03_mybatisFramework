@@ -14,6 +14,8 @@
 		- 인터페이스 활용
 		- 인터페이스의 컨테이너사용
 		
+		# mybatis에서 실제 객체가 만들어지는 개념에 대한 이해
+		
 	2) 데이터베이스의 접근을 위한 환경 이해
 		# DB connection 부분
 			드라이버
@@ -85,7 +87,8 @@
 	ex2)
 	select *
 	from emp02
-	where empno = @@@;
+	where empno = @@@; primary key인 empno를 통해서 시별하여 단일 행데이터를
+		나타날때 사용..
 	
 2. dao
 	public int getCount(int deptno);
@@ -154,15 +157,46 @@
 			mapper.xml
 			<select id="getEnames" resultType="string" parameterType="int">
 		 3조 제출, 손들기.A01_EmpDao.java	
-			
+		EX) 
+		-- 직책에 따른 사원 번호 출력
+		SELECT empno
+		FROM emp
+		WHERE job = 'SALESMAN';
+		4조 제출, 손들기.
+		
 		여러 컬럼에서 여러 개의 행데이터가 리턴되는 경우가 있다.
-EX) 
--- 직책에 따른 사원 번호 출력
-SELECT empno
-FROM emp
-WHERE job = 'SALESMAN';
+		select * 
+		from emp
+		where deptno=@@
+		dao : public List<Emp> geEmpList(int deptno);
+		mapper.xml
+			<select id="getEmpList" resultType="emp" parameterType="int">
+				select * 
+				from emp
+				where deptno=#{deptno}			
 
-4조 제출, 손들기.
+		# resultMap 활용하기.
+		1. key나 기타 column 명과 property가 다르게 설정하여 사용할 경우에
+			활용한다.
+		2. 처리 순서.
+			1) 	resultMap 기본 vo와 연동하여 선언.
+				ex) <resultMap id="empRsult" type="emp">
+						<result column="" property=""
+			2) <select resultMap="선언된resultMap아이디">
+
+# 매개변수 데이터 처리하기
+1. 단일데이터 매개변수 처리..
+	public Emp getEmp(int empno);
+	<select id="getEmp" resultType="emp" parameterType="int">
+	
+2. 2개 이상 데이터 입력..
+	select
+	from emp
+	where mgr = #{mgr}
+	and deptno = #{deptno}
+	
+	public Emp getEmp_mgr_deptno(@Param("mgr") int mgr, @Param("deptno") int deptno);
+
 
 	 	
 	

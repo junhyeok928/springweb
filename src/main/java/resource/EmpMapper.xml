@@ -120,4 +120,23 @@ List<EmpGrade> getEmpGrade();
   	select *
   	from emp
   </select>	
+  <select id="getAvg" parameterType="string"  resultType="double">
+	select avg(sal)
+	from emp
+	where job = #{job} 
+  </select>	  
+  <select id="getMgrEmp" parameterType="string" resultType="emp" >
+	     	select *
+	      	from emp
+	       	where mgr in (
+		            	select empno
+		            	from emp
+		            	where ename=#{ename} )
+  </select>
+  <select id="getSchEmp" resultType="emp">
+  	select *
+  	from emp
+  	where mgr = #{mgr}
+  	and deptno = #{deptno}
+  </select>
 </mapper>

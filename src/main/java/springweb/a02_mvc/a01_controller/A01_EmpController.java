@@ -22,6 +22,9 @@ public class A01_EmpController {
 		// service 객체에서 넘겨온 ArrayList<Emp>객체를 emplist라는
 		// 이름으로 모델 데이터 선언하여, ${emplist}로 뷰단에서 쓸 수 있게
 		// 해놓는다.
+		// service.getEmpList(sch)
+		// 요청값을 vo롤 통해서 DB에 전달하고, 전달된 내용의 
+		// 결과를 다시 객체로 받아서 모델명 emplist 설정을 한다.
 		d.addAttribute("emplist", service.getEmpList(sch));
 		
 		

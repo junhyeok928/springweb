@@ -13,4 +13,13 @@ public interface A03_SalgradeDao {
 		 from salgrade
 		 where grade = #{grade}
 	</select>
+	<resultMap type="salgrade2" id="salResult">
+  	<result column="grade" property="level"/>
+  	<result column="losal" property="lowsalary"/>
+  	<result column="hisal" property="highsalary"/>
+  </resultMap>
+	<select id="getSalgrade2List" resultMap="salResult">
+		 select *
+		 from salgrade
+	</select>
 </mapper>
