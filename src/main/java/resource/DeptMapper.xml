@@ -17,13 +17,30 @@
 		 from dept
 		 where dname=#{dname}	
 	</select>
+	<!-- 
+	List<Dept2> getDept2List();
+	 -->
 	<resultMap type="dept2" id="dept2Rst">
-  		<result column="deptno" property="no"/>
-  		<result column="dname" property="name"/>
-  		<result column="loc" property="location"/>
-  	</resultMap>
-  	<select id="getDept2List" resultMap="dept2Rst">
-  		select *
-  		from dept
-  	</select>	
+		<result column="deptno" property="no"/>
+		<result column="dname" property="name"/>
+		<result column="loc" property="location"/>
+	</resultMap> 
+	<select id="getDept2List" resultMap="dept2Rst">
+		select *
+		from dept
+	</select>
+	<!-- 
+	public List<Dept> getDeptList(Dept sch);
+	 -->
+	<select id="getDeptList" parameterType="dept" 
+			resultType="dept">
+		select *
+		from dept02
+		where dname like '%'||#{dname}||'%'
+		and loc like '%'||#{loc}||'%'	
+	</select>
+	
+	<insert id="insertDept" parameterType="dept">
+		insert into dept02 values(#{deptno}, #{dname}, #{loc})
+	</insert>
 </mapper>

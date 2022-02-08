@@ -1,5 +1,5 @@
-# 사원정보 CRUD 처리
-1. 파일 구성
+# 사원정보 CRUD 처리.
+1. 파일 구성 
 	1) controller(A01_EmpController.java)
 	2) service(A01_EmpService.java)
 	3) dao(A01_EmpDao.java)
@@ -15,10 +15,10 @@
 		해당 내용을 등록 후, 특정 기능 버튼 클릭시, 사원정보 등록 및
 		전체화면 리스트 처리..
 	3) 처리 순서
-		- 뷰 단(jsp) 처리
-			등록버튼으로 등록 다이얼로그 로딩
+		- 뷰 단(jsp) 처리 
+			등록 버튼으로 등록 다이얼로그 로딩
 			form 등록 목록 설정 요청값 처리
-			등록 controller단 호출 : form의 action 부분 선언
+			등록 controller단 호출 :form의 action 부분 선언
 		- 등록 controller 선언
 		- DB 처리
 			sql 작성
@@ -26,4 +26,106 @@
 			dao, mapper 작성
 			service단 처리
 			controller(위 등록 처리 내용 호출)
-			등록 처리 후, 출력할 리스트 화면 controller 호출..
+			등록 처리 후, 출력할 리스트 controller 호출..
+	4) 진행 핵심 코드.
+		- 등록 처리 화면(a01_empList.jsp)
+			- 다이얼로그 창 띄우기
+			- form 속성 및 하위 요소객체 처리
+				<form action="${path}/insertEmp.do"
+					<input name="ename"/>			
+			
+		- 등록 요청 처리 컨트롤러(A01_EmpController.java)
+			@RequestMapping("/insertEmp.do")
+			public String inserEmp(Emp ins, Model d){
+				d.add("proc","등록완료");
+				// service
+				return "WEB-INF\views\a02_mvc\a01_empList.jsp"; // 등록 후, 처리해야 할 화면 호출..
+			}	
+		- 등록 처리 후, 처리할 내용 (a01_empList.jsp)
+			var proc = "${proc}";
+			if(proc!=""){
+				if( confirm( proc+"\n조회화면으로 이동하시겠습니까?") ){
+					location.href="${path}/empList.do";	
+				}
+			}	
+		- 등록 처리 dao 및 mapper
+			1) sql 확인 
+			INSERT INTO EMP02 values(EMP_SEQ.NEXTVAL,'등록자','사원',7698,to_date('2022-02-08','YYYY-MM-DD'),3000,1000,10);
+			2) vo객체 만들고
+			3) dao/mapper 처리
+			public void insertEmp(Emp ins);  (A01_EmpDao.java)
+			<insert id="insertEmp" parameterType="emp"> (EmpMapper.xml)
+				insert into emp02 values(emp_seq.nextval, ${ename}, ${job},...... );
+		- service 호출  (A01_EmpService.java)
+			dao 메서드 호출
+		- controller에서 처리  (A01_EmpController.java)
+			service.insertEmp(ins);		
+
+	4) 진행 핵심 코드(연습예제)
+		- 등록 처리 화면(a10_deptList.jsp)
+			- 다이얼로그 창 띄우기
+			- form 속성 및 하위 요소객체 처리
+				<form action="${path}/insertDept.do"
+					<input name="deptno"/>			
+					<input name="dname"/>			
+					<input name="loc"/>			
+			
+		- 등록 요청 처리 컨트롤러(A02_DeptController.java)
+			@RequestMapping("/insertDept.do")
+			public String insertDept(Dept ins, Model d){
+				d.add("proc","등록완료");
+				// service
+				return "WEB-INF\views\a02_mvc\a10_deptList.jsp"; // 등록 후, 처리해야 할 화면 호출..
+			}	
+		- 등록 처리 후, 처리할 내용 (a10_deptList.jsp)
+			var proc = "${proc}";
+			if(proc!=""){
+				alert(proc);
+				location.href="${path}/deptList.do";	
+			}	
+		===========================================================	
+		ex) 부서정보 등록 처리 예제 - 4조 제출
+		- 등록 처리 dao 및 mapper 
+			public void insertDept(Dept ins);  (A02_DeptDao.java)
+			<insert id="insertDept" parameterType="dept"> (DeptMapper.xml)
+				insert into dept02 values(${deptno}, ${dname}, ${loc})
+		- service 호출  (A02_DeptService.java)
+		- controller에서 처리  (A02_DeptController.java)
+			service.insertDept(ins);	
+			
+3. 상세화면(수정/삭제처리)
+	1) 상세화면 로딩
+		리스트 jsp화면에서 상세화면 가기(a01_empList.jsp)
+			<tr ondblclick="goDetail(${empno})"><td>${empno}
+			funtion goDetail(empno){
+				location.href="${path}/emp.do?empno="+empno;
+			}
+		controller(A01_EmpController.java)
+			@RequestMapping("/emp.do")
+			public String getEmpno(int empno, Model d){
+				System.out.println(empno);
+				return "WEB-INF\views\a02_mvc\a02_empDetail.jsp";
+			}
+		-----------------------------
+		view(a02_empDetail.jsp)
+			상세화면 구성
+			
+		-----------------------------
+		sql : select * from emp02 where empno = @@@
+		vo : Emp
+		dao/mapper
+			public Emp getEmp(int empno);	(A01_EmpDao.java)
+			<select id="getEmp" parameterType="int">
+				select * from emp02 where empno = #{empno}	(EmpMapper.xml)
+		service ==> controller
+		controller
+			d.addAttribute("emp", service.getEmp(empno));
+	2) 수정
+	
+	3) 삭제
+				
+				
+				
+							 	
+			
+			

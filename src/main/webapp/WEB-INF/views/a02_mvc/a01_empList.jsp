@@ -28,25 +28,39 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var vm = new Vue({
-			el:".container",
-			data:{msg:"시작!!(뷰와함께)"}
-		});	
+		var proc = "${proc}";
+		if(proc!=""){
+			alert(proc);
+			location.href="${path}/empList.do";	
+			/* 화면이 다를 때는 꼭 필요.
+			if( confirm( proc+"\n조회화면으로 이동하시겠습니까?") ){
+				location.href="${path}/empList.do";	
+			}
+			*/
+		}			
+		
+		
 		$("#regBtn").click(function(){
 			if(confirm("등록하시겠습니다.")){
-				$("#frm02").submit;	//frm02
+				$("#frm02").submit(); // frm02
 			}
+			
 		});
 		<%-- 
 		
 		--%>	
 	});
+	function goDetail(empno){
+		// get방식으로 상세화면 이동..
+		location.href="${path}/emp.do?empno="+empno;	
+	}
+	
 </script>
 </head>
 
 <body>
 <div class="jumbotron text-center">
-  <h2 >사원정보조회</h2>
+  <h2>사원정보조회</h2>
 
 </div>
 <div class="container">
@@ -57,8 +71,8 @@
 	    <input class="form-control mr-sm-2" placeholder="직책명" 
 	    	name="job" value="${emp.job}"/>
 	    <button class="btn btn-info" type="submit">Search</button>
-	    <button data-toggle="modal" data-target="#exampleModalCenter"
-	    	class="btn btn-success" type="button">등록</button>
+	    <button  data-toggle="modal" data-target="#exampleModalCenter" 
+	    	class="btn btn-success" type="button" >등록</button>
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
@@ -78,7 +92,7 @@
     </thead>	
     <tbody>
     	<c:forEach var="emp" items="${emplist}">
-    	<tr><td>${emp.empno}</td><td>${emp.ename}</td><td>${emp.job}</td>
+    	<tr ondblclick="goDetail(${emp.empno})"><td>${emp.empno}</td><td>${emp.ename}</td><td>${emp.job}</td>
     	<td><fmt:formatNumber value="${emp.sal}"/></td><td>${emp.deptno}</td></tr>
     	</c:forEach>
     </tbody>
@@ -95,7 +109,7 @@
         </button>
       </div>
       <div class="modal-body">
-		<form id="frm02" class="form" action="${path}/insertEmp.do}" method="post">
+		<form id="frm02" class="form" action="${path}/insertEmp.do"  method="post">
 	     <div class="row">
 	      <div class="col">
 	        <input type="text" class="form-control" placeholder="사원명 입력" name="ename">
@@ -106,25 +120,25 @@
 	     </div>
 	     <div class="row">
 	      <div class="col">
-	        <input type="text" class="form-control" placeholder="입사일 입력" name="hiredate">
+	        <input type="date" class="form-control" placeholder="입사일 입력" name="hiredateS">
 	      </div>
 	      <div class="col">
-	        <input type="text" class="form-control" placeholder="관리자 번호" name="mgr">
+	        <input type="number" class="form-control" placeholder="관리자 번호 입력" name="mgr"  value="0">
 	      </div>
 	     </div>
 	     <div class="row">
 	      <div class="col">
-	        <input type="text" class="form-control" placeholder="급여 입력" name="sal">
+	        <input type="number" class="form-control" placeholder="급여 입력" name="sal" value="0">
 	      </div>
 	      <div class="col">
-	        <input type="text" class="form-control" placeholder="보너스 입력" name="comm">
+	        <input type="number" class="form-control" placeholder="보너스 입력" name="comm"  value="0">
 	      </div>
 	     </div>
-		<div class="row">
+	     <div class="row">
 	      <div class="col">
-	        <input type="text" class="form-control" placeholder="부서번호 입력" name="deptno">
+	        <input type="number" class="form-control" placeholder="부서번호 입력" name="deptno"  value="0">
 	      </div>
-	     </div>
+	     </div>	     	     	      
 	    </form> 
       </div>
       <div class="modal-footer">

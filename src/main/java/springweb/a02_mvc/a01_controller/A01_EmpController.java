@@ -30,6 +30,20 @@ public class A01_EmpController {
 		
 		return "WEB-INF\\views\\a02_mvc\\a01_empList.jsp";
 	}
-	
+	@RequestMapping("/insertEmp.do")
+	public String insertEmp(Emp ins, Model d){
+		
+		d.addAttribute("proc","등록완료");
+		System.out.println("날짜:"+ins.getHiredateS());
+		service.insertEmp(ins);
+		// service
+		return "WEB-INF\\views\\a02_mvc\\a01_empList.jsp"; // 등록 후, 처리해야 할 화면 호출..
+	}	
+	@RequestMapping("/emp.do")
+	public String getEmpno(int empno, Model d){
+		System.out.println("상세 empno:"+empno);
+		d.addAttribute("emp", service.getEmp(empno));
+		return "WEB-INF\\views\\a02_mvc\\a02_empDetail.jsp";
+	}
 	
 }

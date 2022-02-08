@@ -32,5 +32,7 @@ public interface A01_EmpDao {
 	public ArrayList<Emp> getMgrEmp(String ename);
 	public ArrayList<Emp> getSchEmp(@Param("mgr") int mgr, 
 									@Param("deptno") int deptno);
-	// service dao.getSchEmp(7839,20);
+	// service  dao.getSchEmp(7839,20);
+	public void insertEmp(Emp ins); 	
+	public Emp getEmp(int empno);
 }

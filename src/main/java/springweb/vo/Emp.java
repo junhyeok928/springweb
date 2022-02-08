@@ -9,6 +9,7 @@ public class Emp {
 	private String job;
 	private int mgr;
 	private Date hiredate;
+	private String hiredateS;
 	private double sal;
 	private double comm;
 	private int deptno;
@@ -92,6 +93,14 @@ public class Emp {
 
 	public void setDeptno(int deptno) {
 		this.deptno = deptno;
+	}
+
+	public String getHiredateS() {
+		return hiredateS;
+	}
+
+	public void setHiredateS(String hiredateS) {
+		this.hiredateS = hiredateS;
 	}
 
 }

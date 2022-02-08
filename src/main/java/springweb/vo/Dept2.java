@@ -1,23 +1,14 @@
 package springweb.vo;
-
+// springweb.vo.Dept2
 public class Dept2 {
-	private String no;
+	private int no;
 	private String name;
 	private String location;
-	public Dept2() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Dept2(String no, String name, String location) {
-		super();
-		this.no = no;
-		this.name = name;
-		this.location = location;
-	}
-	public String getNo() {
+	
+	public int getNo() {
 		return no;
 	}
-	public void setNo(String no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 	public String getName() {

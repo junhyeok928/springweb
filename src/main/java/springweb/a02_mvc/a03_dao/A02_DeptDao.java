@@ -20,11 +20,17 @@ public interface A02_DeptDao {
 	public Dept getDeptName(String dname);
 	/*
 	ex) select * dept
-	resultMap을 활용하여 처리 하세요.
+	resultMap를 활용하여 처리 하세요.. mybatis.Spring.xml dept2 등록
 	class Dept2
 		private String no;
 		private String name;
 		private String location;
-	 */
+		
+		6조 제출, 6조를 포함해서 조장님 손들기
+	 * */
 	public List<Dept2> getDept2List();
+	
+	public List<Dept> getDeptList(Dept sch);
+	
+	public void insertDept(Dept ins);
 }
