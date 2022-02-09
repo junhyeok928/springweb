@@ -25,11 +25,30 @@
 <script src="${path}/a00_com/popper.min.js"></script>
 <script src="${path}/a00_com/bootstrap.min.js"></script>
 <script src="${path}/a00_com/jquery-ui.js"></script>
-<script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-
+		var proc="${proc}";
+		if(proc!=""){
+			alert(proc);
+			if(proc=="삭제되었습니다"){
+				location.href="${path}/empList.do";
+			}
+		}	
+		$("#uptBtn").click(function(){
+			if(confirm("수정하시겠습니까?")){
+				$("form").attr("action","${path}/uptEmp.do");
+				$("form").submit();
+			}
+		});
+		$("#delBtn").click(function(){
+			if(confirm("삭제하시겠습니까?")){
+				location.href="${path}/delEmp.do?empno="+$("[name=empno]").val();
+			}
+		});
+		$("#mainBtn").click(function(){
+			location.href="${path}/empList.do";
+		});
 	});
 </script>
 </head>
@@ -50,7 +69,7 @@
 			<span class="input-group-text">사원명</span>
 		</div>
 		<input name="ename" class="form-control" value="${emp.ename}" />	
-	</div>
+	</div>	
 	<div class="input-group mb-3">	
 		<div class="input-group-prepend ">
 			<span class="input-group-text ">직책명</span>
@@ -60,37 +79,35 @@
 			<span class="input-group-text">관리자</span>
 		</div>
 		<input name="mgr" class="form-control" value="${emp.mgr}" />	
-	</div>
+	</div>	
 	<div class="input-group mb-3">	
 		<div class="input-group-prepend ">
 			<span class="input-group-text ">입사일</span>
 		</div>
-		<input name="hiredate" type="date" class="form-control" value='${emp.hiredate}'/>
-			<%--
-			<fmt:
-			 --%>
+		<input name="hiredateS" type="date" class="form-control" 
+			value='<fmt:formatDate value="${emp.hiredate}" pattern="yyyy-MM-dd"/>' />
+
 		<div class="input-group-prepend">
 			<span class="input-group-text">부서번호</span>
 		</div>
 		<input name="deptno" class="form-control" value="${emp.deptno}" />	
-	</div>
+	</div>		
 	<div class="input-group mb-3">	
 		<div class="input-group-prepend ">
 			<span class="input-group-text ">급여</span>
 		</div>
-		<input name="sal" class="form-control" value="${emp.sall}" />	
+		<input name="sal" class="form-control" value="${emp.sal}" />	
 		<div class="input-group-prepend">
 			<span class="input-group-text">보너스</span>
 		</div>
 		<input name="comm" class="form-control" value="${emp.comm}" />	
-	</div>
+	</div>	
 	<div style="text-align:right;">
-	<input type="button" class="btn btn-info" value="수정" id="uptBtn"/>
-	<input type="button" class="btn btn-danger" value="삭제" id="uptBtn"/>
-	<input type="button" class="btn btn-success" value="조회리스트" id="uptBtn"/>
+		<input type="button" class="btn btn-info" value="수정" id="uptBtn"/>
+		<input type="button" class="btn btn-danger" value="삭제" id="delBtn"/>
+		<input type="button" class="btn btn-success" value="조회리스트" id="mainBtn"/>
+	</div>	
+	</form>	
 </div>
-</form>
-</div>
-
 </body>
 </html>

@@ -1,0 +1,62 @@
+2022-02-07
+[1단계:개념] 1. resultMap과 resultType의 차이와 사용할 때를 기술하세요.
+[1단계:확인] 2. 사원정보와 부서정보를 조인하여 클래스로 departname, empname, no, departname을 출력하게 resultMap을 활용하여,
+             dao, mapper.xml을 선언하고 확인하세요.
+[1단계:확인] 3. @param을 활용하여, 부서이름과 부서위치를 검색하는 dao, mappper를 구현하세요.
+[1단계:확인] 4. MVC로 부서정보를 부서미름과 부서위치를 검색하여 리스트 하세요.
+
+MVC로 부서정보 리스트 화면 구현하기..
+1. sql 작성
+	select *
+	from dept02
+	where dname like '%'||''||'%'
+	and loc like '%'||''||'%'
+2. vo 작성(요청/리스트 구분)
+	private int deptno;
+	private String dname;
+	private String loc;
+3. view단 초기화면 호출 및 form 객체 처리
+	WEB-INF\views\a02_mvc\a10_deptList.jsp
+	<form>
+		<input type="text" name="dname" value="${dept.dname}"/>
+		<input type="text" name="loc" value="${dept.loc}"/>
+		<input type="submit" value="검색"/>
+	<table>
+		<tr><th>부서번호</th><th>부서명</th><th>부서위치</th></tr>	
+4. controller단을 통해 초기화면 처리
+	A02_DeptController.java
+	// http://localhost:7080/springweb/deptList.do
+	@RequestMapping("/deptList.do")
+	public String deptList(Dept sch, Model d){
+		return "WEB-INF\views\a02_mvc\a10_deptList.jsp";
+	}
+5. dao 작성
+	A02_DeptDao.java
+		public List<Dept> getDeptList(Dept sch);
+	mybatis.Spring.xml
+		vo alias 등록
+		XXXMapper.xml 등록	
+	DeptMapper.xml
+		<select id="getDeptList" parameterType="dept">
+			select *
+			from dept02
+			where dname like '%'||#{dname}||'%'
+			and loc like '%'||#{loc}||'%'	
+6. service
+   A02_DeptService.java
+7. controller 모델 선언하기
+	  @Autowired
+	  private  A02_DeptService service;
+	  d.addAttribute("dlist", service.getDeptList(sch) );
+8. view(jsp) 테이블 조회 리스트 만들기
+	<c:forEach var="dept" items="${dlist}">
+		<tr><td>${dept.deptno}</td><td>${dept.dname}</td><td>${dept.loc}</td></tr>	  			
+
+
+# 보강 #
+[1단계:확인] 1. 1:1관계가 설정된 객체를 선언하고 main()에서 호출하여 처리하세요.
+		Computer, Mouse 컨테이너에서 처리하게 하세요
+[1단계:확인] 2. 1:다관계가 설정된 객체를 선언하고 main()에서 호출하여 처리하세요.
+        Library, ArrayList<Book> 형태로 컨테이너에 담기 처리하는 내용
+[1단계:개념] 3. autowire 속성으로 byType과 byName의 차이점을 기술하세요..
+[1단계:개념] 4. 소스상에 객체를 연관 관계 처리할 수 있는 옵션에 대하여 기술하세요

@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="${encoding}">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 </head>
 <body>
-	<div id="show">
+	<div id="view">
 		<h2 align="center">{{msg}}</h2>
+		<h2 align="center">{{msg2}}</h2>
 	</div>
 </body>
 <script>
-	var vm = new Vue({
-		el:"#show",
-		data:{msg:"시작!!"}
+	var model = {msg:"vue 시작!", msg2:"안녕하세요"};
+	
+	var viewmodel = new Vue({
+		el:"#view",
+		data:model
 	});
+	
 </script>
 </html>

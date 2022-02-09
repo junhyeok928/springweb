@@ -14,11 +14,14 @@ public class A02_DeptService {
 	private A02_DeptDao dao;
 	
 	public List<Dept> getDeptList(Dept sch){
+		// sch.getDname() 초기 화면에서는 null
 		if(sch.getDname()==null) sch.setDname("");
 		if(sch.getLoc()==null) sch.setLoc("");
 		return dao.getDeptList(sch);
 	}
-	public void insertDept(Dept ins) {
-		dao.insertDept(ins);
+	
+	public void insertDept(Dept sch) {
+		dao.insertDept(sch);
 	}
+
 }

@@ -51,12 +51,12 @@
 		- 등록 처리 dao 및 mapper
 			1) sql 확인 
 			INSERT INTO EMP02 values(EMP_SEQ.NEXTVAL,'등록자','사원',7698,to_date('2022-02-08','YYYY-MM-DD'),3000,1000,10);
-			2) vo객체 만들고
-			3) dao/mapper 처리
+			2) vo객체 만들고,
+			3) dao/mapper처리
 			public void insertEmp(Emp ins);  (A01_EmpDao.java)
 			<insert id="insertEmp" parameterType="emp"> (EmpMapper.xml)
 				insert into emp02 values(emp_seq.nextval, ${ename}, ${job},...... );
-		- service 호출  (A01_EmpService.java)
+		- service 처리  (A01_EmpService.java)
 			dao 메서드 호출
 		- controller에서 처리  (A01_EmpController.java)
 			service.insertEmp(ins);		
@@ -84,48 +84,222 @@
 				location.href="${path}/deptList.do";	
 			}	
 		===========================================================	
-		ex) 부서정보 등록 처리 예제 - 4조 제출
+		ex) 부서정보 등록 처리 예제 - 4조 제출, 
 		- 등록 처리 dao 및 mapper 
 			public void insertDept(Dept ins);  (A02_DeptDao.java)
 			<insert id="insertDept" parameterType="dept"> (DeptMapper.xml)
 				insert into dept02 values(${deptno}, ${dname}, ${loc})
 		- service 호출  (A02_DeptService.java)
 		- controller에서 처리  (A02_DeptController.java)
-			service.insertDept(ins);	
-			
+			service.insertDept(ins);		
+				
 3. 상세화면(수정/삭제처리)
 	1) 상세화면 로딩
 		리스트 jsp화면에서 상세화면 가기(a01_empList.jsp)
-			<tr ondblclick="goDetail(${empno})"><td>${empno}
-			funtion goDetail(empno){
-				location.href="${path}/emp.do?empno="+empno;
-			}
+			<tr ondblclick="goDetail(${empno} )"><td>${empno}
+			function goDetail(empno){
+				location.href="${path}/emp.do?empno="+empno;	
+			}	
 		controller(A01_EmpController.java)
 			@RequestMapping("/emp.do")
-			public String getEmpno(int empno, Model d){
+			public String getEmpno(@RequestParam("empno")  int empno, Model d){
 				System.out.println(empno);
 				return "WEB-INF\views\a02_mvc\a02_empDetail.jsp";
 			}
-		-----------------------------
+		--------------------------			
 		view(a02_empDetail.jsp)
 			상세화면 구성
+			<input name="sal" class="form-control" value="${emp.sal}" />	
+			<input type="button" class="btn btn-info" value="수정" id="uptBtn"/>	
 			
-		-----------------------------
-		sql : select * from emp02 where empno = @@@
+	
+		-------------------
+		sql : select * from emp02 where empno=@@@
 		vo : Emp
 		dao/mapper
-			public Emp getEmp(int empno);	(A01_EmpDao.java)
+			
+			public Emp getEmp(int empno); (A01_EmpDao.java)
+			
 			<select id="getEmp" parameterType="int">
-				select * from emp02 where empno = #{empno}	(EmpMapper.xml)
+				select * from emp02 where empno=#{empno} (EmpMapper.xml)
 		service ==> controller
 		controller
 			d.addAttribute("emp", service.getEmp(empno));
-	2) 수정
+			
+		# 다이얼로그를 이용한 상세화면 구성 및 수정 삭제 처리(연습예제-dept부서정보)
+		1. 개발 순서
+			0) 기능 버튼의 활성화 및 form 요청값 정리
+				닫기 버튼 공통
+				등록 버튼 클릭 시 :  다이얼로그의 등록버튼과 , 다른 버튼(수정/삭제) 비활성화
+								타이틀 등록으로 표기
+				더블 클릭 시 : 다이얼로그 등록버튼 비활성화/보이지 않게 처리, 수정/삭제버튼 활성화
+			1) 더블 클릭시, 상세화면 팝업로딩
+			2) 함수를 통해 기존데이터 로딩 및 수정/삭제 
+				- 다이얼로그에 수정 버튼 클릭시 수정 처리 호출
+				- 다이얼로그에 삭제 버튼 클릭시 삭제 처리 호출
+		2. 처리할 핵심 코드					
+			0) 초기 기능 버튼 설정 및 활성화 및 비활성화 처리
+				<button id="regBtn" >등록</button>	
+				<button id="uptBtn" >수정</button>	
+				<button id="delBtn" >삭제</button>
+				초기 및 등록 버튼 클릭시.
+				$("#regBtn").show();	
+				$("#uptBtn").hide();	
+				$("#delBtn").hide();
+			1) 상세화면 파업로딩 더블 클릭
+				function detail(deptno, dname, loc){
+					// 타이틀 변경
+					$("#exampleModalLongTitle").text("부서정보(수정/삭제)");
+					// 버튼 활성화 비활성화 처리
+					// 각각의 form에 데이터 할당.
+					$("#frm02 [name=deptno]").val(deptno);
+					$("#frm02 [name=dname]").val(dname);
+					$("#frm02 [name=loc]").val(loc);
+				}
+				<tr ondblclick="detail(${dept.deptno},'${dept.dname}','${dept.loc}')" 
+					 data-toggle="modal" data-target="#exampleModalCenter" >	
+			2) 수정 버튼 클릭시, 	
+				$("#uptBtn").click(function(){
+					if(confirm("수정하시겠습니까?")){
+						$("#frm02").attr("action","${path}/uptDept.do");
+						$("#frm02").submit();	
+					}
+				});	 
+				$("#delBtn").click(function(){
+					if(confirm("삭제하시겠습니까?")){
+						$("#frm02").attr("action","${path}/delDept.do");
+						$("#frm02").submit();	
+					}
+				});
+			3) 수정/삭제 controller 만들기
+			4) dao/mapper
+			5) service, controller 호출						
 	
+	2) 수정
+		- 프로세스
+		수정 클릭시 수정 관련 controller 요청 및 요청값 전달
+		요청 전달된 VO를 기준으로 데이터베이스 수정 처리
+		수정 후, 다음 화면에서 수정된 데이터 로딩 및 수정 완료 표현
+		- 개발 순서
+			컨트롤러 처리 controller(A01_EmpController.java)
+				@RequestMapping("/uptEmp.do")
+				public String uptEmp(Emp upt, Model d){
+					d.addAttribute("proc","수정완료");
+					return "WEB-INF\views\a02_mvc\a10_deptList.jsp"
+				}
+			뷰처리 view(WEB-INF\views\a02_mvc\a01_empList.jsp)
+				var proc="${proc}";
+				if(proc!=""){
+					alert(proc);
+				}	
+				$("#uptBtn").click(function(){
+					if(confirm("수정하시겠습니까?")){
+						$("form").attr("action","${path}/uptEmp.do");
+						$("form").submit();
+					}
+				}); 
+			----------------------------------------------------	
+			데이터베이스 처리.	A01_EmpDao.java, EmpMapper.xml
+				sql 작성  
+					update emp02
+						set ename = '',
+							job = '',
+							mgr = 22,
+							hiredate = to_date('','YYYY-MM-DD'),
+							sal = 1000,
+							comm = 100,
+							deptno = 10
+					where empno = @@;
+				vo 확인
+				dao 처리 A01_EmpDao.java
+					public void uptEmp(Emp upt);
+				mapper
+					<update id = "uptEmp" parameterType="emp">
+						update emp02
+							set ename = #{ename},
+								job = #{job},
+								mgr = #{mgr},
+								hiredate = to_date(#{hiredateS},'YYYY-MM-DD'),
+								sal = #{sal},
+								comm = #{comm},
+								deptno = #{deptno}
+						where empno = #{empno}					
+				service ==> controller 호출
+				controller
+					service.uptEmp(upt);
+			ex) 부서상세화면에서 수정 버튼 클릭시, 컨트롤러 호출하고, 수정되었다고
+				표시하세요 - 5조 제출해주세요.
+				controller(A02_DeptController.java) 부서수정 선언
+					@RequestMapping("/uptDept.do")
+					public String uptDept(Dept upt, Model d){
+						d.addAttribute("proc","부서수정완료");
+						
+						return "WEB-INF\views\a02_mvc\a10_deptList.jsp";
+					}
+				view (a10_deptList.jsp)
+					var proc="${proc}";
+					if(proc!=""){
+						alert(proc);
+					}
+					$("#uptBtn").click(function(){
+						if(confirm("수정하시겠습니까?")){
+						    $("#frm02").attr("action","${path}/uptDept.do");
+							$("#frm02").submit();
+						}
+					});
+			ex) 부서 정보 수정 Dao 처리
+				
+				sql 작성 : 
+					update dept02
+						set dname = '',
+							loc = ''
+					where deptno = 10;
+				vo 확인
+				dao 작성
+					public void uptDept(Dept upt);
+				mapper 작성
+					<update id="uptDept" parameterType="dept">
+					
+				service ==> controller
+				
+				controller단 처리.. @RequestMapping("/uptDept.do")
+					service.uptDept(upt);
+				
+				
+				
 	3) 삭제
+		프로세스
+			삭제버튼 클릭
+			삭제 controller단에 요청값을 empno를 전송
+			삭제 처리 후, 화면리스트로 전송
+		개발순서
+			삭제 controller 선언
+				@RequestMapping("delEmp.do")
+				public String delEmp(@RequestParam("empno") int empno, Model d){
+					d.addAttribute("proc","삭제되었습니다");
+				}
 				
-				
-				
+			삭제 클릭시 controller로 호출(jsp)
+				$("#delBtn").click(function(){
+					if(confirm("삭제하시겠습니까?")){
+						location.href="${path}/delEmp.do?empno="+$("[name=empno]").val();
+					}
+				});
+			삭제 후, 조회리스트로 이동 처리..		
+				var proc = "${proc}";
+				if(proc=="삭제되었습니다"){
+					alert(proc);
+					location.href="${path}/empList.do";
+				}
+			==========
+			sql : delete from emp02 where empno=@@
+			dao/mapper
+				public void delEmp(int empno);
+				<delete id="delEmp" parameterType="int">
+					 delete from emp02 where empno =#{empno}
+			service / controller 호출
+			controller
+				service.delEmp(empno);
 							 	
 			
 			

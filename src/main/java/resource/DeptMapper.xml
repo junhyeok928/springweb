@@ -38,9 +38,10 @@
 		from dept02
 		where dname like '%'||#{dname}||'%'
 		and loc like '%'||#{loc}||'%'	
-	</select>
+	</select>	
 	
 	<insert id="insertDept" parameterType="dept">
 		insert into dept02 values(#{deptno}, #{dname}, #{loc})
 	</insert>
+	
 </mapper>

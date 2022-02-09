@@ -1,0 +1,60 @@
+2022-02-03
+[1단계:개념] 1. 스프링에서 DB연동할 Dao인퍼테이스 패키지가 2개이상을 때, 처리하는 방법을 기술하세요
+ <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	 	<property name="basePackage" value="패키지명1, 패키지명2..."/>
+
+
+[1단계:개념] 2. mybatis에서 실제 클래스 없이 Dao 인터페이스와 XXXMapper.xml파일만 설정하는 이유는 무엇인가?
+	Dao인터페이스 선언과 추상메서드 선언 + 연동하는 XXXMapper.xml을 선언하면,
+	마이바티즈 프레임웍에서 자동으로 Dao인터페이스를 상속받은 실제 객체를 만들어서 실제 객체를 
+	리턴하여 사용할 수 있기 때문이다.
+[1단계:확인] 3. 다음의 sql을 기준으로 dao 메서드와 XXXMapper.xml를 추가 처리하세요.
+            1) select * from emp e, dept d 
+                where e.deptno = d.empno
+                and deptno = @@
+            2) select *     (새로운 dao/mappper 추가 처리)
+                from salgrade
+                where grade = @@
+            3) select deptno, max(sal) mxsal, min(sal) misal
+                from emp
+                group by deptno
+                where deptno = @@
+            4) select *
+               from emp
+               where sal between @@@ and @@@;
+            5) 분기별 최고/최저/평균급여자 출력 : 입력-분기, 출력 급여자 정보
+            	select to_char(hiredate,'Q') div, 
+            			max(sal) mxsal, min(sal) mnsal, avg(sal) avsal
+            	from emp
+            	group by to_char(hiredate,'Q')
+            	having to_char(hiredate,'Q') = #{div}
+  SELECT *
+FROM emp
+WHERE sal IN ( select max(sal) 
+            	from emp
+            	group by to_char(hiredate,'Q')
+            	having to_char(hiredate,'Q') = '1'
+              UNION
+			  select min(sal) 
+            	from emp
+            	group by to_char(hiredate,'Q')
+            	having to_char(hiredate,'Q') = '1'
+              UNION 
+ 			  select avg(sal) 
+            	from emp
+            	group by to_char(hiredate,'Q')
+            	having to_char(hiredate,'Q') = '1');
+            	          	
+            	
+            	
+ # 처리순서
+ 1. sql 작성
+ 2. vo 작성
+ 3. dao 작성, 메서드 선언
+ 4. 공통 설정 파일에 alias, XXXMapper.xml 작성
+ 5. service단 호출로 테스트
+             
+            
+            
+            
+            

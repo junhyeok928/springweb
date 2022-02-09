@@ -1,0 +1,47 @@
+2022-02-04
+[1단계:개념] 1. mybatis에서 sql 처리시  필요한 기본 설정과 처리 구조를 기술하세요
+                1) 스프링 컨테이너
+                2) 공통 마이바티즈 설정
+                3) dao 인터페이스
+                4) XXXMapper와 dao인터페이스 연동 규칙
+[1단계:개념] 2. 아래의 내용을 구분하여, 처리할 sql 예제와 dao, XXXMapper.xml의 설정내용을 기술하세요
+            1) 단일 데이터(기본데이터유형, String) 리턴
+            2) 하나의 컬럼에 다중 행의 리턴
+            3) 여러 개의 컬럼에 다중 행의 리턴
+[1단계:활용] 3. 아래의 내용을 sql로 만들어, dao 인터페이스와 XXXMapper.xml을 처리하세요.
+            1) 분기별 사원의 수 - 입력값 : 분기, 출력 : 사원 수
+            2) 직책별 평균 급여자 - 입력값 : 직책, 출력 : 평균 급여
+            	select avg(sal)
+            	from emp
+            	where job = #{job}
+            	public double getAvg(String job);
+            	<select id="getAvg" parameterType="string"  resultType="double">
+	               	select avg(sal)
+	            	from emp
+	            	where job = #{job}         		
+            3) 입사 월별 사원 정보 - 입력값 : 입사월, 출력 : 사원 전체정보
+            4) 부서위치별 사원 정보 - 입력값 : 부서위치, 출력 : 부서명, 부서위치, 사원명, 급여
+            5) 관리자명별 사원 정보 - 입력값 : 관리자명, 출력 : 하위 사원 정보
+            	select *
+            	from emp
+            	where mgr = (
+	            	select empno
+	            	from emp
+	            	where ename=#{ename} )
+	            public ArrayList<Emp> getMgrEmp(String ename);
+	            
+	            <select id="getMgrEmp" parameterType="string" resultType="emp" >
+	            	select *
+	            	from emp
+	            	where mgr in (
+		            	select empno
+		            	from emp
+		            	where ename=#{ename} )	            	
+	            	
+            	
+            
+            
+            
+            
+            
+            

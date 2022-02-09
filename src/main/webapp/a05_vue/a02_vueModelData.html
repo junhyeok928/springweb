@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="${encoding}">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
@@ -9,12 +9,16 @@
 <body>
 	<div id="show">
 		<h2 align="center">{{msg}}</h2>
+		<h2 align="center">{{name}}</h2>
+		<h2 align="center">{{age}}</h2>
+		<h2 align="center">{{loc}}</h2>
 	</div>
 </body>
 <script>
 	var vm = new Vue({
 		el:"#show",
-		data:{msg:"시작!!"}
+		data:{msg:"시작!!",name:"홍길동",age:25,loc:"서울"} // 4조, 모델 데이터 변수를 이름, 나이, 사는 곳으로 선언하고
+		// 화면에 출력하게 하세요
 	});
 </script>
 </html>

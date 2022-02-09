@@ -31,6 +31,6 @@ public interface A02_DeptDao {
 	public List<Dept2> getDept2List();
 	
 	public List<Dept> getDeptList(Dept sch);
-	
-	public void insertDept(Dept ins);
+	public void insertDept(Dept sch);
+	public void uptDept(Dept upt);
 }
