@@ -43,5 +43,10 @@
 	<insert id="insertDept" parameterType="dept">
 		insert into dept02 values(#{deptno}, #{dname}, #{loc})
 	</insert>
-	
+	<update id="uptDept" parameterType="dept">
+		update dept02
+	       set dname = #{dname},
+			    loc = #{loc}
+		  where deptno = #{deptno}						
+	</update>	
 </mapper>

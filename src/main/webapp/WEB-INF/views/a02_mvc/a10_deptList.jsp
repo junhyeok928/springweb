@@ -35,8 +35,12 @@ td {
 			alert(proc);
 			location.href="${path}/deptList.do";
 		}
-		
-		
+		$("#uptBtn").click(function(){
+			if(confirm("수정하시겠습니까?")){
+				$("#frm02").attr("action","${path}/uptDept.do");
+				$("#frm02").submit();
+			}
+		});		
 		
 		
 		$("#regBtn").click(function(){

@@ -247,59 +247,68 @@
 							$("#frm02").submit();
 						}
 					});
-			ex) 부서 정보 수정 Dao 처리
+			ex) 부서 정보 수정 Dao 처리 
+				6조 제출
+					sql 작성 :
+						update dept02
+							set dname = '',
+							    loc = ''
+						where deptno = 10;
+					vo 확인		    	
+					dao 작성
+						public void uptDept(Dept upt);
+					mapper 작성
+						<update id="uptDept" parameterType="dept">
+							update dept02
+								set dname = #{dname},
+								    loc = #{loc}
+							where deptno = #{deptno}						
+						</update>
+					service ==> controller
+					controller단 처리..@RequestMapping("/uptDept.do")
+						service.uptDept(upt);
 				
-				sql 작성 : 
-					update dept02
-						set dname = '',
-							loc = ''
-					where deptno = 10;
-				vo 확인
-				dao 작성
-					public void uptDept(Dept upt);
-				mapper 작성
-					<update id="uptDept" parameterType="dept">
-					
-				service ==> controller
 				
-				controller단 처리.. @RequestMapping("/uptDept.do")
-					service.uptDept(upt);
-				
-				
-				
-	3) 삭제
+	3) 삭제				
 		프로세스
 			삭제버튼 클릭
 			삭제 controller단에 요청값을 empno를 전송
 			삭제 처리 후, 화면리스트로 전송
 		개발순서
-			삭제 controller 선언
+			삭제 controller선언
 				@RequestMapping("delEmp.do")
 				public String delEmp(@RequestParam("empno") int empno, Model d){
 					d.addAttribute("proc","삭제되었습니다");
 				}
-				
+			
 			삭제 클릭시 controller로 호출(jsp)
 				$("#delBtn").click(function(){
 					if(confirm("삭제하시겠습니까?")){
 						location.href="${path}/delEmp.do?empno="+$("[name=empno]").val();
 					}
 				});
-			삭제 후, 조회리스트로 이동 처리..		
+			삭제 후, 조회리스트로 이동 처리..
 				var proc = "${proc}";
 				if(proc=="삭제되었습니다"){
 					alert(proc);
 					location.href="${path}/empList.do";
 				}
-			==========
-			sql : delete from emp02 where empno=@@
+			========
+			sql : delete from emp02 where empno=@@	
 			dao/mapper
 				public void delEmp(int empno);
 				<delete id="delEmp" parameterType="int">
-					 delete from emp02 where empno =#{empno}
-			service / controller 호출
+					delete from emp02 where empno=#{empno} 
+			service /controller 호출
 			controller
 				service.delEmp(empno);
-							 	
+				
+			ex)	2/3조 제출, 손들기	
+				
+			
+				
+			
+			
+								 	
 			
 			

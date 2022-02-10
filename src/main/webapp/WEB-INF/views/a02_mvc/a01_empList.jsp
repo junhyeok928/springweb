@@ -28,6 +28,8 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		// 모델데이터 를 js로 받아서 메시지를 내용을 처리할 때 사용한다.
+		//
 		var proc = "${proc}";
 		if(proc!=""){
 			alert(proc);
@@ -68,6 +70,18 @@
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	    <input class="form-control mr-sm-2" placeholder="사원명" 
 	    	name="ename" value="${emp.ename}"/>
+	    <%--
+	    value="${param.ename}"
+	    
+	    public String empList(Emp sch, Model d)
+	    Emp sch를 선언하면 요청값을 객체로 받는데, 스프링에서는 요청 객체로
+	    받을뿐아니라. ModelAttribute(요청객체+model) 개념에 의해 default로
+	    모델명을 Emp 객체의 소문자로 설정이 된다. emp
+	    화면에 사용할 모델명을 지정할 때, ${sch.@@}로 쓰고자 할 때,
+	    아래와 같이 선언할 수 있다.
+	    public String empList(@ModelAttribute("sch") Emp sch, Model d)
+	    
+	     --%>	
 	    <input class="form-control mr-sm-2" placeholder="직책명" 
 	    	name="job" value="${emp.job}"/>
 	    <button class="btn btn-info" type="submit">Search</button>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+</head>
+<body>
+	<div id="show">
+		<!-- 
+		# 화면 출력 처리 : 디렉티브
+		1. v-text : 태그 문자열 그래도 모델데이터를 선언하여 출력
+		2. v-html : 모델데이터가 tag내용을 포함하고 있으면 랜더링하여 출력
+		3. v-bind:속성 : 모델데이터를 요소객체의 속성으로 할당하여 처리할 때 사용된다.
+			약자로 :속성으로 설정이 가능하다.
+			ex) <input v-bind:value=prive" />
+				<input :value=prive"
+		4. v-model : 입력하는 요소객체(form하위 태그)에 설정하면, 입력하는
+			동시에 모델데이터에 영향을 미처, 이 모델을 호출하는 모든 데이터에
+			영향을 미치게 처리하는 속성이다.
+		 -->
+		<h2 align="center">{{msg}}</h2><!-- mustache expression -->
+		<p v-text="msg2"> </p>
+		<p v-html="msg2"> </p>
+		물건명:<input type="text v-bind:value="name"/><br>
+		가격:<input type="text" :value="price"/><br>
+		갯수:<input type="text v-model="cnt"/><br>
+		<h3>입력된 정보</h3>
+		<h4>가격:{{price}}, 갯수:{{cnt}}</h4>
+		<h4>총계:{{price*cnt}}</h4>
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"시작!!", msg2:"<h3>안녕하세요</h3>",
+			name:"사과", price:0, cnt:0}
+	});
+</script>
+</html>

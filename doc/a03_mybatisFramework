@@ -189,13 +189,14 @@
 	public Emp getEmp(int empno);
 	<select id="getEmp" resultType="emp" parameterType="int">
 	
-2. 2개 이상 데이터 입력..
-	select
+2. 2개이상 데이터 입력..
+	select 
 	from emp
-	where mgr = #{mgr}
+	where mgr = #{mgr1}
 	and deptno = #{deptno}
 	
-	public Emp getEmp_mgr_deptno(@Param("mgr") int mgr, @Param("deptno") int deptno);
+	public Emp getEmp_mgr_deptno(@Param("mgr1") int mgr, @Param("deptno") int deptno);	
+	
 
 
 	 	

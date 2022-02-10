@@ -18,6 +18,14 @@ public class A01_EmpController {
 	private A01_EmpService service;
 	
 	// http://localhost:7080/springweb/empList.do
+	/*
+	1. 요청값 : key=value
+	2. 모델데이터 : 화면view단에 넘길 핵심데이터
+	3. 화면뷰처리 : (모델데이터${모델명})
+	 * 
+	 * */
+	
+	
 	@RequestMapping("/empList.do")
 	public String empList(Emp sch, Model d) {
 		// service 객체에서 넘겨온 ArrayList<Emp>객체를 emplist라는
@@ -26,6 +34,10 @@ public class A01_EmpController {
 		// service.getEmpList(sch)
 		// 요청값을 vo롤 통해서 DB에 전달하고, 전달된 내용의 
 		// 결과를 다시 객체로 받아서 모델명 emplist 설정을 한다.
+		
+		// 모델데이터 설정을 sch(매개변수)로 넘겨주어 dao를 통해 데이터 처리한 후,
+		// 다시 리턴되어 리턴되는 객체를 받아서 최종적을 emplist라는 이름으로 
+		// 할당되어 처리된다.
 		d.addAttribute("emplist", service.getEmpList(sch));
 		
 		

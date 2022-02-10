@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+</head>
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		<div v-html="pname"></div>
+		<h3 v-text="price"></h3>
+		<h3 v-text="cnt"></h3>
+		등록한 사람의 수:<input v-model="pcnt"/><br>
+		좋아요 사람의 수:<input v-model="like"/><br>
+		<h3>좋아요 확율:{{like/pcnt*100}}%</h3>
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"시작!!", pname:"<h4>사과</h4>", price:3000,cnt:2,
+				pcnt:5, like:3}
+	});
+	// ex) a04_directiveExp.html
+	//     v-html을 이용해서 화면에 h4로 출력할 물건명을 처리하고
+	//     v-text로 가격과 갯수를 표현하세요.
+	//     v-model을 이용해서, 등록한 사람의 수와 좋아요를 클릭한 사람을 수를 입력받아
+	//        현재  좋아요 확율을 표기 하세요   좋아요사람/등록한사람
+	//     5조 제출해주세요	
+</script>
+</html>

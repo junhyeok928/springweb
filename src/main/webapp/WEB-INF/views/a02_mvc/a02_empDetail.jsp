@@ -33,14 +33,14 @@
 			alert(proc);
 			if(proc=="삭제되었습니다"){
 				location.href="${path}/empList.do";
-			}
+			}			
 		}	
 		$("#uptBtn").click(function(){
 			if(confirm("수정하시겠습니까?")){
 				$("form").attr("action","${path}/uptEmp.do");
 				$("form").submit();
 			}
-		});
+		}); 
 		$("#delBtn").click(function(){
 			if(confirm("삭제하시겠습니까?")){
 				location.href="${path}/delEmp.do?empno="+$("[name=empno]").val();
@@ -48,7 +48,9 @@
 		});
 		$("#mainBtn").click(function(){
 			location.href="${path}/empList.do";
-		});
+		});		
+		
+		
 	});
 </script>
 </head>
@@ -86,7 +88,16 @@
 		</div>
 		<input name="hiredateS" type="date" class="form-control" 
 			value='<fmt:formatDate value="${emp.hiredate}" pattern="yyyy-MM-dd"/>' />
-
+		<%--
+		${emp.hiredate} :  private Date hiredate;  getHiredate()
+		날짜형식의 데이터이기에 원하는 형식으로 출력을 할려면 <fmt:formatDate>
+		가 필요로 하다.
+		
+		해당 내용을 DB에 저장할 때는, 문자열형식으로 저장하여 전달해서 DB 
+		to_date('문자열데이터','YYYY-MM-DD')로 필요하기에  name="hiredateS" 로 선언하고
+		VO 객체에서도 setHiredateS(String hiredate)를 선언하여 저장하게 하였다.
+		
+		 --%>
 		<div class="input-group-prepend">
 			<span class="input-group-text">부서번호</span>
 		</div>
