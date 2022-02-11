@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
 <link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
 <style>
-	td{text-align:center;}
+   td{text-align:center;}
 </style>
 <script src="${path}/a00_com/jquery.min.js"></script>
 <script src="${path}/a00_com/popper.min.js"></script>
@@ -28,50 +28,46 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var msg = "${msg}";
-		if(msg!=""){
-			alert(msg);
-		}
+		<%-- 
+		
+		--%>	
 	});
 </script>
 </head>
 
 <body>
 <div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">파일업로드</h2>
+  <h2 data-toggle="modal" data-target="#exampleModalCenter">스프링과 ajax</h2>
+
 </div>
 <div class="container">
-	<%-- action의 속성은 현재 controller 단에 의해 호출한 view이고 그 이름으로
-		다시 호출할 경우에는 생략가능하다. action="/upload.do"  --%>
-	<form id="frm01" class="form-inline" enctype="multipart/form-data"  method="post">
+	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input type="text" name="title" class="form-control mr-sm-2" placeholder="제목" />
-	    <input type="file" name="report" class="form-control mr-sm-2" placeholder="첨부파일" />
-	    <button class="btn btn-info" type="submit">업로드</button>
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
-	<%--
-	<form id="frm02" class="form-inline" action="${path}/uploadVo.do" enctype="multipart/form-data"  method="post">
-  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input type="text" name="title" class="form-control mr-sm-2" placeholder="제목" />
-	    <input type="file" name="report" class="form-control mr-sm-2" placeholder="첨부파일" />
-	    <button class="btn btn-info" type="submit">업로드</button>
- 	</nav>
-	</form>
-	 --%>	
    <table class="table table-hover table-striped">
-   	<col width="30%">
-   	<col width="70%">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
     <thead>
+    
       <tr class="table-success text-center">
-        <th>파일명</th>
-        <th>경로</th>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
       </tr>
     </thead>	
     <tbody>
-    	<c:forEach var = "file" items="${flist}"></c:forEach>
-    	<tr><td>${file.fname}</td>
-    		<td>${file.pathinfo}</td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
     </tbody>
 	</table>    
     

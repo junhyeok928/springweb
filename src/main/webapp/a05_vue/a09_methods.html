@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+</head>
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		첫번째 숫자:<input v-model="num01"/><br>
+		두번째 숫자:<input v-model="num02"/><br>
+		<h3>총계:{{tot()}}</h3>
+		가격:<input v-model="price"/>, 갯수:<input v-model="cnt"/><br>
+		<h3>구매총계:{{totAll()}}</h3>
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"함수형 속성!!", num01:0, num02:0, price:0, cnt:0},
+		methods:{
+			tot:function(){
+				// 함수안에서 모델데이터는 this.모델명으로 호출할 수 있다.
+				var sum = Number(this.num01) + Number(this.num02);
+				return sum;
+			},
+			totAll:function(){
+				var totSum = this.price*this.cnt;
+				return totSum;
+			}
+		}
+	});
+</script>
+</html>

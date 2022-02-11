@@ -35,7 +35,57 @@
 		저장할 파일 객체 선언하기
 			File uploadFile = new File(upload+fname);
 		MultipartFile객체를 실제 특정한 경로에 저장하기 위해 File로 전환하여야 한다.
-			report.transferTo( uploadFile );		
+			report.transferTo( uploadFile );	
+	4) 데이터베이스에 파일정보를 등록, 등록된 내용을 리스트 할 수 있게 처리.
+		테이블 구성/sequence : 고유키, 경로명, 파일명, 등록일,수정일, 기타
+	
+			create sequence fno_seq
+				start with 1000
+				minvalue 1000
+				maxvalue 9999;
+			INSERT INTO fileInfo values(fno_seq.nextval, 'upload',
+				'연습.txt',sysdate,sysdate,'기타' );				
+			SELECT * FROM fileInfo;
+			create table fileInfo(
+				fno number, 
+				pathinfo varchar2(500),
+				fname varchar2(100),
+				regdte date,
+				uptdte date,
+				etc varchar2(500)
+			);				
+		등록/조회 dao mapper 작성
+			sql 작성
+				select * from fileInfo
+				INSERT INTO fileInfo values(fno_seq.nextval, 'upload',
+				'연습.txt',sysdate,sysdate,'기타' )				
+			vo 작성
+				FileInfo.java
+				private int fno;
+				private String pathinfo;
+				private String fname;
+				private Date regdte;
+				private Date uptdte;
+				private String etc;
+			공통 mybatis : FileInfo 	
+			dao
+				public void insertFileInfo(FileInfo ins);
+				public ArrayList<FileInfo> getFileList();
+			mapper
+				<insert id="insertFileInfo" parameterType="fileInfo">
+					INSERT INTO fileInfo values(fno_seq.nextval, #{pathinfo},
+					#{fname},sysdate,sysdate,#{etc})							
+				<select	id="getFileList" resultType="fileInfo">
+					select * from fileInfo
+		------------------------------------------------------			
+		2/3조 mapper까지 작성// 손들기 해주세요..
+		
+		
+		service단에서 파일업로드시 데이터베이스 입력 처리..
+		
+		
+					
+				
 ex) A04_FileExpController.java
     A04_FileService.java
 	\WEB-INF\views\a02_mvc\a04_fileUploadFrm.jsp

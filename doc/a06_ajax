@@ -1,0 +1,54 @@
+# ajax
+1. ajax의 기본 개념
+	0) 서버와 클라이언트 통신
+		브라우저(클라이언트) 요청하는 처리
+			url : ip:port/경로/url매핑
+			query string : ?key=value&key2=value2
+			# 서버는 
+			- url경우 특정한 url매핑된 controller나 화면을 호출
+			- query string을 통해 데이터를 전달 받아서, DB 처리
+				파일업로드 여러가지 기능 처리를 한다.
+		서버를 통해 클라이언트에 전달하는 데이터
+			html 화면
+			json데이터
+			
+	1) 서버와 client의 비동기 통신
+		비동기 통신 : 요청 후, 서버에서 결과 데이터를 받기까지
+			다른 기능 처리를 가능하게 할 때 사용된다.
+			자원의 효과적인 배분을 할 수 있게 도와 준다.
+			
+2. jquery에서 ajax 기본 속성
+	$.ajax({속성:속성값});
+	$.ajax({
+		url:"${path}/컨트롤러 mapping주소",
+		data:"query string",
+		type:"get/post",     client==> server 요청하는 부분
+		-------------------------------------
+		dataType:"html/text/json",  sever ==> client에 전달되는 부분
+		success:function(data){    서버에서 온 실제 데이터
+			data : json 형식으로 왔을 때는 객체가 되어서 활용할 수 있게 된다.
+			$("DOM선택자") : 해당 선택자 선택하여 처리할 수 있다.
+		}
+	});
+	
+3. 스프링에서 ajax 처리
+	1) 컨테이너 json view 선언
+		ArrayList/Object ==> json문자열 변환
+	2) Rest controller 선언 json 데이터 받기 처리.
+	
+4. 비동기 통신을 통한 DB데이터 입력과 출력 처리.	 
+
+5. 실무예제
+
+# RestController 사용 예제
+1. Controller  
+	A10_Controller.java
+		초기화면호출메서드
+	A11_RestController.java
+		ajax처리호출
+	
+2. View단 만들기
+	 
+
+
+

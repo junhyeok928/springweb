@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+</head>
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		<h3 v-for="(fruit, idx) in fruits">{{idx+1}}) {{fruit}}</h3>
+		<table border>
+			<tr><th>속성</th><th>속성값</th></tr>
+			<tr v-for="(val, prop) in person">
+				<td>{{prop}}</td><td>{{val}}</td> 
+			</tr>
+		</table>
+		<select>
+			<option v-for="(val,prop) in person" 
+				:value="prop">{{val}}</option>
+		</select>
+		<h3 align="center">야구선수</h3>
+		<!-- 
+		 player:{tname:"키움", name:"이정후", records:0.360 }
+		 -->
+		<table align="center" border> 
+			<tr><th>항목</th><th>내용</th></tr>
+			<tr v-for="(val, prop) in player"><td>{{prop}}</td><td>{{val}}</td></tr>	
+		
+		</table>
+		<h3 align="center">구매과일</h3>
+		<!-- 
+		  plist:[
+				 {pname:"사과", price:3000, cnt:2}, 
+		 -->
+		<style>
+			td{text-align:center;}
+		</style> 
+		<table align="center" border> 
+			<tr><th>번호</th><th>물건명</th><th>가격</th><th>갯수</th><th>계</th></tr>
+			<tr v-for="(prod, idx) in plist">
+				<td>{{idx+1}}</td>
+				<td>{{prod.pname}}</td>
+				<td>{{prod.price}}</td>
+				<td>{{prod.cnt}}</td>
+				<td>{{prod.price*prod.cnt}}</td>
+			</tr> 
+		</table>		
+		<!-- ex) 팀별 순위 리스트를 json으로 만들어 출력하세요 5조
+		
+		 -->
+		<table align="center" border="1">
+         <tr><th>순위</th><th>팀명</th><th>경기</th><th>승</th><th>패</th><th>무</th><th>승률</th></tr>
+         <tr v-for="(team, idx) in tlist">
+            <td>{{idx+1}}</td>
+            <td>{{team.tname}}</td>
+            <td>{{team.game}}</td>
+            <td>{{team.win}}</td>
+            <td>{{team.lose}}</td>
+            <td>{{team.draw}}</td>
+            <td>{{team.winrec}}</td>
+         </tr>
+      </table>		 
+	</div>
+</body>
+<script>
+	/*
+	# 반복 랜더링 처리 v-for
+	1. 모델데이터의 배열, 객체, 객체형배열을 반복문에 의해서 효과적으로 처리할 수 있다.
+	2. 기본 형식
+		1) 배열
+		    <반복할DOM v-for="(단위변수,index) in 배열형모델">
+				{{단위변수}}
+		2) 객체
+			<반복할DOM v-for="(단위값, prop) in 객체모델">
+		3) 객체형 배열
+			<반복할DOM v-for="(단위객체, index) in 객체형배열모델">
+				{{단위객체.속성}}
+	*/
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"v-for문활용",fruits:["사과","바나나","딸기"],
+			  person:{name:"홍길동",age:25,loc:"서울신림동"},
+			  player:{tname:"키움", name:"이정후", records:0.360 },
+			  plist:[
+				 {pname:"사과", price:3000, cnt:2}, 
+				 {pname:"바나나", price:4000, cnt:3}, 
+				 {pname:"딸기", price:12000, cnt:5} 
+			  ],
+			  tlist:[
+		             {tname:"KT",game:144,win:76,lose:59,draw:9,winrec:0.563}, 
+		             {tname:"두산",game:144,win:71,lose:65,draw:8,winrec:0.522}, 
+		             {tname:"삼성",game:144,win:76,lose:59,draw:9,winrec:0.563} 
+		            ]			  
+			 }
+	});
+	// ex) 모델 데이터로 객체로 운동선수로 팀명, 이름, 성적으로 설정하여,
+	//     테이블로 출력되게 처리하세요. 4조제출하세요.
+</script>
+</html>
