@@ -80,6 +80,43 @@
 	<!--  파일 업로드를 위한 viewer 선언 -->
 	<bean id="multipartResolver" 
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	<!-- 
+	# jsp/html 뷰와 기본 bean view의 우선 순위 설정..
+	1. jsp view 기본 설정. - 우선순위 property로 설정 1
+	2. bean으로 등록하는 view 설정. - 우선순위 property로 설정 0
+	 컨테이너에서 viewer를 찾을 때, 등록된 것인 적은 것부터 찾고, 등록된 것이 많은 것을 찾는 
+	 것이 효율적이기 때문이다.
+	 -->	
+	<!-- jsp view는 기본적으로 설정이 되어 있지만, 우선순위 때문에 선언한다. -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 
+		접두어/접미어 매핑
+		이 내용을 선언하면 controller의 view호출의 마지막 부분을
+		접두어와 접미어가 생략가능하다.
+		return "WEB-INF\\views\\a02_mvc\\a01_empList.jsp"
+		==> return "\\a02_mvc\\a01_empList"
+		<property name="prefix" value="WEB-INF\views"/>	 
+		<property name="suffix" value=".jsp"/>	 
+		 -->
+		<property name="order" value="1"/>
+	</bean> 
+	<!-- 정의한 bean viewer 선언 우선순위 첫번째로 지정. -->
+	<bean id="btnViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"/>
+	</bean>
+	<!-- 다운로드 viewer 등록
+		컨트롤러에서 아래와 같이 viewer를 호출 처리..
+		return "download"
+	 -->
+	<bean id="download" class=" springweb.z01_util.DownloadViewer"/>
+	
+	<!--  json 뷰 선언
+		return "pageJsonReport"
+	 -->
+	<bean id="pageJsonReport" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="contentType" value="text/html; charset=utf-8"></property>
+	</bean>
+		
 </beans>
 
 

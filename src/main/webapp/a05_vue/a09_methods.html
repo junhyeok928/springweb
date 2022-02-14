@@ -12,24 +12,30 @@
 		첫번째 숫자:<input v-model="num01"/><br>
 		두번째 숫자:<input v-model="num02"/><br>
 		<h3>총계:{{tot()}}</h3>
-		가격:<input v-model="price"/>, 갯수:<input v-model="cnt"/><br>
-		<h3>구매총계:{{totAll()}}</h3>
+		<!-- 
+		ex) 가격 갯수를 입력받아 함수   totAll()를 정의하여 해당 함수를 통해서 가격*갯수의
+			처리 결과를 출력하게 하세요..6조 
+		 -->
+		 가격:<input v-model="price"/>,  갯수:<input v-model="cnt"/><br>
+		 <h3>구매총계:{{totAll()}}</h3>
 	</div>
 </body>
 <script>
 	var vm = new Vue({
 		el:"#show",
-		data:{msg:"함수형 속성!!", num01:0, num02:0, price:0, cnt:0},
+		data:{msg:"함수형 속성!!", num01:0,num02:0,price:0,cnt:0},
 		methods:{
 			tot:function(){
 				// 함수안에서 모델데이터는 this.모델명으로 호출할 수 있다.
-				var sum = Number(this.num01) + Number(this.num02);
+				// 
+				var sum = Number(this.num01)+Number(this.num02);
 				return sum;
 			},
 			totAll:function(){
 				var totSum = this.price*this.cnt;
 				return totSum;
 			}
+			
 		}
 	});
 </script>

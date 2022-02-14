@@ -72,14 +72,20 @@
 	
 4. spring MVC 
 	1) controller 호출 방식
-		- url 패턴
-		- 요청값 처리.
+		- url 패턴/get/post방식에 따른 호출
+		- 요청값 처리 - @RequestParam(), Vo객체(property), ModelAttribute(요청값 + 모델데이터처리)
+			?name=사과&price=2000
+		- 모델데이터 처리
+			addAttribute("모델명",모델객체/모델값)
+		- 뷰단호출 - jsp, json, 파일다운로드
 	2) model 처리
-		- service ==> dao ==> XXXMappper.xml 을 통해서 요청값을 넘긴 후, 다시 (매개변수 전달)
+		- controller ==> service ==> dao ==> XXXMappper.xml 을 통해서 요청값을 넘긴 후, 다시 (매개변수 전달)
+			service.selectList(sch)
 		- XXXMapper.xml ==> dao ==> service ==> controller 모델 데이터 설정.(리턴값을 통해서 전달)
-		
+							public ArrayList<List>
 	3) view단 처리..
 		- form 하위 요소객체 : 입력을 통해 요청값 처리(query string)
+			<form action="컨트롤단url매핑">
 		- table 리스트 처리 : 모델데이터를 통해서 el/jstl을 활용하여 출력 처리
 		- css/html 화면 구성
 		- js, jquery를 통해서 유효성 check, 동적인 이벤트 처리..

@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
 <link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
 <style>
-	td{text-align:center;}
+   td{text-align:center;}
 </style>
 <script src="${path}/a00_com/jquery.min.js"></script>
 <script src="${path}/a00_com/popper.min.js"></script>
@@ -28,60 +28,66 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var msg = "${msg}";
-		if(msg!=""){
-			alert(msg);
-		}
+		$("[name=deptno], [name=dname]").keyup(function(){
+			if(event.keyCode==13){ // enter키를 입력시.
+				//  ename=%ED%99%8D%EA%B8%B8%EB%8F%99&job=%EB%8C%80%EB%A6%AC  
+				//alert($("#frm01").serialize()); // form하위에 key=value 형식으로 데이터 처리
+				// ajax처리를 통해서 controller 호출 후, 데이터 리스트 처리..
+				$.ajax({
+					url:"${path}/deptAjax01.do",
+					type:"get",
+					data:$("#frm01").serialize(),
+					dataType:"json",
+					success:function(data){
+						var deptList = data.deptList;
+						console.log(deptList);
+					    var html="";
+					    $.each(deptList,function(idx, dept){
+						    html+="<tr><td>"+dept.deptno+"</td><td>"+dept.dname+"</td><td>"+dept.loc+
+					    	"</td></tr>";
+					    });
+					    console.log(html);
+					    $("tbody").html(html);						
+					},
+					error:function(err){
+						console.log(err)
+					}
+				});
+			}
+		});
 	});
 </script>
 </head>
 
 <body>
 <div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">파일업로드</h2>
+  <h2 data-toggle="modal" data-target="#exampleModalCenter">부서정보ajax처리</h2>
+
 </div>
 <div class="container">
-	<%-- action의 속성은 현재 controller 단에 의해 호출한 view이고 그 이름으로
-		다시 호출할 경우에는 생략가능하다. action="/upload.do"  --%>
-	<form id="frm01" class="form-inline" enctype="multipart/form-data"  method="post">
+	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input type="text" name="title" class="form-control mr-sm-2" placeholder="제목" />
-	    <input type="file" name="report" class="form-control mr-sm-2" placeholder="첨부파일" />
-	    <button class="btn btn-info" type="submit">업로드</button>
+	    <input class="form-control mr-sm-2" name="deptno" placeholder="부서번호" />
+	    <input class="form-control mr-sm-2" name="dname" placeholder="부서이름" />
  	</nav>
 	</form>
-	<%--
-	<form id="frm02" class="form-inline" action="${path}/uploadVo.do" enctype="multipart/form-data"  method="post">
-  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input type="text" name="title" class="form-control mr-sm-2" placeholder="제목" />
-	    <input type="file" name="report" class="form-control mr-sm-2" placeholder="첨부파일" />
-	    <button class="btn btn-info" type="submit">업로드</button>
- 	</nav>
-	</form>
-	 --%>	
    <table class="table table-hover table-striped">
-   	<col width="30%">
-   	<col width="70%">
+   	<col width="33%">
+   	<col width="33%">
+   	<col width="33%">
     <thead>
+    
       <tr class="table-success text-center">
-        <th>파일명</th>
-        <th>경로</th>
+        <th>부서번호</th>
+        <th>부서이름</th>
+        <th>지역</th>
       </tr>
     </thead>	
     <tbody>
-    	<c:forEach var = "file" items="${flist}">
-    	<tr><td  ondblclick="downFun('${file.fname}')">${file.fname}</td>
-    		<td>${file.pathinfo}</td></tr>
-    	</c:forEach>	
+    	<tr><td></td><td></td><td></td></tr>
     </tbody>
 	</table>    
-    <script type="text/javascript">
-    	function downFun(fname){
-    		if(confirm(fname+"을 다운하시겠습니까?")){
-    			location.href="${path}/download.do?fname="+fname;
-    		}
-    	}
-    </script>
+    
 </div>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

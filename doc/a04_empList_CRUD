@@ -37,7 +37,7 @@
 		- 등록 요청 처리 컨트롤러(A01_EmpController.java)
 			@RequestMapping("/insertEmp.do")
 			public String inserEmp(Emp ins, Model d){
-				d.add("proc","등록완료");
+				d.addAttribute("proc","등록완료");
 				// service
 				return "WEB-INF\views\a02_mvc\a01_empList.jsp"; // 등록 후, 처리해야 할 화면 호출..
 			}	

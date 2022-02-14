@@ -27,16 +27,19 @@
 		vo가 있을 시(private MultipartFile report 포함)
 			public String upload(FileVo vo)				 
 							 
-	3) 파일첨부시 처리할 service 선언(springweb.a02_mvc.a02_service.A03_FileService.java)
+	4) 파일첨부시 처리할 service 선언(springweb.a02_mvc.a02_service.A03_FileService.java)
 		파일명 가져오기 : String fname = report.getOriginalFilename()	
 		경로설정 가져오기 : 
-			@Value("${upload}")
+			@Value("${upload}") : 파일서버 위치정보설정 src\main\java\resource\config 
 			private String upload;
 		저장할 파일 객체 선언하기
 			File uploadFile = new File(upload+fname);
 		MultipartFile객체를 실제 특정한 경로에 저장하기 위해 File로 전환하여야 한다.
 			report.transferTo( uploadFile );	
-	4) 데이터베이스에 파일정보를 등록, 등록된 내용을 리스트 할 수 있게 처리.
+			요청객체를 통해 받은 파일정보를 실제 저장할 파일정보로 변환 처리.
+			이 때, IO(input/output를 통해 파일 저장)가 발생하기에 필수 예외(컴파일예외)
+			처리를 하여야 한다.
+	5) 데이터베이스에 파일정보를 등록, 등록된 내용을 리스트 할 수 있게 처리.
 		테이블 구성/sequence : 고유키, 경로명, 파일명, 등록일,수정일, 기타
 	
 			create sequence fno_seq
@@ -92,6 +95,71 @@ ex) A04_FileExpController.java
 	를 통해, 파일을 업로드하여 확인하세요.
 	4조 제출, 손들기.
 	
+# 파일 다운로드
+1. 프로세스
+	다운할 파일을 클릭시, 해당 파일정보를 요청값으로 해서, controller를 호출한다.
+	요청된 컨트롤러는 해당 파일에 model데이터로 설정하여,
+	컨테이너에서 지정된 다운로드 viewer를 호출한다.
+	다운로드 viewer에 의해서 파일을 서버에서 브라우저가 있는 곳으로 stream으로
+	보내어져서 다운로드가 시작하고, 특정한 위치에 파일을 확인할 수 있다.
+2. 사전 이해 개념
+	1) 스프링 컨테이너의 viewer
+	2) 웹프로그래밍에서 파일을 다운로드할 시, 처리할 기본 구성요소
+		서버 다운로드할 파일을 만들어서 ===> 클라이언트 브라우저
+		response객체를 통해서 파일을 binary형식으로 만들어서 전달 처리
+		response header부분에 파일을 전송할 수 있는 정보를 설정해서 전달할 수 있다.
+		- file 크기, 파일명, 형식
+	3) 한글 encoding 처리	
+		파일명이 한글일 때도 브라우저에 정상적으로 전달하기 위해서 설정..
+3. 개발 절차
+	1) 사전 환경 설정 작업
+		- 컨테이너에서 jsp view와 일반 view를 구분하기위한 선언방식
+		기본적으로 bean으로 등록된 view가 먼저 호출이 되고, 컨테이너에서
+		이 view가 없을 때, jsp view 즉 jsp 파일이 호출되게 선언
+		- viewer클래스 생성 : 파일을 다운로드할 수 있게 viewer를 클래스로 선언하여야 한다.***
+		컨테이너에 등록.
+	2) 프로그래밍 순서
+		- 다운로드 viewer 클래스 만들기
+		- 다운로드 viewer 컨테이너에 등록 bean
+		- 화면에서 클릭시, 요청값으로 파일이나 파일관련 정보를 받아서 처리하는 downloadController
+			선언
+		- 모델데이터 파일관련 정보 설정
+		- return "다운로드 viewer" 호출.
+		- view단에서 특정한 파일을 클릭 및 controller url호출 하게 처리 location.href="";
+		
+# 다운로드 viewer 처리
+1. 상속 AbstractView
+	1) overriding 메서드 재정의
+	- renderMergedOutputModel
+		매개변수
+		Map<String, Object> model,
+		HttpServletRequest request,
+		HttpServletResponse response		
+2. 다운로드 처리
+	1) upload된 파일 가져오기.(서버가 가지고 있는 파일)
+		- 현재 viewer를 호출시, 사용되는 model 객체가져오기
+		- File 객체 생성
+	2) 모델과 함께 있는 File객체 가져오기.(서버가 가지고 있는 파일)
+	3) 반응 객체(response)로 전달 처리(클라이언트에 파일) 
+		- 전체 파일명
+		- 파일명
+		- 파일의 길이
+		- setContentType 설정 : application/download;charset-utf-8
+		- setContentLength로 파일의 길이 설정.
+		- 한글명된 파일은 Encoding처리.
+		- 파일을 response에 탑재를 위한 header부분 설정.
+			Content-Disposition으로 attachment로 파일 설정
+			Content-Transfer-Encoding설정 binary 설정..
+		- 파일을 network으로 전송하기위해 Stream객체로 변환.
+			InputStream(읽어오는 객체) ==> OupStream 보내는 객체..
+			FileInputStream(파일객체)
+			FileCopyUtils.copy(inputstream, outstream)
+			outstream의 flush를 통해서 자원을 해제..
+
+~ 12:35에 다음 내용 넘어 가겠습니다.
+도움이 필요한 개인이나 조는 메시지 주세요.
+
+
 
 	
 	

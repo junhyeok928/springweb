@@ -39,6 +39,31 @@
 4. 비동기 통신을 통한 DB데이터 입력과 출력 처리.	 
 
 5. 실무예제
+# json view를 통한 스프링 ajax 처리.
+1. 처리 프로세스 
+	1) 이벤트에 의해 이벤트 핸들러 함수 호출.
+	2) $.ajax()로 특정 controller 호출
+	3) controller에서 model데이터 설정
+	4) return "json뷰호출"
+	5) $.ajax()의 success:function(data){ json 데이터 가져오기 }
+		화면단 구현 및 출력 처리.
+2. 개발 처리
+	1) 환경 설정
+		json viewer 컨테이너에 등록
+	2) 초기 화면 controller를 통해 호출 - 초기메서드 선언
+	   ajax를 통해 호출할 controller단 메서드 선언
+	3) view (jsp)
+		화면 구성
+		이벤트 처리(click, keyup 등)
+		이벤트 핸들러 함수 선언
+			- 요청값 처리.
+			- $.ajax()를 통해서 속성과 속성값 설정
+			- success:function(data){
+				핸들러 함수 내용 처리.
+			  }
+		
+
+
 
 # RestController 사용 예제
 1. Controller  

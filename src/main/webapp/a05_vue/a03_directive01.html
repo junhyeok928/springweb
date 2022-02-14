@@ -21,9 +21,12 @@
 			영향을 미치게 처리하는 속성이다.
 		 -->
 		<h2 align="center">{{msg}}</h2><!-- mustache expression -->
+		<h2 align="center" v-text="msg2"></h2><!-- 모델데이터 그대로 출력 -->
+		<h2 align="center" v-html="msg2"></h2><!-- 모델데이터 html코드를 랜더링 출력 -->
 		 물건명:<input type="text" v-bind:value="name" /><br>
 		 가격:<input type="text" :value="price"/><br>
 		 갯수:<input type="text" v-model="cnt"/><br>
+		 <img :src="img01"/>
 		<h3>입력된 정보</h3>
 		<h4>가격:{{price}}, 갯수:{{cnt}}</h4> 
 		<h4>총계:{{price*cnt}}</h4> 
@@ -33,7 +36,7 @@
 	var vm = new Vue({
 		el:"#show",
 		data:{msg:"시작!!", msg2:"<h3>안녕하세요</h3>",
-			 name:"사과", price:3000, cnt:0}
+			 name:"사과", price:3000, cnt:0,img01:"img04.PNG"}
 	});
 	// ex) a04_directiveExp.html
 	//     v-html을 이용해서 화면에 h4로 출력할 물건명을 처리하고

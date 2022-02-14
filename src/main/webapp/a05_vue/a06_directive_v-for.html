@@ -9,9 +9,11 @@
 <body>
 	<div id="show">
 		<h2 align="center">{{msg}}</h2>
+		<!-- fruits:["사과","바나나","딸기"] -->
 		<h3 v-for="(fruit, idx) in fruits">{{idx+1}}) {{fruit}}</h3>
 		<table border>
 			<tr><th>속성</th><th>속성값</th></tr>
+			<!--  person:{name:"홍길동",age:25,loc:"서울신림동"}, -->
 			<tr v-for="(val, prop) in person">
 				<td>{{prop}}</td><td>{{val}}</td> 
 			</tr>
@@ -33,6 +35,9 @@
 		<!-- 
 		  plist:[
 				 {pname:"사과", price:3000, cnt:2}, 
+				 {pname:"바나나", price:4000, cnt:3}, 
+				 {pname:"딸기", price:12000, cnt:5} 
+			  ],
 		 -->
 		<style>
 			td{text-align:center;}

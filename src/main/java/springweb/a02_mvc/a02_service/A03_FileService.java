@@ -33,10 +33,13 @@ public class A03_FileService {
 		String result="";
 		try {
 			// io가 생기기에 필수 예외 처리
+			// 파일의 업로드
 			mf.transferTo(file);
 			// FileInfo(String pathinfo, String fname, String etc) 
+			// 업로드 된 파일 정보를 DB에 등록
 			FileInfo ins = new FileInfo(upload,fname,"");
 			dao.insertFileInfo(ins);
+			
 			result="업로드 성공";
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
