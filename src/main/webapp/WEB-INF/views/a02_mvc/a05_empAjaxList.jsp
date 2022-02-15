@@ -42,6 +42,8 @@
 					data:$("#frm01").serialize(),
 					dataType:"json",
 					success:function(data){
+						// d.addAttribute("empList", service.getEmpList(sch));
+						// data.모델명
 						var empList = data.empList;
 						console.log(empList);
 					    var html="";
@@ -56,6 +58,7 @@
 						console.log(err)
 					}
 				});
+				// EX) 부서정보 화면에서 AJAX 처리 LIST 출력 4조제출.
 			}
 		});
 	});

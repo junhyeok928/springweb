@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"부서정보처리(vue)",sch:{dname:"",loc:""},deptList:[]},
+			methods:{
+				search:function(){
+					var vm = this;
+					$.ajax({
+						url:"/springweb/deptAjax01.do",
+						data:vm.sch,
+						dataType:"json",
+						success:function(data){
+							vm.deptList=data.dlist;
+						},
+						error:function(err){
+							console.log(err);
+						}
+						
+					});
+					//this.deptList=[{deptno:10,dname:"인사",loc:"서울강남"}];
+				}
+			}
+		});	
+	// ex) 부서정보 검색 vue 처리 검색 시, 샘플데이터 출력되게 처리 2,3조 제출
+	});
+</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" placeholder="부서명" v-model="sch.dname" @keyup.13="search" />
+	    <!-- 
+	     @keyup.13="search" 
+	     키업시 키코드값이 13일때, search 함수 호출..
+	     -->
+	    <input class="form-control mr-sm-2" placeholder="내용"  v-model="sch.loc"  @keyup.13="search" />
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="33%">
+   	<col width="33%">
+   	<col width="33%">
+    <thead>
+      <tr class="table-success text-center">
+        <th>부서번호</th>
+        <th>부서명</th>
+        <th>부서위치</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr v-for="(dept, idx) in deptList">
+    		<td>{{dept.deptno}}</td><td>{{dept.dname}}</td><td>{{dept.loc}}</td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

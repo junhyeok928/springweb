@@ -14,13 +14,13 @@ public class A06_DeptAjaxController {
 	private A02_DeptService service;
 	
 	@GetMapping("/deptAjax.do")
-	public String deptAjaxFrm() {
+	public String deptAjax() {
 		return "WEB-INF\\views\\a02_mvc\\a06_deptAjaxList.jsp";
 	}
-	// http://localhost:7080/springweb/deptAjax.do
+	// http://localhost:7080/springweb/deptAjax01.do  dlist
 	@GetMapping("/deptAjax01.do")
-	public String deptAjax(Dept sch, Model d) {
-		d.addAttribute("deptList", service.getDeptList(sch));
+	public String deptAjax01(Dept sch, Model d) {
+		d.addAttribute("dlist", service.getDeptList(sch));
 		return "pageJsonReport";
 	}
 }

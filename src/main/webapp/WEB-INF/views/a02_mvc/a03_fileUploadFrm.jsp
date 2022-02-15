@@ -33,6 +33,11 @@
 			alert(msg);
 		}
 	});
+	function downFun(fname){
+		if(confirm(fname+"을 다운하시겠습니까?")){
+			location.href="${path}/download.do?fname="+fname;
+		}
+	}	
 </script>
 </head>
 
@@ -75,13 +80,6 @@
     	</c:forEach>	
     </tbody>
 	</table>    
-    <script type="text/javascript">
-    	function downFun(fname){
-    		if(confirm(fname+"을 다운하시겠습니까?")){
-    			location.href="${path}/download.do?fname="+fname;
-    		}
-    	}
-    </script>
 </div>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

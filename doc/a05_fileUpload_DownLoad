@@ -119,12 +119,15 @@ ex) A04_FileExpController.java
 		- viewer클래스 생성 : 파일을 다운로드할 수 있게 viewer를 클래스로 선언하여야 한다.***
 		컨테이너에 등록.
 	2) 프로그래밍 순서
-		- 다운로드 viewer 클래스 만들기
+		=스프링 컨테이너 설정========================
+		- 다운로드 viewer 클래스 만들기(파일객체, response객체를 통해 파일전송할 수 있게 설정, stream으로 파일전달)
 		- 다운로드 viewer 컨테이너에 등록 bean
+		=컨트롤단 처리=============================
 		- 화면에서 클릭시, 요청값으로 파일이나 파일관련 정보를 받아서 처리하는 downloadController
 			선언
 		- 모델데이터 파일관련 정보 설정
 		- return "다운로드 viewer" 호출.
+		=화면단 처리================================
 		- view단에서 특정한 파일을 클릭 및 controller url호출 하게 처리 location.href="";
 		
 # 다운로드 viewer 처리
@@ -150,15 +153,11 @@ ex) A04_FileExpController.java
 		- 파일을 response에 탑재를 위한 header부분 설정.
 			Content-Disposition으로 attachment로 파일 설정
 			Content-Transfer-Encoding설정 binary 설정..
-		- 파일을 network으로 전송하기위해 Stream객체로 변환.
-			InputStream(읽어오는 객체) ==> OupStream 보내는 객체..
-			FileInputStream(파일객체)
-			FileCopyUtils.copy(inputstream, outstream)
-			outstream의 flush를 통해서 자원을 해제..
-
-~ 12:35에 다음 내용 넘어 가겠습니다.
-도움이 필요한 개인이나 조는 메시지 주세요.
-
+	4) 파일을 network으로 전송하기위해 Stream객체로 변환.
+		InputStream(읽어오는 객체) ==> OupStream 보내는 객체..
+		FileInputStream(파일객체)
+		FileCopyUtils.copy(inputstream, outstream)
+		outstream의 flush를 통해서 자원을 해제..
 
 
 	

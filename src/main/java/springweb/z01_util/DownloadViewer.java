@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.AbstractView;
 // springweb.z01_util.DownloadViewer
 public class DownloadViewer extends AbstractView {
 
-	// 다운로드할 파일포드 위치 지정(공통 설정파일에서 호출)
+	// 다운로드할 파일 위치 지정(공통 설정파일에서 호출) src\main\java\resource\config
 	@Value("${upload}")
 	private String upload;
 	
@@ -46,10 +46,10 @@ public class DownloadViewer extends AbstractView {
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		
 //			3. File을 읽어와서 response의 OutputStream으로 전달.
-		FileInputStream fis = new FileInputStream(file);
-		OutputStream out = response.getOutputStream();
+		FileInputStream fis = new FileInputStream(file); // 서버에 있는 파일을 stream으로 읽어와서
+		OutputStream out = response.getOutputStream(); // 네트워크로 전달 가능하게 response의 outputstream 객체 활용
 //				FileInputStream을 통해 파일객체를 읽어온 것을 OutputStream에 복사하여 처리.
-		FileCopyUtils.copy(fis, out);
+		FileCopyUtils.copy(fis, out);	// 
 //			4. flush 처리:  전송 후, 남아 있는 메모리 비우기..
 		out.flush();
 		

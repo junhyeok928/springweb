@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="container">
+<div class="jumbotron text-center">
+  <h2 >{{title}}</h2>
+
+</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" v-model="sch.ename" placeholder="사원명" @keyup="search" />
+	    <input class="form-control mr-sm-2" v-model="sch.job"  placeholder="직책"  @keyup="search" />
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="20%">
+   	<col width="20%">
+   	<col width="20%">
+   	<col width="20%">
+   	<col width="20%">
+    <thead>
+      <tr class="table-success text-center">
+        <th>사원번호</th>
+        <th>사원명</th>
+        <th>직책명</th>
+        <th>급여</th>
+        <th>부서번호</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr v-for="(emp, idx) in empList"><td>{{emp.empno}}</td><td>{{emp.ename}}</td>
+    		<td>{{emp.job}}</td><td>{{emp.sal}}</td><td>{{emp.deptno}}</td></tr>
+    </tbody>
+	</table>  
+	<div id="show01" v-show="isProcess" style="position:absolute;top:40%;left:40%;"><img src="DansokLoading.gif"/></div>     
+	<!-- 
+	# v-if와 v-show
+	1. 공통점 : 해당 조건(boolean)에 따라 요소객체가 보였다가 보이지 않았다가 처리된다.
+	2. 차이점 
+		v-if는 조건이 false일 때, 랜더링 자체를 하지 않는다.
+		v-show는 일단 DOM객체로 랜더링은 하되, 조건에 따라 보였다가 보이지 않았다가 처리할 때 사용된다.	
+	 -->
+</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:".container",
+		data:{title:"사원정보 뷰로 조회",sch:{ename:"",job:""},empList:[],isProcess:false},
+		methods:{
+			search:function(){
+				if(event.keyCode==13){
+					console.log("사원명:"+this.sch.ename)
+					console.log("직책명:"+this.sch.job)
+					this.isProcess=true; // 키를 누르고 데이터가 로딩 될때 까지 화면에 이미지가 보임.
+					var vm = this;
+					$.ajax({
+						url:"/springweb/empAjax01.do",
+						data:vm.sch,
+						dataType:"json",
+						success:function(data){
+							console.log(data)
+							// 넘겨온 json 데이터를 model 데이터에 할당.
+							vm.empList = data.empList;
+							vm.isProcess = false;
+							// 데이터가 로딩이 완료된 상황에서는 이미지가 보이지 않음..
+						},
+						error:function(err){
+							console.log(err)	
+						}
+					});
+					// ex) 4조 제출 deptList 처리하세요. 데이터 출력 
+				}
+			}
+		}
+	});
+</script>
+</html>

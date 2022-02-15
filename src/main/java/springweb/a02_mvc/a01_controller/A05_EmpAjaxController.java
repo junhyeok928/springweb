@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import springweb.a02_mvc.a02_service.A01_EmpService;
 import springweb.vo.Emp;
@@ -26,6 +27,7 @@ public class A05_EmpAjaxController {
 	public String empAjax(Emp sch, Model d) {
 		d.addAttribute("empList", service.getEmpList(sch));
 		return "pageJsonReport"; // json View 호출..
+		// ArrayList형 empList를 json 형식으로 json view에 의해 변경 처리해준다.
 	}
 	
 	// ex) A06_DeptAjaxController를 만들고,

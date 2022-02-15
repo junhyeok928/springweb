@@ -1,0 +1,9 @@
+2022-02-14
+[1단계:개념] 1. 파일 다운로드를 하기위한 환경 구성을 기술하세요.
+[1단계:개념] 2. 파일 다운로드를 하기위한 개발 처리의 핵심 내용을 기술하고, 그 의미를 기술하세요.
+[1단계:개념] 3. 파일 다운로드를 하기 위해 개발 viewer의 핵심 설정 3가지(파일, response 해더선언, stream 파일전송)을 나누어 핵심 기능을 기술하세요.
+[1단계:확인] 4. DownloadViewer2.java를 만들고, A02_DownLoadController2.java를 만들어, DownloadViewer2.java를 컨테이너에 등록하여
+            A04_FileExpController.java 파일 다운로드 처리하는 예제  처리해보세요.
+[1단계:개념] 5. spring에서 ajax처리를 위한 환경 설정과 pageJsonReport가 하는 작업을 구체적으로 기술하세요
+[1단계:확인] 6. spring ajax를 통해서 회원가입시, 회원등록 여부를 확인하는 프로그램을 처리하세요.
+

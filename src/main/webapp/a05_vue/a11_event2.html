@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+</head>
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		입금할금액:<input v-model="amount"/><br>
+		<button @click="balance+=parseInt(amount)">입금</button>
+		<button @click="balance-=parseInt(amount)">출금</button>
+		<button @click="deposit">입금(함수)</button>
+		<button @click="widthdraw">출금(함수)</button>
+		<h2>현 계좌 잔액:{{balance}}</h2>
+		<!-- 
+		ex) withdraw 함수를 선언해서 차감하되
+			ckValid2 함수를 정의 하되 0 이하로는 차감이 안되게 처리하세요..
+			5조 제출해주세요..
+			
+		 -->
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"이벤트처리",amount:0,balance:0},
+		methods:{
+			deposit:function(){
+				if( this.ckValid() ){
+					this.balance += parseInt(this.amount);
+				}
+			},
+			widthdraw:function(){
+				this.ckValid2();
+			},
+			ckValid2:function(){
+				this.balance -= this.amount;
+				if(this.balance < 0){
+					alert("잔액이 0이하로 차감이 안됩니다.");
+					this.balance += parseInt(this.amount);
+				}
+			},
+			ckValid:function(){
+				var isValid=true;
+				if(isNaN(this.amount)){ // 입력된 데이터가 숫자가 아닐 때..
+					alert("숫자를 입력하세요");
+					this.amount="";
+					isValid=false;
+				}
+				return isValid;
+			}
+		}
+	});
+</script>
+</html>

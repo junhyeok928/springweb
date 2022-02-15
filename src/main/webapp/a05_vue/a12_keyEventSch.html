@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+</head>
+<body>
+	<div id="show">
+		<h2 align="center">{{msg}}</h2>
+		<p align="center">
+		사원명:<input type="text" v-model="ename" v-on:keyup="search" /><br>
+		직책:<input type="text" v-model="job" @keyup="search"/><br>
+
+		</p>
+			<h3 align="center">요청값:{{requestVal}}</h3>
+			<p align="center">
+			<input v-model="num01" size="2"/>
+			<select v-model="cal" @change="calcu"> <!-- 선택할 때, 함수 calcu 호출 -->
+				<option value="0"> + </option>
+				<option value="1"> - </option>
+				<option value="2"> * </option>
+				<option value="3"> / </option>
+			</select>
+			<input v-model="num02" size="2"/><br>
+			</p>
+			<h2 align="center">{{num01}} {{chCal}} {{num02}} = {{sum}}</h2>		
+		<!-- 
+		ex) [    ][select +,-,*,/][    ]  두개의 숫자를 입력해서 중간에 연산자를 선택하는 이벤트 change
+			했을 때, calcu 함수를 통해서  하단에  @@ + @@ = @@로 연산자를 선택에 따라 다른 결과값을 출력하세요. 6조 제출
+		 -->
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el:"#show",
+		data:{msg:"키이벤트 처리", ename:"", job:"", requestVal:"",data:[], num01:0,num02:0,
+				cal:0,chCal:"+",sum:0},
+		methods:{
+			search:function(){
+				this.requestVal="ename="+this.ename+"&job="+this.job;
+			},
+			calcu:function(){
+				//alert("연산자 선택!!");
+				console.log("선택된 연산 index:"+this.cal); /// select의  option 의  value값이 0~3까지 중에 선택되어 진다.
+				var calArr=[" + "," - ", " * ", " / "];
+				this.chCal = calArr[this.cal];  // select의 선택한 0~3 번 중의 연산자.
+				console.log("선택된 연산자:"+this.chCal);
+				var sums=[parseInt(this.num01)+parseInt(this.num02),this.num01-this.num02,
+						this.num01*this.num02, 
+						(this.num01=='0' || this.num02=='0')?0:this.num01/this.num02];
+				this.sum = sums[this.cal]; // select 선택한  0~3번 중의 결과값 설정..
+				console.log("선택된 총계:"+this.sum);
+				
+			}
+		}
+	});
+</script>
+</html>

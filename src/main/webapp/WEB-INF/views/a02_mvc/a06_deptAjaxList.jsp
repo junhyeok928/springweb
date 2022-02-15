@@ -28,32 +28,28 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("[name=deptno], [name=dname]").keyup(function(){
-			if(event.keyCode==13){ // enter키를 입력시.
-				//  ename=%ED%99%8D%EA%B8%B8%EB%8F%99&job=%EB%8C%80%EB%A6%AC  
-				//alert($("#frm01").serialize()); // form하위에 key=value 형식으로 데이터 처리
-				// ajax처리를 통해서 controller 호출 후, 데이터 리스트 처리..
-				$.ajax({
-					url:"${path}/deptAjax01.do",
-					type:"get",
-					data:$("#frm01").serialize(),
-					dataType:"json",
-					success:function(data){
-						var deptList = data.deptList;
-						console.log(deptList);
-					    var html="";
-					    $.each(deptList,function(idx, dept){
-						    html+="<tr><td>"+dept.deptno+"</td><td>"+dept.dname+"</td><td>"+dept.loc+
-					    	"</td></tr>";
-					    });
-					    console.log(html);
-					    $("tbody").html(html);						
-					},
-					error:function(err){
-						console.log(err)
-					}
-				});
-			}
+		<%-- 
+		deptAjax01.do  dlist
+		--%>	
+		$("[name=dname],[name=loc]").keyup(function(){
+			$.ajax({
+				url:"${path}/deptAjax01.do",
+				data:$("#frm01").serialize(),
+				dataType:"json",
+				success:function(data){
+					var dlist=data.dlist;
+					var html="";
+					$.each(dlist,function(idx,dept){
+						html+="<tr><td>"+dept.deptno+"</td><td>"+dept.dname+"</td><td>"+dept.loc+"</td></tr>";
+						
+					});
+					$("tbody").html(html);
+				},
+				error:function(err){
+					console.log(err)
+				}
+			})
+			
 		});
 	});
 </script>
@@ -67,8 +63,8 @@
 <div class="container">
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" name="deptno" placeholder="부서번호" />
-	    <input class="form-control mr-sm-2" name="dname" placeholder="부서이름" />
+	    <input class="form-control mr-sm-2" placeholder="부서명" name="dname"/>
+	    <input class="form-control mr-sm-2" placeholder="부서위치" name="loc" />
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
@@ -79,8 +75,8 @@
     
       <tr class="table-success text-center">
         <th>부서번호</th>
-        <th>부서이름</th>
-        <th>지역</th>
+        <th>부서명</th>
+        <th>부서위치</th>
       </tr>
     </thead>	
     <tbody>
