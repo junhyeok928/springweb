@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"좋아요! 이벤트 연습)",likecount:0},
+			methods:{
+				countUp:function(){
+					this.likecount = parseInt(this.likecount)+1;
+				}
+			}
+		});	
+		/*
+		<h2 >좋아요:{{likecount}}</h2>
+		<button class="btn btn-info" @click="countUp">좋아요 카운트업</button>
+		*/
+	});
+</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	  <h2 >좋아요:{{likecount}}</h2>
+	</div>
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <button class="btn btn-info" @click="countUp">좋아요 카운트업</button>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

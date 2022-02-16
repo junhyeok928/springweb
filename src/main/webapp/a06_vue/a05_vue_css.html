@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+/*
+# 스타일 적용
+1. style의 선언과, vue의 style적용 비교.
+	1) inline 요소객체 style 적용 비교
+		<요소  style="color:red;background-color:yellow;"
+		<요소 :style="{color:'red',backgroundColor:'yellow'}"
+	2) inline 요소객체의 클래스 적용 비교
+		<요소  class="클래스명1 클래스명2 클래스명3"
+		<요소 :class="{클래스명1:true,클래스명2:true}"
+2. 적용된 style과 클래스의 속성을 모델데이터와 연동 처리.
+	1) 속성:모델로 설정. ex) data:{color1:'red',isAdapt:true}
+	2) 이벤트를 통한 핸들러 메서드에서 위의 속성을 모델 데이터를 통해 변경 처리
+		methods:{
+			핸들러함수:function(){
+				this.color1="orange";
+				this.isAdapter=false;
+			}
+		}
+	3) 특정 요소객체 이벤트 처리와 핸들러 함수 호출.
+		<요소 @click="핸들러함수()"
+	4) 모델 데이터와 속성값의 연동 처리..
+		<요소 :style="{backgroundColor:모델명}"
+		<요소 :class="{클래스명:모델명}"
+ 
+ */
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"시작!!(뷰와함께)",color1:'pink',bk01:'navy',
+				style01:{fontSize:'30px', color:'orange'},
+				clsAdd01:true, clsAdd02:{cls04:true,cls05:false,cls06:true}
+				}
+		});	
+
+	});
+</script>
+</head>
+
+<body>
+<style>
+	.cls01{color:green;}
+	.cls02{border:1px solid red;}
+	.cls03{background:orange;}
+	.cls04{font-size:20px;}
+	.cls05{color:red;}
+	.cls06{background:blue;}
+</style>
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	  <h2 :style="{color:color1, background:bk01}">{{msg}}(모델적용1)</h2>
+	  <h2 :class="{cls01:clsAdd01,cls02:true,cls03:true}">{{msg}}</h2>
+	  <h3 :style="style01">{{msg}}(모델적용2)</h3>
+	  <h3 :class="clsAdd02">{{msg}}</h3>
+	  <!-- 
+	   ex) vue 속성 형태로 style로 글자크기, 글자색상을 지정하고,
+	   		class로 cls04~cls06까지 클래스를 지정하여 적용 여부를 처리하세요. 6조
+	   -->
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <button class="btn btn-info" type="submit">Search</button>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

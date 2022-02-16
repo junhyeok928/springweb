@@ -19,12 +19,16 @@
   <h2 >{{title}}</h2>
 
 </div>
+	사원번호:<input v-model="empno"/>
+	<input type="button" @click="detail" value="상세화면" 
+		data-toggle="modal" data-target="#exampleModalCenter" />
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	    <input class="form-control mr-sm-2" v-model="sch.ename" placeholder="사원명" @keyup="search" />
 	    <input class="form-control mr-sm-2" v-model="sch.job"  placeholder="직책"  @keyup="search" />
  	</nav>
 	</form>
+	
    <table class="table table-hover table-striped">
    	<col width="20%">
    	<col width="20%">
@@ -41,7 +45,10 @@
       </tr>
     </thead>	
     <tbody>
-    	<tr v-for="(emp, idx) in empList"><td>{{emp.empno}}</td><td>{{emp.ename}}</td>
+    	<tr v-for="(emp, idx) in empList"
+    		
+    		
+    		><td>{{emp.empno}}</td><td>{{emp.ename}}</td>
     		<td>{{emp.job}}</td><td>{{emp.sal}}</td><td>{{emp.deptno}}</td></tr>
     </tbody>
 	</table>  
@@ -53,13 +60,92 @@
 		v-if는 조건이 false일 때, 랜더링 자체를 하지 않는다.
 		v-show는 일단 DOM객체로 랜더링은 하되, 조건에 따라 보였다가 보이지 않았다가 처리할 때 사용된다.	
 	 -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLongTitle">사원정보</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+			<form id="frm02" class="form"  method="post">
+		     <div class="row">
+		      <div class="col">
+		        <input type="text" :value="emp.empno" class="form-control" >
+		      </div>
+		      <div class="col">
+		        <input type="text":value="emp.ename"  class="form-control" >
+		      </div>
+		     </div>
+		     <div class="row">
+		      <div class="col">
+		        <input type="text" :value="emp.job" class="form-control" >
+		      </div>
+		      <div class="col">
+		        <input type="text" :value="emp.deptno"  class="form-control" >
+		      </div>
+		     </div>
+		     <div class="row">
+		      <div class="col">
+		        <input type="text" :value="emp.mgr" class="form-control" >
+		      </div>
+		      <div class="col">
+		        <input type="text" :value="emp.hiredate"  class="form-control" >
+		      </div>
+		     </div>
+		     <div class="row">
+		      <div class="col">
+		        <input type="text" :value="emp.sal" class="form-control" >
+		      </div>
+		      <div class="col">
+		        <input type="text" :value="emp.comm"  class="form-control" >
+		      </div>
+		     </div>		     	     		     			
+			
+
+		    </form> 
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	 
+	 
 </div>
 </body>
 <script>
 	var vm = new Vue({
 		el:".container",
-		data:{title:"사원정보 뷰로 조회",sch:{ename:"",job:""},empList:[],isProcess:false},
+		data:{title:"사원정보 뷰로 조회",sch:{ename:"",job:""},empList:[],isProcess:false,
+			  emp:{},empno:0
+		     },
 		methods:{
+			detail:function(){
+				var vm = this;
+				$.ajax({
+					url:"/springweb/empAjaxDetail.do",
+					data:"empno="+vm.empno,
+					dataType:"json",
+					success:function(data){
+						vm.emp = data.emp;
+						// java.util.Date ==> json데이터 ==> Date형식으로 변환
+						// ==> toLocaleString()
+						// 1970/1/1  1/1000 getTime()
+						var date = new Date(data.emp.hiredate);
+						vm.emp.hiredate = date.toLocaleString();
+						console.log(vm.emp.hiredate);
+					},
+					error:function(err){
+						console.log(err);
+					}
+				})	
+				
+				
+			},
 			search:function(){
 				if(event.keyCode==13){
 					console.log("사원명:"+this.sch.ename)

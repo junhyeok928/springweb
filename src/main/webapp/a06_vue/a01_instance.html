@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+/*
+ # 인스턴스(instance)
+1. 객체지향 프로그래밍에서 객체를 생성한 후, 참조 변수를 지칭하는 의미로,
+vue에서는 new Vue()를 통해서 객체가 생성이 되고, 그 안에서 여러 요소 객체를
+사용하고, 또한 life cycle에 의해서 Vue객체의 생성, 소멸 주기에 따른 메서드
+처리 기능을 포함하고 있다.
+  var vm = new Vue();
+2. data : 객체 사이에 프록시를 두어 처리, 변경 사항을 즉시 반영하는 데이터를
+말하고, 실제는 모델 데이터에 대한 처리를 말한다.
+3. el : 하나의 Vue 인스턴스의 대상이 되는 요소객체(범위)를 의미하고, 하나의
+인스턴스에서는 하나의 el(요소객체)만 지정할 수 있다.
+4. 메서드 형태(함수명=function(){})
+	1) computed : 지정한 값은 함수로 프록시 처리로 속성처럼 종속된 값에 의해
+	결과값을 캐시하여 처리한다. cf) methods와 궁극적인 차이점은 캐시메모리
+	를 쓰느냐에 있다.
+	2) watch : 모델과 연결된 기능 처리 메서드 형태로, 모델 데이터의 변경에 따른
+	추가적인 기능을 선언해서 함수형태로 활용할 때, 사용된다.
+	함수명은 모델명과 동일하게 선언하고, 매개변수로 해당 값이 변경될 때, 데이터를
+	받아 처리할 수 있다.
+	3) methods : 대부분에 기능 함수를 선언하여 메서드를 처리하고, 그 결과값을
+	리턴할 때, 활용되는 함수이다. 일반적인 이벤트(클릭, 마우스오버, keyup)의
+	이벤트 핸들러 함수는 이 기능 함수로 선언하여 활용된다.
+	4) 라이프사이클 시점에서 호출되는 메서드.
+	인스턴스의 라이프 사이클의 시점마다, 정해진 함수를 통해서 프로세스를 처리할 때,
+	활용된다.  created(), mounted(), updated(), destoryed()
+	등이, 내장되어 있다.
+ 
+ */
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"여러가지 기능 메서드 computed", num01:0, num02:0},
+			computed:{
+				sum:function(){
+					console.log("첫번째수:"+this.num01);
+					console.log("두번째수:"+this.num02);
+					var tot = Number(this.num01) +Number(this.num02);
+					return tot;
+				}
+			}
+		});	
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 align="center" >{{msg}}</h2>
+	  <h2 align="center"  >{{num01}} + {{num02}} = {{sum}}</h2>
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" placeholder="첫번째 수" v-model="num01"/>
+	    <input class="form-control mr-sm-2" placeholder="두번째 수" v-model="num02"/>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"watch 연습",name:"",price:0,cnt:0,tot:0,dis:0.0},
+			watch:{
+				dis:function(disVal){
+					// 모델이 변경될 때, 함수를 처리
+					var sum = this.price*this.cnt;
+					this.tot=sum - (sum*disVal); // 할인율이 적용된 총계값 처리..
+					
+				}
+				
+			}
+		});	
+// ex) 물건명, 물건가격, 물건갯수, 할인율(select 5%,10%,20%)를 선언하고, 할인율을 watch 속성을 이용해서 결과 총비용 출력하세요.
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	  <h2 >물건명:{{name}}</h2>
+	  <h2 >가격:{{price}}</h2>
+	  <h2 >갯수:{{cnt}}</h2>
+	  <h2 >계(할인전):{{price*cnt}}원</h2>
+	  <h2 >할인율:{{parseInt(dis*100)}}%</h2>
+	  <h2 >계(할인후):{{tot}}원</h2>
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" v-model="name" />
+	    <input class="form-control mr-sm-2" v-model="price" />
+	    <input class="form-control mr-sm-2" v-model="cnt" />
+	    <select  class="form-control mr-sm-2"  v-model="dis">
+	    	<option value="0">할인율선택</option>
+	    	<option value="0.05">5%</option>
+	    	<option value="0.1">10%</option>
+	    	<option value="0.2">20%</option>
+	    </select>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

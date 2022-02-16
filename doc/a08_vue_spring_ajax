@@ -1,0 +1,51 @@
+# vue를 통한 spring ajax 연동 처리
+1. 기능 처리
+	1) 스프링 ajax를 통한 json 데이터 처리(controller)
+	2) vue를 통한 스프링 controller단 호출 및 model데이터 연동하여 화면 처리
+2. 개발 순서
+	1) backent단 처리 (controller, service, dao)
+		요청 url을 통해서 json 데이터 가져오는 처리..
+		/springweb/empAjax01.do	
+	2) vue 코드 처리
+		jquery lib, ajax관련 lib 설정(crossing browser)
+		new Vue()객체를 통해서 model 데이터 선언 : 검색데이터, 요청값처리, 객체 리스트 배열
+		화면 ui 구현
+			- v-model 속성 선언 : 검색값
+			- v-for를 통해서 연결할 부분
+		이벤트 핸들러 함수 선언
+			mothods:{ search:function(){}}	
+		ajax를 통해 서버단 호출 및 요청값 처리
+			success:function(){
+				this.empList = data.empList;
+			}
+		
+# emp상세화면 구현
+1. 주요 파일
+	화면 : main\webapp\a05_vue\a13_empList.html
+	컨트롤러 : springweb\a02_mvc\a01_controller\A05_EmpAjaxController.java
+				springweb/empAjaxDetail.do?empno=7654
+2. 개발 순서
+	컨트롤러 상세 json 처리 url 호출 메서드
+	
+	화면 - 상세데이터 클릭시, dialogue 로딩 empno와 함께 detail함수 호출
+		0. 화면 dialog
+			<input :value="emp.empno"/>
+			<input :value="emp.ename"/>
+		1. 모델 데이터 확인 empno, emp:{}
+		2. 메서드 선언 : 
+			methods:{
+				detail:function(){
+				vm = this;
+					$.ajax({
+						url:"springweb/empAjaxDetail.do",
+						data:"empno"+vm.empno,
+						dataType:"json",
+						success:function(data){
+							vm.emp = data.emp;
+						},
+						error:function(err){
+							console.log(err)
+						}
+					})
+				}
+			}

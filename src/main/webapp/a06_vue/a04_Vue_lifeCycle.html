@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+/*
+# vue의 instance life cycle
+1. 뷰는 크게 creation(생성), mounting(로딩), updating(수정),
+	destruction(소멸) 단계로 라이프 사이클을 가지고 있다.
+2. 인스턴스 라이프 사이클에 따른 기능 메서드
+	1) 인스턴스 생성(new Vue())
+		- 이벤트 및 라이프 사이클의 초기화를 처리해 준다.
+		- beforeCreate() 메서드를 호출
+		- 화면의 반응성을 주입
+			events($on, $emit, $once, $off) - event bus,
+				vuex에서 활용한다.
+		- el, template 속성 확인
+		- template 속성 내용을 render()로 변환 처리.
+		- beforeMount() 메소드 호출..
+		- $el 생성 후, el 속성값을 대입처리
+		- mounted() 메서드 호출.
+	2) 인스턴스 화면 부착.
+		- 인스턴스의 데이터 변경
+		- beforeUpdate()
+		- 화면 재 랜더링 및 데이터 갱신
+		- updated()
+	3) 인스턴스 내용 갱신
+		- 인스턴스 접근 가능
+		- beforeDestory()
+		- 컴포넌트, 인스턴스, 디렉티브 등 모두 삭제
+		- destoryed()
+	4) 인스턴스의 소멸 
+ 
+ */
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"뷰인스턴스 라이프 사이클", id:"",pass:"", status:""},
+			created:function(){
+				console.log("# 인스턴스 생성! #");
+				this.status = "# 인스턴스 생성!#";
+			},
+			beforeUpdated:function(){
+				console.log("# 수정 직전! #");
+				this.status = "# 수정 직전! #";
+				console.log("아이디:"+this.id)
+				console.log("패스워드:"+this.pass)
+			},
+			updated:function(){
+				console.log("# 수정 후! #");
+				this.status = "# 수정 후! #";
+				console.log("아이디:"+this.id)
+				console.log("패스워드:"+this.pass)			
+			}			
+		});	
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	  <h2 >{{status}}</h2>
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" v-model="id" />
+	    <input class="form-control mr-sm-2" v-model="pass" />
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

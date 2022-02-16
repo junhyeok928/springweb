@@ -29,11 +29,13 @@ public class A05_EmpAjaxController {
 		return "pageJsonReport"; // json View 호출..
 		// ArrayList형 empList를 json 형식으로 json view에 의해 변경 처리해준다.
 	}
-	
-	// ex) A06_DeptAjaxController를 만들고,
-	//      deptAjax.do를 통해서 초기 화면(a06_deptAjaxList.jsp", 호출
-	//      deptAjsx01.do를 통해서 DB를 처리한 ajax데이터를 출력하세요
-	//    2, 3조 제출하고, 기타 조 손들기
+	// http://localhost:7080/springweb/empAjaxDetail.do?empno=7654
+	@GetMapping("/empAjaxDetail.do")
+	public String empAjaxDetail(int empno, Model d) {
+		d.addAttribute("emp", service.getEmp(empno));
+		return "pageJsonReport"; // json View 호출..
+		// ArrayList형 empList를 json 형식으로 json view에 의해 변경 처리해준다.
+	}
 	
 	
 	

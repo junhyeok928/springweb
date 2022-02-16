@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+/*
+# watch
+1. model 데이터의 변경에 따른, 특정 프로세스가 필요한 경우에 watch 속성 하위에 모델명을 함수로 정의하여 처리한다.
+2. 기본 형식
+	watch :{
+		선언된 모델명:function(입력된 모델값){
+			처리할 프로세스..
+		}
+		
+	}
+ 
+ */
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"watch function 처리",num01:0, num02:0, cal:'+',sum:0,},
+			watch:{
+				cal:function(cal){
+					console.log("#선택 연산자#")
+					console.log(cal)
+					if(cal=="+") this.sum = Number(this.num01)+Number(this.num02);
+					if(cal=="-") this.sum = this.num01 - this.num02;
+					if(cal=="*") this.sum = this.num01 * this.num02;
+					if(cal=="/") this.sum = (this.num01=="0"||this.num02=="0" )? 0 : this.num01 / this.num02;
+				}
+			}			
+		});	
+		// ex) 물건명, 물건가격, 물건갯수, 할인율(select 5%,10%,20%)를 선언하고, 할인율을 watch 속성을 이용해서 결과 총비용 출력하세요.
+		//     5조.
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 align="center">{{msg}}</h2>
+	  <h2 align="center">{{num01}} {{cal}} {{num02}} = {{sum}}</h2>
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" v-model="num01" />
+	    <select  class="form-control mr-sm-2" v-model="cal">
+	    	<option>+</option><option>-</option><option>*</option><option>/</option>	
+	    </select>
+	    <input class="form-control mr-sm-2" v-model="num02" />
+	    
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>
