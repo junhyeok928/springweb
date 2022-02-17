@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+	.cls01{background-color:orange}
+	.cls02{border:1px solid green;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"style(뷰와함께)",color01:"blue", 
+				  addCls:{cls01:true,cls02:true},rainColor:"red"}
+		});	
+	});
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	  <h2 :style="{color:color01}">{{msg}}(style적용)</h2>
+	  <h2 :class="addCls">{{msg}}(class적용)</h2>
+	  <h2 :style="{background:rainColor}">무지개 색상</h2>
+	  <select class="form-control mr-sm-2" v-model="rainColor">
+	  	<option>red</option>
+	  	<option>orange</option>
+	  	<option>yellow</option>
+	  	<option>green</option>
+	  	<option>blue</option>
+	  	<option>navy</option>
+	  	<option>purple</option>
+	  </select>
+<!-- 
+/*
+[1단계:확인] 2. 모델명으로 글자색상을 파랑색으로 설정하고, 클래스2가지 이상 클래스 
+				적용을 선언하여, 인라인으로 호출하세요
+				
+[1단계:확인] 3. select로 무지개 색상을 선택할 때마다 모델값이 변경되어 이와 연동되는 
+				h2의 글자색상이 변경되게 하세요. 
+ */
+ -->	  
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <button class="btn btn-info" type="submit">Search</button>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

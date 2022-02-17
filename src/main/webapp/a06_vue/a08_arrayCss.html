@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+/*
+# form 하위 요소객체와 css 선언.
+1. type="checkbox"인 경우 checked 가 될 때, 해당 값을 사용할 수 있다.
+	- 클래스로 선언된 모델과 연동된 경우 클래스 적용 여부를 처리할 수 있다.
+2. 단계별로 모델과 클래스 적용
+	0) style="속성:속성값;"
+	1) :style="{속성:속성값}"
+	2) :style="{속성:모델명}" : 모델로 설정되어 있기에 변경되는 모델값에 의해 처리가 가능.
+	3) :style="객체로선언된모델"
+	4) :style="[객체모델1, 객체모델2]"
+ */
+
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"시작!!(뷰와함께)",
+				style01:{color:"yellow",background:"tomato"},
+				style02:{border:"3px solid green"},
+				style03:{background:"pink"},
+				style04:{color:"navy"},gender:"",
+				clsObj01:{cls1:true}, ck01:false, ck02:false,
+				clsObj02:{cls2:true}, ck03:false, ck04:false,
+			},
+			watch:{
+				ck03:function(ck){
+					this.gender="신사";
+					if(ck){
+						this.ck04=false;
+					}else{
+						this.ck04=true;	
+					}
+				},
+				ck04:function(ck){
+					this.gender="숙녀";
+					if(ck){
+						this.ck03=false;
+					}else{
+						this.ck03=true;	
+					}
+				},
+			}
+		});	
+	});
+</script><style>.cls1{color:red;background:orange;}
+		        .cls2{border:3px double blue;}
+		        .cls3{color:yellow;background:blue;}
+		        .cls4{color:purple;background:pink;}
+		        </style>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	  <h4 :style="style01">객체 style</h4>
+	  <h4 :style="[style01,style02]">배열 style</h4>
+	  <h4 :class="[clsObj01,clsObj02]">배열 class</h4>
+	  <h4 :class="{cls1:ck01,cls2:ck02}">class(check여부)</h4>
+	  <input type="checkbox" v-model="ck01" value="true"/>클래스1 적용
+	  <input type="checkbox" v-model="ck02" value="true"/>클래스2 적용<br>
+	  <h5 :style="[style03,style04]">스타일 배열 적용(연습)</h5>
+	  <input type="radio" v-model="ck03" value="true">남
+	  <input type="radio" v-model="ck04" value="true">여<br>
+	  <h4 :class="{cls3:ck03,cls4:ck04}">{{gender}}</h4>
+	  
+	  
+	</div>
+	<!-- 
+	ex1) style03, style04를 선언하고, h5에 해당 내용을 적용되게 하세요
+	ex2) 성별을 check하게 하고 하단에 h5에 영향을 미쳐 남:파랑색, 여자:분홍색 배경색이
+		출력되게 하세요.  6조 
+	 -->
+	
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <button class="btn btn-info" type="submit">Search</button>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>
