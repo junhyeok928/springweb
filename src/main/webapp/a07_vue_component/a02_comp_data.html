@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<template id="tmp01">
+	<!-- 
+	1. 반드시 최상위이 요소객체는 1개이어야 한다.
+	 -->
+	<div>
+		<h2>안녕하세요</h2>
+		<p>{{greet}}</p>	
+	</div>
+</template>
+<template id="tmp02">
+	<div>
+		<h2>이름 {{name}}</h2>
+	</div>
+</template>
+<template id="tmp03">
+	<h3 :style="{background:color2}">{{color2}}</h3>
+</template>
+<script type="text/javascript">
+	$(document).ready(function(){
+		Vue.component("com01",{
+			template:"#tmp01",
+			data:function(){ 
+				// 컴포넌트의 모델 데이터는 반드시 function(){ return 객체} 형태로 선언하여야 한다.
+				return {greet:"좋은 한주간 시작입니다."};
+			}
+		})
+		Vue.component("com02",{
+			template:"#tmp02",
+			data:function(){
+				return {name:"홍길동"};
+			}
+		});
+		Vue.component("rainbow",{
+			template:"#tmp03",
+			props:['color2']  // 속성을 :color="red"를 받아서 template에 전달할 수 있다.
+			
+		});
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"컴포넌트 선언의 데이터 처리.."}
+		});	
+	});
+	/*
+	ex) #tmp02와 comp02를 만들고, 컴포넌트에 모델데이터를 입력을 한 내용에 의해 
+	출력되게 하세요. 2/3조 제출
+	*/
+/*
+# 컴포넌트의 계층구조
+1. 컴포넌트는 body를 최상위로 해서, 하위의 자식 컴포넌트를
+만들어, 또 자식 컴포넌트 계층적으로 만들어 사용할 수 있다.
+2. 상위의 컴포넌트 속성으로 props를 설정하여, 속성값으로
+하위 컴포넌트에서 처리할 속성이나, 데이터를 출력할 수 있다.
+# 부모컴포넌트에서 자식컴포넌트로 데이터 전달 props 속성.
+1. 처리 process 순서
+	1) 상위화면
+		컴포넌트  속성명="전달할데이터"
+	2) 정의된 컴포넌트
+		속성명  props:["속성명"] 상위 화면에 있는
+		속성으로 전달될 데이터를 하위템플릿까지 데이터
+		전달할 수 있다. 
+~11:16 
+ */	
+</script>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron text-center">
+	  <rainbow color2="red"></rainbow>
+	  <rainbow color2="blue"></rainbow>
+	  <rainbow color2="green"></rainbow>	
+	  <h2 >{{msg}}</h2>
+	  <com01 ></com01>
+	  <com02></com02>
+
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <button class="btn btn-info" type="submit">Search</button>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

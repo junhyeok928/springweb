@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+/* 
+# 실습 예제 주요 내용.
+1. 모델 데이터 
+	score : 화면에 입력되는 점수와 연동하는 모델 데이터 v-model
+2. computed 
+	화면에 바로 cache메모리를 통해 적용된 메서드 결과값을 출력처리할 때,
+	활용되는 속성.
+3. 함수의 리턴값 중, 객체형태일 때.
+	info:function(){
+		return {warning:true}; 
+	}
+	 함수의 수행 결과값이 {warning:true} warning이 클래스로
+		선언된 것이면 적용을 처리, {warning:false}이면 해당 클래스
+		를 적용하지 않음.
+	info함수가 computed 속성에 소속되어 있으면, 화면의 동적인 속성에
+	영향을 미칠 수 있다.
+	<요소객체  :class="info"/>
+		info의 결과 return값이 {warning:true}/{warning:false}
+		동적인 처리에 의해 warning가 class가 적용될지 여부를 설정.
+	<요소객체  v-show="info.warning"/>
+		info함수에 리턴한 값이 아래와 같으므로, boolean값을 가지고 있기
+		때문에 보였다/보이지 않는 것을 설정할 수 있음.
+		{warning:true}/{warning:false}
+*/
+// 특정한 점수를 입력하고, 그 범위를 벗어날을 때, warning 이미지가 출력되는 vue 프로그램..
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"동적 style 예제", score:0, 
+					id:"",ckMsg:"유효하지 않습니다"},
+			computed:{
+				info:function(){
+					// 모델 score에 따라서 {warning:true}를 다르게 처리..
+					// 1~100까지는 정상일 때는 warning 클래스가 적용되지 않음..
+					// 그외는 warning 클래스 적용..
+					var isAdapt=true;
+					if(this.score>=1 && this.score<=100){
+						isAdapt=false;
+					}else{
+						isAdapt=true;
+					}
+					
+					return {warning:isAdapt};
+				},
+				chkId0:function(){
+					return {ckInvalid:false}
+				}, // <input :class="chkId0"
+				chkId1:function(){
+					//<input v-model="id" :class="chkId1"/>
+					// 아이디를 입력하는 순간 모델의 id값이 변경이 되고,
+					// 변경되는 id의 글자 크기를 len으로 받아온다.
+					var len = this.id.length;
+					var isNonValid=true;
+					if(len>=4 && len<=8){
+						isNonValid=false;
+					}
+					// 글자수가 4미만 이거나 8초가 일때, 클래스가 true
+					return {ckInvalid:isNonValid};
+				},				
+				chkId2:function(){
+					
+					var len = this.id.length;
+					var isNonValid=true;
+					this.ckMsg="유효하지 않습니다.";
+					if(len>=4 && len<=8){
+						isNonValid=false;
+						this.ckMsg="등록가능합니다.";
+					}
+					return {ckInvalid:isNonValid};
+				}
+			}
+		});	
+
+	});
+</script>
+<style>
+	.score{border:solid 1px black;}
+	.warning{background-color:orange;color:purple;}
+	.warnimage{width:18px;height:18px;top:5px;position:relative}
+	.ckInvalid{background:red;color:yellow;}
+</style>
+</head>
+<body>
+
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	  <h4>1부터 100까지만 입력하세요(1단계)</h4>
+	  점수:<input type="text" class="score" v-model="score" 
+	  		:class="{warning:true}"/> 
+	  <img src="error.png" class="warnimage" v-show="true"/>	  
+	  <h4>1부터 100까지만 입력하세요(2단계)</h4>
+	  점수:<input type="text" class="score" v-model="score" 
+	  		:class="info"/> <!-- info 기능메서의 return {warning:true} -->
+	  <img src="error.png" class="warnimage" v-show="info.warning"/>
+	  <!-- info 리턴값을 활용하여 class와 v-show를 지정한다. -->
+	  <!-- 
+	  ex) class를 배경색상으로 빨강색 클래스 선언
+	  	모델 데이터 id 설정, computed 메서드 chkId
+	  	글자가 4~12 때, 정상 표기, 그외는 빨강색 배경색상 표기..  
+	   --><br>
+	  아이디(1단계):<input type='text' v-model="id" :class="{ckInvalid:false}"/><br> 
+	  <!-- :클래스="{클래스명:true}" : 해당 클래스가 적용 될 때, true 그렇지 않을 false  -->
+	  아이디(2단계):<input type='text' v-model="id" :class="chkId0"/><br>
+	  아이디(3단계):<input type='text' v-model="id" :class="chkId1"/><br>
+	  아이디(4단계):<input type='text' v-model="id" :class="chkId2"/><span>{{ckMsg}}</span><br> 
+	  
+	  
+	  
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <button class="btn btn-info" type="submit">Search</button>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

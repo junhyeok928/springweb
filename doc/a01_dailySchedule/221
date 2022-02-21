@@ -1,0 +1,124 @@
+2022-02-21
+# 전날 정리
+[1단계:개념] 1. 다중 파일 첨부를 위한 기본 코드 및 환경을 기술하세요
+	컨트롤의 매개변수나, VO MultiplePartFile [] : 배열형태로 선언
+	화면에 UI를 동적으로 파일 첨부, <input type="file" multiple="multiple" 
+	service단에서 배열의 횟수만큼 반복 처리
+[1단계:개념] 2. 게시판과 첨부파일을 연결하는 데이터 구조에 대하여 기술하세요.
+	게시판 테이블  no number (key)
+	첨부파일 테이블 fno  number 
+	no, fno를 연결관계로 설정, foreign key 관계로 설정하는 경우도 있음.
+	게시물은 등록할 때, 첨부할 파일을 sequence로 연동하여, 처리하는 경우가 있다.
+[1단계:확인] 3. 다중 파일을 등록하는 controller/service/view를 구현하여 처리하세요.
+	view 단 처리
+		<form enctype="multipart/form-data">
+		<input type="file" name="report"   multiple="multiple"
+	vo	Board.java
+		private MultipartFile[] report;
+	controller
+		String boardInsert(Board insert, Model d) 		
+	service
+	@Value("${upload}")
+	private String uploadPath;			
+		if (ins.getReport() != null && ins.getReport().length > 0) {
+			try {
+				for (MultipartFile mf : ins.getReport()) {
+					String fname = mf.getOriginalFilename();
+					if (fname != null && !fname.equals("")) {
+						System.out.println("경로명:" + uploadPath);
+						System.out.println("첨부파일명:" + fname);
+						File file = new File(uploadPath + fname);
+						mf.transferTo(file);
+						// 첨부파일 정보 DB에 등록..
+						dao.insertFileInfo(new FileInfo(uploadPath, fname, "게시물 제목:" + ins.getTitle()));
+		   		
+[1단계:확인] 4. textarea를 만들고, 입력되는 글자와 한계를 @@/@@로 선언하고, 해당 글자 수가 
+               초과할 때, 배경색상을 변경되게 처리하세요.(지난시간 - computed, 클래스선언 활용)
+
+~ 9:30까지 제출하세요.
+
+
+# 주요학습범위
+1. vue 컴포넌트 활용하기
+2. 게시판 상세화면을 출력 및 다중의 파일리스트 다운로드 처리
+3. 로그인 session과 권한에 따른 게시판 데이터 처리.
+
+# 생각해봅시다.
+1. vue에서 컴포넌트 간의 데이터 전송은 어떻게 할까?
+2. 게시판에서 session 처리는 어떻게 할까?
+
+# 학습목표
+1. vue의 컴포넌트를 단계별로 이해하고 활용할 수 있다.
+2. 게시판에서 session 처리와 등록/수정/삭제에 따른 권한 처리를 활용할 수 있다.
+
+ 	
+# 주요핵심 keyword
+
+
+# 주요 진행계획(학습 단계별 체계화)
+1. 전체 핵심 내용을 이해하고, 간단한 코드로 확인한다.
+2. 각 내용을 내용 계열화를 통해 연관되어 이해를 한다.
+3. 세부 내용을 기능 메서드의 기능을 확인하고 진행한다.
+4. 9:10 발표 전날 내용 리뷰, 과제 풀이, 
+
+5. 14시 - 
+	==> 조별 발표 자료 공유
+	==> 조별 피드백 : 구체적인 범위로 요청/추상적 X			
+6. 16시 - 일일 과제진행,  보강, 조별 기술적 공유사항 협의, 피드백
+	subquery		
+7. 17시 - 조별과제 진행 회의, 질문사항, 피드백
+
+# 추후 일정
+1. 서버 구축
+	1) 클라우드 환경 서버 구축
+		aws
+		조별로 계정 만들어고 공유하는 형식으로 진행
+			비자카드 준비
+			- 조별로 준비가 된 조는 지난번 같이 메시지를 주세요..
+		사전 주의 사항
+			최종 프로젝트 파일을 충분히 테스트 한 후, 한번 올리는 걸로 해야지,
+			테스트용으로 계속 소스 변경해서 upload를 하면 과금 폭탄!!	
+		
+2. 프런트 단 : vue
+3. 스프링 수업
+	- dynamic web project : 스프링 환경
+	- 기타 실무 예제
+		파일업로드/다운로드(완료)	
+	    게시판(파일업로드, 답변, 페이징처리)
+		ajax 처리 : fullcalendar(jquery lib)
+		채팅
+		다국어 처리
+		aop
+		배치프로그래밍
+	- 스프링 boot(아래내용 선택)	
+		vue 환경 게시판 예제 진행
+	
+# 요청사항 진행
+1. 수업 속도 - 현재 속도 유지
+	- 조별로 완료가 되지 않았더라도 지금 정도는 진행되어야 할 때, 손들기로 변경
+
+
+# 조별과제 진행 점검
+1.  진행 플로우 점검
+		- 전체
+		- 주단위
+			전주(금) - 다음 주 진행할 일정계획 및 담당자 확인,
+					  발표 feedback 사항 및 변경 및 개선사항 정리
+					  진행에 필요한 내용 점검(조장/조원), 진행 계획 수립
+			월 - 개선사항 적용 템플릿 점검(조별활동시간)
+				text로 개선사항 내용과 함께 ppt의 페이지를 표기해서 전달 부탁드립니다.
+			화 - 조별 상세 피드백(설계, 코드, 발표 자료 등)
+		    수 - 조별 상세 피드백(설계, 코드, 발표 자료 등)
+		    목 - 최종 발표 및 산출물(소스 및 진행 내용) 자료 제출
+		    금 - 발표
+# 개념 및 원리이해/실습(진도)
+
+# 평가/정리
+- 다음 날 진행.
+
+# 공지사항
+1. 조별로 aws 결재로 처리할 준비가 된 조는 메시지 주세요.(내일 오전까지)
+
+
+
+

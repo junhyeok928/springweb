@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+/*
+# 컴포넌트란?
+1. vue컴포넌트는 작고 독립적인 코드 블럭을 조합하여, 효율적으로 화면을
+구성하는 것을 말한다. 레고 블럭을 조립하듯 컴포넌트를 조직하여 화면 구성을
+효율적으로 할 수 있다.
+2. 컴포넌트는 조합해서 전체 애플리케이션을 작성할 수 있다.
+3. 컴포넌트 간의 데이터는 1단계로 계층형으로
+	1) props 속성을 통해 부모 컴포넌트는 자식 컴포넌트에  데이터를
+		전달한다.
+	2) event 속성을 통해서 이벤트와 이벤트에서 발생한 데이터를 자식
+		컴포넌트에서 부모 컴포넌트로 전달한다.
+4. 컴포넌트의 기본 형식
+	1) Vue.component("요소이름정의",{속성1:속성값,속성2:속성값})
+		- 요소이름정의 : 컴포넌트명으로 실제 화면에서 사용할 사용자정의
+			컴포넌트 명이다. <요소명></요소명
+		- 속성 정의 : 컴포넌트에서 사용할 template, 모델데이터,
+			각종 기능 메서드들을 선언할 수 있다. 
+ */
+	$(document).ready(function(){
+		/*1. 컴포넌트 1단계*/
+		Vue.component("hello-comp",{
+			template:"<div>안녕하세요 컴포넌트 1단계 내용입니다 ^^</div>"
+		});		
+		// ex1) greet-comp로  <div>하위에 h2와 p로 인사말을 문자로 해서 하단에서 호출하세요..
+		Vue.component("greet-com",{
+			template:"<div><h2>안녕하세요</h2><p>컴포넌트 1단계 예제!!</p></div>"
+		});
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"컴포넌트 시작!"}
+		});	
+
+
+	});
+</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	  <hello-comp></hello-comp>
+	  <hello-comp></hello-comp>
+	  <greet-com></greet-com>
+	  <greet-com></greet-com>
+	  <greet-com></greet-com>
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <button class="btn btn-info" type="submit">Search</button>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

@@ -1,73 +1,43 @@
 # 전날 정리
 [1단계:확인] 1. vue를 style1객체(배경색상), style2객체(글자색상)을 선언하여 배열로 속성 설정을 처리하는
                h3를 선언하세요.
-	<script>
-	$(document).ready(function(){
-			var vm = new Vue({
-				el:".container",
-				data:{msg:"시작!!(뷰와함께)",
-					style1:{background: "pink"},
-					style2:{color:"blue"},
-					
-					}
-			});	
-	
-		});
-	</script>
-	<style>
-	</style>
-	<h3 :style="[style1, style2]">{{msg}}</h3>   
-[1단계:확인] 2. 클래스로 테두리를 설정하여, check box를 클릭시 마다 적용여부 처리하게 하세요
-	<style>
-		.cls1{
-			border:3px double blue;
-		}
-	</style>
-	<h4 :class="cls1:ck01">테두리 적용</h4>	
-	<input type="checkbox" v-model="ck01" value="true"/>테두리 적용
-[1단계:확인] 3. select로 무지개 색상을 선택할 때마다 모델값이 변경되어 이와 연동되는 
-				h2의 글자색상이 변경되게 하세요.
-	<script type="text/javascript">
-	   $(document).ready(function(){
-	      var vm = new Vue({
-	         el:".container",
-	         data:{msg:"예제3번",color:""
-	            },
-	         methods:{
-	            colorChange(event){
-	               this.color = event.target.value;
-	            }
-	         }
-	      });   
-	   });
-	</script>
-	<select @change="colorChange($event)">
-	        <option value="red">빨강</option>
-	        <option value="orange">주황</option>
-	        <option value="yellow">노랑</option>
-	        <option value="green">초록</option>
-	        <option value="blue">파랑</option>
-	        <option value="indigo">남색</option>
-	        <option value="purple">보라</option>
-	</select>
-	<h2 :style="{color:color}">{{msg}}</h2>
-[1단계:개념] 4. web.xml의 contextConfigLocation 설정의 의미를 기술하세요
-	컨테이너 xml 의 설정명위치 변경
-[1단계:개념] 5. 컨테이너 설정에서 아래가 가지는 의미를 기술하세요.
+[1단계:확인] 2. 클래스로 테두리/배경 색상을 설정하여, check box를 클릭시 마다 적용여부 처리하게 하세요
+[1단계:개념] 3. web.xml의 contextConfigLocation 설정의 의미를 기술하세요
+	스프링컨테이너의 설정위치와 파일명을 지정할 때, 활용된다.
+	front controller에 대한 호출방식에 대한 설정도 가능하다.
+
+[1단계:개념] 4. 컨테이너 설정에서 아래가 가지는 의미를 기술하세요.
 		<property name="prefix" value="WEB-INF\views\"/>	 
 		<property name="suffix" value=".jsp"/>	 
 		<property name="order" value="1"/>
-	prefix : 접두어
-	suffix : 접미어
-	order : 우선순위
-	접두어로 WEB-INF\views\ 접미어로 .jsp를 붙여 해당 위치에 있는 jsp를 index순위 0 다음 순위로 불러온다
+	컨트롤러 마지막 return의 view 호출을 선언할 때, 설정하는 옵션으로
+	bean으로 선언한 viewer나 jsp view를 구분하기 위해, 
+	name="order"를 통해 우선 선위를 설정하고, prefix/suffix를 통해
+	접두어와 접미어를 설정할 수 있다. 
+
+~ 9:30까지 제출하시고, 발표 진행하겠습니다.
+
+
 # 주요학습범위
 1. 스프링 게시판 개요와 주요기능 파악하기.
 2. vue 스타일 적용 예제
 
 # 생각해봅시다.
 1. vue에서 모델 메서드를 통한 동적기능의 구조는 무엇인가?
-2. 게시판에서 여러개 파일을 업로드 하기 위해서는 어떤 기능 설정과 처리가 필요할까?	
+	모델 설정 : 핵심 데이터 처리를 위한 내용으로 v-model, methods과 함께
+		변경 처리할 수 있다.
+	v-model : 모델 데이터에 영향을 미칠 수 있는 입력 요소 객체에 보통 설정한다.
+	methods,computed,watch 기타 기능 메서드를 통해서 위에 모델 데이터를 로직에
+		의하 입력 수정할 수 있다.
+	이벤트 : 요소객체에서 선언한 이벤트 핸들러 메서드와 함께 효과적으로 동적인 구성을 처리할 수 있다.
+		
+
+2. 게시판에서 여러 개 파일을 업로드 하기 위해서는 어떤 기능 설정과 처리가 필요할까?
+	1) 다중의 파일을 업로드 하기위해서 MultiPartFile 객체가 배열이나 ArrayList 형태로
+		VO또는 요청값으로 설정이 되어야 한다.
+	2) 하나의 게시물과 연동되어 해당 게시물의 고유번호로 file정보를 저장하는 fno가 연동하여
+		1:다관계로 저장되어야 한다.
+	3) jquery이벤트 처리를 통해서 여러개의 파일 추가/삭제가 가능하게 동적으로 처리하여야 한다.				
 
 # 학습목표
 1. 답변형 게시판에서 첨부파일 처리 구조를 이해하고 등록을 할 수 있다.

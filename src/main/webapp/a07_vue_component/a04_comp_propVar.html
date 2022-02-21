@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<template id="tmp01">
+	<div>
+		<h2>이름:{{name}}</h2>
+		<h2>나이:{{age}}</h2>
+		<h2>사는곳:{{loc}}</h2>
+		<span v-for="one in list">{{one}},</span>
+	</div>
+</template>
+<script type="text/javascript">
+	$(document).ready(function(){
+		Vue.component("comp01",{
+			template:"#tmp01",
+			props:{
+				name:{type:String},
+				age:{type:Number},
+				loc:{type:String},
+				list:{type:Array}
+			}
+		});
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"여러가지 속성 전달"}
+		});	
+
+	});
+	/*
+	  <comp01 name="홍길동" age="25" loc="서울"></comp01>
+	  <comp01 name="김길동" age="26" loc="대구"></comp01>
+	  <comp01 name="신길동" age="27" loc="부산"></comp01>	
+	*/
+	
+/*
+# 여러가지 속성지정 처리.
+1. props:{
+	속성1명:{유형처리.},
+	속성2명:{유형처리.},
+	속성3명:{유형처리.}
+   }
+*/	
+</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	  <comp01 name="홍길동" age="25" loc="서울" :list="['사과','바나나','딸기']"></comp01>
+	  <comp01 name="김길동" age="26" loc="대구"  :list="[3000, 4000, 5000]"></comp01>
+	  <comp01 name="신길동" age="27" loc="부산"  :list="[2,3,4]"></comp01>
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <button class="btn btn-info" type="submit">Search</button>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>
