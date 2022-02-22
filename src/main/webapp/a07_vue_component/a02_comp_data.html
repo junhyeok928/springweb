@@ -46,7 +46,17 @@
 		Vue.component("rainbow",{
 			template:"#tmp03",
 			props:['color2']  // 속성을 :color="red"를 받아서 template에 전달할 수 있다.
-			
+			/*  1. 최상위 Vue 인스턴스의 el 범위 안에 있을 때,
+				2. <컴포넌트명  속성1="속성값으로 전송할 데이터">
+				   속성값으로 설정할 데이터가 js에 쓰이는 데이터 즉, 숫자형, 객체 형, 모델데이터 일 때는
+				   v-bind:속성1="숫자|{}|[]|모델명"
+				   :속성1="숫자|{}|[]|모델명"
+			    3. 포함된 Vue.component에서
+			    	문자열이나 속성 1개 일때는 props:["속성1","속성2"]
+					props에 있는 내용을 템플릿에서 사용할 수 있다.
+				3. template에서 속성을 directive로 사용할 수 있다.
+					{{속성1}}
+			*/
 		});
 		var vm = new Vue({
 			el:".container",
@@ -76,9 +86,13 @@
 </script>
 </head>
 <body>
-<div class="container">
+<div class="container"> 
+	<!-- 전체 범위는  Vue() 인스턴스에서 관리 
+	1. 메모리상 Vue.component()를 먼저 만들고
+	2. Vue() 인스턴스에 포함 되는 관계로 처리
+	-->
 	<div class="jumbotron text-center">
-	  <rainbow color2="red"></rainbow>
+	  <rainbow color2="red"></rainbow> <!--  Vue.component()에서 처리 -->
 	  <rainbow color2="blue"></rainbow>
 	  <rainbow color2="green"></rainbow>	
 	  <h2 >{{msg}}</h2>

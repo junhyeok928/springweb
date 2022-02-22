@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+	<template id="timeTemplate">
+		<div>
+			<span>{{nowTS}}</span>
+			<button v-on:click="timeClick">현재시간확인</button>
+		</div>
+	</template>
+	<template id="expTemplate">
+		<div>
+			<button v-on:click="play">{{result}}</button>
+			<button v-on:click="countUp">번호:{{cnt}}</button>
+		</div>
+	</template>
+<script type="text/javascript">
+/*
+# 컴포넌트의 모델데이터와 메서드 활용..
+1. 컴포넌트의 모델 데이터는 매번 만들어진 객체가 리턴되기 때문에,
+	data속성으로 함수형을 선언하고, return 값에서 json객체로
+	선언하여야 한다. cf) 바로 객체형으로 선언(X)
+	ex) data:function(){
+			return {모델속성:모델속성값};
+		}
+2. 컴포넌트에서도 이벤트에 의해 핸들러 함수를 선언하여
+	처리할 수 있다.
+	1) methods:{ 함수명:function(){}}
+	2) template에서
+		요소객체  v-on:이벤트명="함수형"
+			    @이벤트명="함수명"
+ 
+ *//* head
+	<template id="timeTemplate">
+		<div>
+			<span>{{nowTS}}</span>
+			<button v-on:click="timeClick">현재시간확인</button>
+		</div>
+	</template>
+	// 아래 두 문제 중 선택.
+	// ex1) Math.random()을 확인하여, 임의의 가위/바위/보  버튼을 클릭시, 컴포넌트를 통해서 출력
+	// ex2)버튼을 클릭시, 번호가 카운트 업되게 컴포넌트 통해서 처리 하세요.. 4조
+	<template id="expTemplate">
+		<div>
+			<button v-on:click="play">{{result}}</button>
+			<button v-on:click="countUp">번호:{{cnt}}</button>
+		</div>
+	</template>	
+	*/
+	$(document).ready(function(){
+		Vue.component("exp01",{
+			template:"#expTemplate",
+			data:function(){
+				return {result:"가위/바위/보",cnt:0}
+			},
+			methods:{
+				play:function(e){
+					var games = ["가위","바위","보"];
+					var rdIdx = Math.floor(Math.random()*3);
+					this.result=games[rdIdx];
+				},
+				countUp:function(){
+					this.cnt=parseInt(this.cnt)+1;
+				}
+			}
+		})
+		// <exp01></exp01>  <exp01></exp01> ~11:24
+		
+		Vue.component("time-component",{
+			template:"#timeTemplate",
+			data:function(){
+				return {nowTS:(new Date()).toLocaleString()};
+			},
+			methods:{
+				timeClick:function(e){
+					this.nowTS = (new Date()).toLocaleString();
+				}
+			}
+		});
+	/* body
+		<time-component></time-component>
+		<time-component></time-component>
+		<time-component></time-component>
+	*/			
+		
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"컴포넌트 이벤트"}
+		});	
+
+	});
+</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	  	<exp01></exp01>
+	  	<exp01></exp01>
+	  	<exp01></exp01>
+		<time-component></time-component>
+		<time-component></time-component>
+		<time-component></time-component>	  
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <button class="btn btn-info" type="submit">Search</button>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

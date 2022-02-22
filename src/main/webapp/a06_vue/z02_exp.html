@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"글자수 제한",inputTxt:"",cnt:0},
+			
+			computed:{
+				ckValidFun:function(){
+					this.cnt = this.inputTxt.length;
+					var ck = true;
+					if(this.cnt<10){
+						ck = false;
+					}
+					console.log("##")
+					console.log(ck)
+					return {cKInvalid:ck};
+				}
+			}
+		});	
+	});
+</script>
+</head>
+<body>
+<style>
+	.cKInvalid{background:red}
+</style>
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	</div>
+	<input :class="ckValidFun"  v-model="inputTxt" />
+	<textarea   v-model="inputTxt" 
+		:class="ckValidFun"
+		></textarea>
+		<span>{{cnt}}/10</span>
+</div>
+</body>
+</html>

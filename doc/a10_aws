@@ -1,0 +1,21 @@
+# aws 개발 환경 구축
+1. 필요로 하는 기술
+	1) aws 계정 생성 및 접근
+		 ec2, s3
+		 접근보안ssh 보안
+		 방화벽설정
+	2) 서버에 접근하는 툴
+		- putty	 다운 로드 설치
+			보안키 설정 - puttygen
+	3) 접근 후 명령(리눅스, ubuntu)
+		- 계정 접속,
+		- 파일 접근 방법 (경로변경, 파일 복사/이동, text파일 수정)
+		- 압축풀기, 명령어에 의해서 파일 다운로드 하기
+		- 권한에 따른 처리
+		- 소프트웨어 설치 위치
+			open jdk 15
+			tomcat 9.0 (리눅버젼)	
+			https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.58/bin/apache-tomcat-9.0.58.tar.gz
+	4) 실제 프로젝트 배포 처리
+		- dynamic web project
+		- spring boot			

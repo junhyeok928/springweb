@@ -11,46 +11,36 @@
 <script src="/springweb/a00_com/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
-<template id="tmp01">
-	<div>
-		<h2>이름:{{name}}</h2>
-		<h2>나이:{{age}}</h2>
-		<h2>사는곳:{{loc}}</h2>
-		<span v-for="one in list">{{one}},</span>
-	</div>
-</template>
+	<template id="child-tmp">
+		<div>				
+			<button @click="clickEvent">클릭클릭</button>
+			<span>구매갯수:{{cnt}}<span>
+		</div>
+	</template>	
 <script type="text/javascript">
-	$(document).ready(function(){
-		Vue.component("comp01",{
-			template:"#tmp01",
-			props:{
-				name:{type:String, default:""}, 
-				/* default:"", required:""*/
-				age:{type:Number},
-				loc:{type:String},
-				list:{type:Array}
+	Vue.component("child-comp",{
+		template:"#child-tmp",
+		data:function(){
+			return {cnt:0};
+		},
+		methods:{
+			clickEvent:function(){
+				console.log(this.cnt)	
+				this.cnt=parseInt(this.cnt)+1;	
 			}
-		});
+		}
+	})	
+	// body : <child-comp></child-comp>
+	/*
+	a07_eventEmit.html ==>
+	a08_eventEmitpart.html  카피하면서 결과를 확인 진행..
+	*/
+	$(document).ready(function(){
 		var vm = new Vue({
 			el:".container",
-			data:{msg:"여러가지 속성 전달"}
+			data:{msg:"시작!!(뷰와함께)"}
 		});	
-
 	});
-	/*
-	  <comp01 name="홍길동" age="25" loc="서울"></comp01>
-	  <comp01 name="김길동" age="26" loc="대구"></comp01>
-	  <comp01 name="신길동" age="27" loc="부산"></comp01>	
-	*/
-	
-/*
-# 여러가지 속성지정 처리.
-1. props:{
-	속성1명:{유형처리.},
-	속성2명:{유형처리.},
-	속성3명:{유형처리.}
-   }
-*/	
 </script>
 </head>
 <body>
@@ -58,9 +48,7 @@
 <div class="container">
 	<div class="jumbotron text-center">
 	  <h2 >{{msg}}</h2>
-	  <comp01 name="홍길동" age="25" loc="서울" :list="['사과','바나나','딸기']"></comp01>
-	  <comp01 name="김길동" age="26" loc="대구"  :list="[3000, 4000, 5000]"></comp01>
-	  <comp01 name="신길동" age="27" loc="부산"  :list="[2,3,4]"></comp01>
+	  <child-comp></child-comp>
 	</div>
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
