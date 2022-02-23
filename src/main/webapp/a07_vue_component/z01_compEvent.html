@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<template id="tmp01">
+	<h3 :style="{background:bk}" v-on:click="call01">{{bk}}</h3>
+</template>
+<script type="text/javascript">
+/*
+[1단계:확인] 2. 컴포넌트에서 이벤트 처리로 클릭시, h3 배경색상이 3색에서 반복되게 처리하세요.
+	1) 템플릿 선언하기
+	2) 컴포넌트 기본 선언, 핸들러 함수 선언하기
+	3) 템플릿에 이벤트와 이벤트 핸들어 함수 선언하기
+	================================
+	4) 이벤트 발산하기
+[1단계:확인] 3. 컴포넌트에서 버튼 이벤트 처리로 클릭시, 좋아요/싫어요가 반복되어 출력이 되게 처리하세요.
+ */
+ 	var idx=0;
+ 	Vue.component("comp01",{
+ 		template:"#tmp01",
+ 		data:function(){
+ 			return {bk:"yellow"}
+ 		},
+ 		methods:{
+ 			call01:function(){
+ 				var colors=["red","blue","green"]
+ 				var chColor01= colors[idx++%3];
+ 				//alert("이벤트 핸들러 함수");
+ 				this.bk=chColor01; // 모델 데이터의 변경
+ 				// 이벤트 발산 : 상위에서 코드로 지정된 이벤트를 정의하고, 그 
+ 				// 	이벤트에 매개변수를 전달한다.
+ 				this.$emit("chcolor",chColor01);
+ 			}
+ 		}
+ 	})	
+ 	// body 부분 <comp01 @chcolor="allevent"></comp01>
+	$(document).ready(function(){
+		Vue.component("")
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"컴포넌트연습1"},
+			methods:{
+				callevent:function(param){
+					this.msg+=","+param;					
+				}
+			}
+		});	
+	});
+</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	  <comp01 @chcolor="callevent"></comp01>
+	</div>
+	<form id="frm01" class="form-inline"  method="post">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <button class="btn btn-info" type="submit">Search</button>
+ 	</nav>
+	</form>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

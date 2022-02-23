@@ -11,17 +11,8 @@
 <script src="/springweb/a00_com/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
-	<template id="timeTemplate">
-		<div>
-			<span>{{nowTS}}</span>
-			<button v-on:click="timeClick">현재시간확인</button>
-		</div>
-	</template>
 	<template id="expTemplate">
-		<div>
-			<button v-on:click="play">{{result}}</button>
-			<button v-on:click="countUp">번호:{{cnt}}</button>
-		</div>
+		<h3 @click="changeColor" :style="{background : background}">색상변경</h3>
 	</template>
 <script type="text/javascript">
 /*
@@ -60,16 +51,13 @@
 		Vue.component("exp01",{
 			template:"#expTemplate",
 			data:function(){
-				return {result:"가위/바위/보",cnt:0}
+				return {background:"red"}
 			},
 			methods:{
-				play:function(e){
-					var games = ["가위","바위","보"];
+				changeColor:function(e){
+					var bakColor = ["red","blue","orange"];
 					var rdIdx = Math.floor(Math.random()*3);
-					this.result=games[rdIdx];
-				},
-				countUp:function(){
-					this.cnt=parseInt(this.cnt)+1;
+					this.background=bakColor[rdIdx];
 				}
 			}
 		})

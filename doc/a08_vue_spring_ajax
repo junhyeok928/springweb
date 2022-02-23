@@ -21,31 +21,34 @@
 		
 # emp상세화면 구현
 1. 주요 파일
-	화면 : main\webapp\a05_vue\a13_empList.html
-	컨트롤러 : springweb\a02_mvc\a01_controller\A05_EmpAjaxController.java
+	화면 : main\webapp\a05_vue\a13_empList.html		
+	컨터롤러 : springweb\a02_mvc\a01_controller\A05_EmpAjaxController.java
 				springweb/empAjaxDetail.do?empno=7654
 2. 개발 순서
-	컨트롤러 상세 json 처리 url 호출 메서드
-	
+	컨터롤러 상세 json 처리 url 호출 메서드 
 	화면 - 상세데이터 클릭시, dialogue 로딩 empno와 함께 detail함수 호출
-		0. 화면 dialog
+		0. 화면 dialogue
 			<input :value="emp.empno"/>
 			<input :value="emp.ename"/>
-		1. 모델 데이터 확인 empno, emp:{}
+		1. 모델 데이터 확인  empno, emp:{}
 		2. 메서드 선언 : 
 			methods:{
 				detail:function(){
-				vm = this;
+					vm = this;
 					$.ajax({
-						url:"springweb/empAjaxDetail.do",
-						data:"empno"+vm.empno,
+						url:"springweb/empAjaxDetail.do"
+						data:"empno="+vm.empno,
 						dataType:"json",
 						success:function(data){
 							vm.emp = data.emp;
 						},
 						error:function(err){
-							console.log(err)
+							console.log(err);
 						}
-					})
+					})		
 				}
 			}
+		
+		
+	
+		

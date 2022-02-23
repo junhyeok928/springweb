@@ -17,19 +17,21 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
 <link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
+<style>
+   td{text-align:center;}
+</style>
 <script src="${path}/a00_com/jquery.min.js"></script>
 <script src="${path}/a00_com/popper.min.js"></script>
 <script src="${path}/a00_com/bootstrap.min.js"></script>
 <script src="${path}/a00_com/jquery-ui.js"></script>
-<script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
-
 	$(document).ready(function(){
-		var vm = new Vue({
-			el:".container",
-			data:{msg:"시작!!(뷰와함께)"}
-		});	
+		var msg = "${msg}";
+		if(msg!=""){
+			alert(msg);
+		}		
 		<%-- 
 		
 		--%>	
@@ -39,28 +41,33 @@
 
 <body>
 <div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">로그인</h2>
-  <h3>입력된 id:${mem.id }</h3>
-  <h3>입력된 pass:${mem.pass }</h3>
-   <!-- modelattribute개념
-   1. 요청값에 맞는 객체가 선언되어 있을 때,
-   2. 해당객체의 Member ==> member 기본 참조값으로 해서..
-   3. 모델값으로 default 전달해준다. 즉, 요청+모델이 같이 처리되는 것을
-   4. 위와 같이 요청값 + 모델을 처리한 모델어트리뷰터는 @ModelAttribute라는
-   	이름을 이용하면 이름을 변경할 수 있다.
-   	@ModelAttribute("mem") Member mem 
-   	말한다. 
-   . -->
+  <h2 data-toggle="modal" data-target="#exampleModalCenter">메인페이지</h2>
+  <h3>현재 session값</h3>
+  <h4>${member.id}</h4>
+  <h4>${member.name}</h4>
+  <h4>${member.auth}</h4>
+  <h4>${member.point}</h4>
 </div>
 <div class="container">
-    <h2 align='center'>{{msg}}</h2>
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" name="id" placeholder="아이디" />
-	    <input class="form-control mr-sm-2" name="pass" placeholder="패스워드" />
-	    <button class="btn btn-info" type="submit">로그인</button>
+	    <input class="form-control mr-sm-2" placeholder="제목" />
+	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <button class="btn btn-info" id="funcBtn" 
+	    	type="button">관리자 권한 필요 기능 버튼</button>
  	</nav>
 	</form>
+	<script>
+		$("#funcBtn").click(function(){
+			var auth = "${member.auth}";
+			if(auth=="admin"){
+				alert("관리자 계정으로 수행 처리")
+			}else{
+				alert("관한이 없으므로 수행할 수 없습니다");
+			}
+		});
+	
+	</script>
    <table class="table table-hover table-striped">
    	<col width="10%">
    	<col width="50%">

@@ -15,17 +15,17 @@ public class A04_MemberCtrl {
 	public String loginFrm() {
 		return "WEB-INF\\views\\a06_login.jsp";
 	}
-	// 2. 요청값 처리화면 호출. login.od?id=@@@&pass=@@@
+	// 2. 요청값 처리화면 호출. login.do?id=@@@&pass=@@@
 	@RequestMapping("/login.do")
-	public String login(@RequestParam("id") String id,
-						@RequestParam("pass") String pass, Model d) {
-		System.out.println("# 로그인 #");
+	public String login(@RequestParam("id") String id, 
+						@RequestParam("pass") String pass, Model d
+			) {
+		System.out.println("#로그인#");
 		System.out.println("id:"+id);
 		System.out.println("pass:"+pass);
-		String result = (id.equals("himan")&&pass.equals("7777"))?"로그인성공":"로그인실패";
+		String result = (id.equals("himan")&&pass.equals("7777"))?"로그인성공":"로그인 실패";
 		System.out.println("결과:"+result);
 		d.addAttribute("result", result);
 		return "WEB-INF\\views\\a06_login.jsp";
 	}
-	
 }

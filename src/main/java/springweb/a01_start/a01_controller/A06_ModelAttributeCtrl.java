@@ -45,17 +45,21 @@ public class A06_ModelAttributeCtrl {
 		System.out.println("패스워드:"+mem.getPass());
 		
 		return "WEB-INF\\views\\a08_loginFrm.jsp";
-	}
+	}	
+	// ex) vo객체로 Calculator를 선언하고 num01, num02로 선언하고,
+	//     두개의 값을 입력하고, 4칙연산 결과를 출력하게 하세요.
+	//     6조 제출, 손들기..
 	@GetMapping("/calcu.do")
 	public String calcu() {
 		return "WEB-INF\\views\\a09_calculator.jsp";
 	}
 	@PostMapping("/calcu.do")
 	public String calcu2(Calculator cal) {
-		System.out.println("# post 방식 #");
+		System.out.println("# post방식 #");
 		System.out.println(cal.getNum01());
 		System.out.println(cal.getNum02());
 		return "WEB-INF\\views\\a09_calculator.jsp";
 	}
+	
 	
 }
