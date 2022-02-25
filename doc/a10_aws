@@ -18,4 +18,154 @@
 			https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.58/bin/apache-tomcat-9.0.58.tar.gz
 	4) 실제 프로젝트 배포 처리
 		- dynamic web project
-		- spring boot			
+		- spring boot
+2. aws ec2를 활용한 배포하기.
+	0) 필요한 tool : 구글 putty 검색 설치..
+	1) 계정 생성
+	2) 로그인 ec2 확인
+	---------------------
+	3) 인스턴스 생성
+	4) 보안 key 생성
+	5) 보안 방화벽 설정
+		22 포트는 열려 있습니다.
+		외부에서 8080포트를 통해 접근할 수 있게 처리
+		0.0.0.0/0, ::/0
+		
+		
+	6) putty gen을 통한 private key 생성
+		ec2의 *.pem
+		해당 private key
+			  *.ppk
+		c:\javaexp\key\ 에 복사해 놓으세요..
+	7) putty를 통한 ec2 서버 접속
+	ec2-13-125-49-156.ap-northeast-2.compute.amazonaws.com
+
+	8) open jdk 설치하기, 환경 설정 하기..
+		sudo -i
+			관리자 권한 사용자
+		sudo apt update
+			apt list 업데이터
+		cd ../..   
+			최상위 root폴드로 이동
+		ls
+			파일 리스트 확인
+		cd usr
+			폴드 이동
+		mkdir java
+		cd java
+			java 폴드로 이동
+		pwd
+			현재폴드위치 확인
+		wget https://download.java.net/openjdk/jdk15/ri/openjdk-15+36_linux-x64_bin.tar.gz
+			해당 jdk 다운로드 처리..
+		ls
+		tar -xvf openjdk-15+36_linux-x64_bin.tar.gz	
+			압축풀기..
+		cd ..
+		cd ..
+			상위폴드로이동	
+		sudo vi /etc/profile
+		-----------------------------------
+			path등록 파일 
+		i
+			insert모드로 변경 
+			를 클릭해서 insert모드로 변경
+			오른쪽마우스 클릭..
+export JAVA_HOME=/usr/java/jdk-15
+export PATH=$PATH:$JAVA_HOME/bin
+		명령모드 변경 esc
+		:wq
+			저장 종료
+		source /etc/profile
+			path 환경설정한 내용 저장
+		java -version
+			자바가 설치된 것을 확인..
+		cd usr
+		cd java
+		wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.58/bin/apache-tomcat-9.0.58.tar.gz
+		tar -xvf apache-tomcat-9.0.58.tar.gz
+		ls
+
+다시 es2 화면에 가서 주소를 복사해서 조원들과 공유
+	ec2-13-125-49-156.ap-northeast-2.compute.amazonaws.com:8080
+	마지막에 8080붙여서 화면이 나오는지 확인..
+	
+
+jspexp\src\main\webapp\WEB-INF\lib	
+	하위 *.jar 파일 아래로 복사.	
+project01\src\main\webapp\WEB-INF\lib		
+		
+springweb\src\main\webapp\a00_com
+	폴드를			
+project01\src\main\webapp
+	로 복사하여 동일하게 만든다.			
+project01\src\main\webapp\a00_com
+				
+	
+	9) tomcat 설치하기
+		- admin을 통한 파일(war) 배포를 위한 접근 권한 파일 설정.
+		cd apache-tomcat-9.0.58/
+		vi webapps/manager/META-INF/context.xml
+		i
+			인서트 코드 모드
+		<!--
+
+		  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+		         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+		
+		-->
+		esc
+			명령모드
+		:wq
+			저장 종료
+		vi conf/tomcat-users.xml
+			한번더 확인	
+		:q
+			종료
+		<role rolename="manager-gui"/>
+		<user username="admin" password="admin" roles="manager-gui"/>	
+		복사
+		esc
+		:wq
+			명령모드에서 저장종료
+		화살표 상/하위 키로 이전명령어 확인			
+		cd bin
+		ls
+				
+		
+		- tomcat 기동
+		
+		
+	10) dynamic web 샘플만들기 
+		- .war 배포를 위한 파일 만들기
+		
+		
+		
+	11) tomcat admin 권한 접근
+		- war 파일 배포 처리하기
+	12) 초기 웹 화면 확인하기.
+	
+	
+	
+	
+	13) 스프링 개발 환경 dynamic web 프로젝트 
+		# 주의
+		1. 데이터베이스 서버 주소를 입력..
+		2. 하단에 bean등록..
+	
+	
+		- jdbc 한글 encoding 처리 bean등록
+		- war 파일 만들기
+		
+		
+		
+	14) tomcat admin 권한 접근
+		- war 파일 배포 처리하기
+	
+	
+	
+	
+	
+	
+	
+					
