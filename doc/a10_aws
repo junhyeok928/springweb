@@ -3,7 +3,7 @@
 	1) aws 계정 생성 및 접근
 		 ec2, s3
 		 접근보안ssh 보안
-		 방화벽설정
+		 방화벽설정 : 일단 웹서비스를 할 수 있는 port를 열어서 처리할 수 있게 한다.
 	2) 서버에 접근하는 툴
 		- putty	 다운 로드 설치
 			보안키 설정 - puttygen
@@ -26,9 +26,11 @@
 	---------------------
 	3) 인스턴스 생성
 	4) 보안 key 생성
-	5) 보안 방화벽 설정
-		22 포트는 열려 있습니다.
-		외부에서 8080포트를 통해 접근할 수 있게 처리
+	5) 보안 방화벽 설정 : 외부에서 해당 aws 운영체제에 접근해서 해당 서비스를 지원 받기 위해서
+			설정한다.
+		22 포트는 열려 있습니다. : ssh 즉, text 콘솔창에 의해서 명령을 처리
+		외부에서 8080포트를 통해 접근할 수 있게 처리 :
+				 apache tomcat 웹 서비스를 확인할 수 있게 처리
 		0.0.0.0/0, ::/0
 		
 		
@@ -37,7 +39,8 @@
 		해당 private key
 			  *.ppk
 		c:\javaexp\key\ 에 복사해 놓으세요..
-	7) putty를 통한 ec2 서버 접속
+		
+	7) putty를 통한 ec2 운영서버에 접속
 	ec2-13-125-49-156.ap-northeast-2.compute.amazonaws.com
 
 	8) open jdk 설치하기, 환경 설정 하기..
@@ -47,8 +50,10 @@
 			apt list 업데이터
 		cd ../..   
 			최상위 root폴드로 이동
+		pwd
+			현재 경로 확인.	
 		ls
-			파일 리스트 확인
+			현재 경로에 있는 파일 리스트 확인
 		cd usr
 			폴드 이동
 		mkdir java
@@ -73,11 +78,14 @@
 			오른쪽마우스 클릭..
 export JAVA_HOME=/usr/java/jdk-15
 export PATH=$PATH:$JAVA_HOME/bin
+			PATH를 지정하면 어떠한 경로에서든지 해당 경로에 있는 실행 파일(exe,bat)등을 
+				활용할 수 있다.
+
 		명령모드 변경 esc
 		:wq
 			저장 종료
 		source /etc/profile
-			path 환경설정한 내용 저장
+			path 환경설정한 내용을 적용
 		java -version
 			자바가 설치된 것을 확인..
 		cd usr
@@ -85,12 +93,14 @@ export PATH=$PATH:$JAVA_HOME/bin
 		wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.58/bin/apache-tomcat-9.0.58.tar.gz
 		tar -xvf apache-tomcat-9.0.58.tar.gz
 		ls
-
+		cd apache-tomcat-9.0.58
+		cd bin
+		./startup.sh  : 톰캣 기동 명령어
 다시 es2 화면에 가서 주소를 복사해서 조원들과 공유
 	ec2-13-125-49-156.ap-northeast-2.compute.amazonaws.com:8080
 	마지막에 8080붙여서 화면이 나오는지 확인..
 	
-
+	# dynamic webproject 만들기..
 jspexp\src\main\webapp\WEB-INF\lib	
 	하위 *.jar 파일 아래로 복사.	
 project01\src\main\webapp\WEB-INF\lib		
@@ -131,10 +141,10 @@ project01\src\main\webapp\a00_com
 		화살표 상/하위 키로 이전명령어 확인			
 		cd bin
 		ls
-				
+		./shutdown.sh		
 		
 		- tomcat 기동
-		
+		./startup.sh
 		
 	10) dynamic web 샘플만들기 
 		- .war 배포를 위한 파일 만들기
@@ -152,9 +162,19 @@ project01\src\main\webapp\a00_com
 		# 주의
 		1. 데이터베이스 서버 주소를 입력..
 		2. 하단에 bean등록..
+		 jdbc 접속시, GMT 시간 설정 컨테이너 등록
+			package board.z01_util;
+			@Controller
+			public class GmtController {
+				public GmtController() {
+					// aws에서 jdbc접속시  gmt 시간 설정이 되어야 처리되기에 컨테이너
+					// 메모리에 로딩.
+					TimeZone tz=TimeZone.getTimeZone("Asia/Seouls");
+					TimeZone.setDefault(tz);
+				}
+			}	
 	
-	
-		- jdbc 한글 encoding 처리 bean등록
+
 		- war 파일 만들기
 		
 		
