@@ -1,0 +1,45 @@
+# 스프링 부트 개발 환경 설정 순서
+1. sts 검색 및 다운로드
+2. java -jar sts파일로 실행
+	cmd
+	java -jar sts.jar
+3. workspace 설정 및 sts 실행
+	C:\z10_spring\sts-4.13.1.RELEASE\SpringToolSuit4.exe
+	
+4. 기본 환경 설정
+	-utf-8, refresh hook
+5. market place svn 설정
+6. 기본 처리할 lib 정리 (gradle에서 설정)
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'   
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+	
+	implementation 'commons-io:commons-io:2.8.0'
+	implementation 'commons-fileupload:commons-fileupload:1.4'
+7. 프로젝트 생성 : 스프링 부트 
+	gradle 환경, web, mybatis, oracle jdbc 설정.
+8. 초기 로딩 controller 호출 및 출력
+
+
+# DB 설정(mybatis환경 설정)
+1. 접속 정보 설정
+	resources\application.properties
+	spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
+	spring.datasource.username=scott
+	spring.datasource.password=tiger
+	spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+2. mybatis Config 파일 설정..
+	com.example.demo.configuration.MybatisConfig
+	클래스 선언
+	@Bean
+		public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory
+			sqlSessionFactory) throws Exception {
+			return new SqlSessionTemplate(sqlSessionFactory);
+		}
+3. mapper 선언.
+	resources\mybatis\mapper\XXXMapper.xml
+4. vo
+5. dao/service

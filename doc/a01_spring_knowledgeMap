@@ -272,6 +272,8 @@
 	3) service단에 특정한 위치에 저장	
 
 # 스프링에서 session 처리
+0. web 프로그래밍에서 session 범위
+	page, request, session, application
 1. session이란?
 	서버와 클라이언트의 관계속에 서버에 저장되는 임시 메모리를 말하고,
 	서버(tomcat)와 클라이언트(브라우저)의 연결된 상황에서 서버쪽에 데이터를 저장하여 가지고 
