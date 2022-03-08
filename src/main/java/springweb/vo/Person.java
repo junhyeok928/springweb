@@ -1,5 +1,5 @@
 package springweb.vo;
-//springweb.vo.Person
+// springweb.vo.Person
 public class Person {
 	private String name;
 	private int age;
@@ -32,5 +32,6 @@ public class Person {
 	public void setLoc(String loc) {
 		this.loc = loc;
 	}
+	
 	
 }

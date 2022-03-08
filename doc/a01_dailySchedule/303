@@ -1,44 +1,70 @@
 2022-03-03
 # 전날 복습
 [1단계:개념] 1. 페이징 처리시, service 단의 BoardSch 속성 처리 순서를 기술하세요
-	1. 전체 갯수
-	2. 한번에 보일 페이지 수 초기값 설정
-	3. 총 페이지 수
-	4. 클릭한 현재 페이지 호출
-	5. 시작번호, 마지막 번호
-	7. 하단의 페이지 block 처리
+	1) 전체 갯수 : count(DB)
+	2) 한번에 보일 페이지 수 pageSize (화면요청)
+	3) 총페이지 수 : count/pageSize (로직)
+	4) 클릭한 현재 페이지 번호 : curPage (화면요청)
+	5) 시작번호 : start (로직)
+	6) 마지막번호 : end (로직)
+	7) 페이지블럭크기 : blockSize(지정)
+	8) 시작블럭 : startBlock(로직)	
+	9) 마지막블럭 : endBlock(로직)	
+
 [1단계:개념] 2. 위 내용을 화면요청값, DB, 로직으로 구분하여 기술하세요 
-	DB - 전체 데이터 건수를 가져온다
-	화면 요청값 - 한번에 보여질 데이터 건수, 클릭한 현재 페이지 번호
-	로직 - 
 [1단계:개념] 3. 위 속성 중 초기값 처리가 필요한 속성과 이유를 기술하세요
-	한번의 보일 페이지 수를 초기값을 설정한다.
+	한번에 보일 페이지 수 pageSize  
+    클릭한 현재 페이지 번호 :  curPage
+    ==> 초기 화면 로딩시, 요청값이 없기 때문에 숫자형 데이터는 0으로 설정되기에
+    	적절한 페이지 수와 번호를 초기로 설정하여야 한다. 
+	페이지블럭크기 : blockSize(지정)
+	==> 블럭 크기는 지정된 블럭 크기 설정이 필요..	
+
 [1단계:개념] 4. 전체 페이지 갯수를 처리하는 로직을 기술하세요
-	double totPage1 = sch.getCount()/(double)sch.getPageSize();
-	totPage1 = Math.ceil(totPage1);
-	int totPage = (int)(totPage1);
-	sch.setPageCount( totPage );
+	 총페이지 수 : count/pageSize (로직)
+	 	전체데이터건수/한번에 보여줄 페이지크기.
+	 	페이지 크기는 나머지 데이터를 올림해서 처리해야지 된다.
+	 	Math.ceil() 활용 ex) 데이터건수가 16건이고, 한번에 보열 줄 페이지당 건수가 5건을 때,
+	 		페이지를 총 4페이지가 필요로 하여 올림처리가 필요로 한다.
 [1단계:개념] 5. 페이지당 시작번호와 마지막 번호를 처리하는 로직을 기술하세요
-	sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
-	sch.setEnd(sch.getCurPage()*sch.getPageSize());
+	마지막번호 : 한번에보여줄 페이지크기 * 현재 클릭한 페이지 번호
+	시작번호 : (한번에보여줄 페이지크기-1) * 현재 클릭한 페이지 번호 + 1
+
 [1단계:개념] 6. 하단에 페이지 블럭단위를 처리하는 로직을 순서별로 기술하세요 
-	1. 기본 block 크기 지정
-	sch.setBlockSize(5);
-	2. 현재 블럭 그룹 번호
-	int curBlockGrpNo = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
-	3. 블럭 그룹 시작페이지 번호
-	sch.setStartBlock((curBlockGrpNo-1)*sch.getBlockSize()+1);
-	4. 블럭 그룹 마지막페이지 번호
-	int endBlockGrpNo = curBlockGrpNo*sch.getBlockSize();
-	sch.setEndBlock(endBlockGrpNo>sch.getPageCount()?sch.getPageCount():endBlockGrpNo);
-	return dao.getBoardList(sch);
+	한번에 보여줄 페이지 블럭 크기를 지정(일반적으로 홀수 3, 5, 7, ...)
+	현재 페이지 블럭번호 
+	페이지 블럭 시작 번호
+	페이지 블럭의 마지막 번호
+
+~9:30 까지 제출해주세요.
+
 # 주요학습범위
 1. spring boot 활용
 
 # 생각해봅시다.
 1. 스프링 boot의  view단의 처리 방식이 어떤 것이 있는가?
+	template를 활용하는 방법 : jsp, 타임리프, freemaker
+	ajax를 통해 view단을 따로 분리 시켜 처리 하는 방법 :
+		ajax + vue(html)
+		
+	웹서버 : html기반 프런트 프레임워크 활용(css, html, js) -vue, react, 앵귤러 - node 환경
+	+ 
+	웹어플리케이션 서버 : 스프링 부트	
+
 2. 스프링 boot에서 ajax로 vue단과 어떻게 연동하여 처리하는가?
+	스프링 boot는 
+		backend 처리를 위해서 환경 구성 (view-json, RestController)
+			RestController : 객체를 return하면 json 데이터 형태로 바로 변환을 하여 출력한다.
+		호출하는 데이터를 요청값을 받아 DB 처리 결과를 json 형태로 리턴..
+		Vue에서는 jquery ajax, axios(js lib)
+		Vue에서 이벤트에 의해서 데이터를 호출하여 스프링 boot의 데이터를 가져와서 처리한다.		
+
 3. 스프링 boot의 lib 처리 방식은 무엇인가?
+	1) framework(@@.jar)에 대한 온라인상 로딩 방식은 여러가지 툴을 지원을 받아처리된다.
+	2) maven : xml형식으로 배포 + lib 다운로드..
+	3) gradle : text형식으로 lib 다운로드 및 배포 처리, maven 보다 bug가 많이 줄어 들었다.
+		 
+
 		
 			
 # 학습목표

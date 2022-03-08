@@ -4,16 +4,6 @@ public class Salgrade2 {
 	private int level;
 	private int lowsalary;
 	private int highsalary;
-	public Salgrade2() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Salgrade2(int level, int lowsalary, int highsalary) {
-		super();
-		this.level = level;
-		this.lowsalary = lowsalary;
-		this.highsalary = highsalary;
-	}
 	public int getLevel() {
 		return level;
 	}

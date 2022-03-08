@@ -13,12 +13,14 @@
 		<typeAlias alias="deptemp" type="springweb.vo.DeptEmp"/>
 		<typeAlias alias="empgrade" type="springweb.vo.EmpGrade"/>
 		<typeAlias alias="fileInfo" type="springweb.vo.FileInfo"/>
+		<typeAlias alias="calendar" type="springweb.vo.Calendar"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="resource/EmpMapper.xml"/>
 		<mapper resource="resource/DeptMapper.xml"/>
 		<mapper resource="resource/SalgradeMapper.xml"/>
 		<mapper resource="resource/FileMapper.xml"/>
+		<mapper resource="resource/CalendarMapper.xml"/>
 	</mappers>
 
 </configuration>

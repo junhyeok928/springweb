@@ -1,6 +1,7 @@
 package springweb.vo;
 
 public class Calculator {
+	
 	private int num01;
 	private int num02;
 	public Calculator() {

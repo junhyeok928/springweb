@@ -1,7 +1,5 @@
 package springweb.vo;
-
 import java.util.Date;
-
 // springweb.vo.Emp
 public class Emp {
 	private int empno;
@@ -13,7 +11,6 @@ public class Emp {
 	private double sal;
 	private double comm;
 	private int deptno;
-
 	public Emp() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -31,50 +28,48 @@ public class Emp {
 		this.deptno = deptno;
 	}
 
+
+
 	public int getEmpno() {
 		return empno;
 	}
-
 	public void setEmpno(int empno) {
 		this.empno = empno;
 	}
-
 	public String getEname() {
 		return ename;
 	}
-
 	public void setEname(String ename) {
 		this.ename = ename;
 	}
-
 	public String getJob() {
 		return job;
 	}
-
 	public void setJob(String job) {
 		this.job = job;
 	}
-
 	public int getMgr() {
 		return mgr;
 	}
-
 	public void setMgr(int mgr) {
 		this.mgr = mgr;
 	}
-
 	public Date getHiredate() {
 		return hiredate;
 	}
-
 	public void setHiredate(Date hiredate) {
 		this.hiredate = hiredate;
 	}
+	public String getHiredateS() {
+		return hiredateS;
+	}
 
+	public void setHiredateS(String hiredateS) {
+		this.hiredateS = hiredateS;
+	}		
 	public double getSal() {
 		return sal;
 	}
-
 	public void setSal(double sal) {
 		this.sal = sal;
 	}
@@ -95,12 +90,5 @@ public class Emp {
 		this.deptno = deptno;
 	}
 
-	public String getHiredateS() {
-		return hiredateS;
-	}
-
-	public void setHiredateS(String hiredateS) {
-		this.hiredateS = hiredateS;
-	}
-
+	
 }
