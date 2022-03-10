@@ -109,14 +109,30 @@
 		return "download"
 	 -->
 	<bean id="download" class=" springweb.z01_util.DownloadViewer"/>
-	
-	<!--  json 뷰 선언
+	<!-- json 뷰 선언
 		return "pageJsonReport"
 	 -->
 	<bean id="pageJsonReport" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<property name="contentType" value="text/html; charset=utf-8"></property>
+	</bean>	
+	<!-- 메일 발송 서버 설정(SMTP) -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="ssangyoung7878@gmail.com"/> 
+			<!-- 등록한 gamil 계정과 비밀번호 입력.. -->
+		<property name="password" value="dkssudgktpdy"/>
+		<!--보안 관련 설정 -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	
 	</bean>
-		
+	
+	
 </beans>
 
 

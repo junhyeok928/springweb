@@ -18,11 +18,6 @@
 	2) 등록하기
 	3) 수정하기
 	4) 삭제하기..
-	 
-
-
-
-
 
 # DB 처리하기.
 	1. json 데이터
@@ -148,7 +143,57 @@ ex) vo, dao, mapper, service, controller 호출해서 json데이터를 출력하
  	 DAO/MAPPER
  	 SERVICE/CONTROLLER
  	 
- 	 
+# 일정등록하기.
+1. 등록 처리하는 event  확인..
+2. 등록 처리할 기본 pop창 내용 확인 입력
+	'3/1절','2022-03-01','2022-03-01','내용','navy','pink','yellow',1);
+	제목, 등록일/종료일 확인,
+	내용, 테두리 색상, 배경색상, 글자 색상 지정,
+	종일여부 지정.
+
+3. 등록 처리할 ajax controller 호출.
+4. DB 처리
+	vo
+	dao/mapper
+5. 등록 처리
+	controller : insertCalendar.do	
+	sql : 
+	INSERT INTO calendar values(cal_seq.nextval, 
+		#{title},#{start},#{end},#{content},#{borderColor},#{backgroundColor},#{textColor},
+			#{allDay})
+	dao : public void insertCalendar(Calendar ins);
+	mapper :
+	service
+	dao
+	controller
+		등록 후,
+		return "redirect:/calendar.do";
+6. 일정 클릭시, 상세 내용 보기/수정 삭제 처리
+	1) 이벤트핸들러 확인
+		- 기능 버튼 정리(show/hide)
+	2) 데이터 로딩.
+		- 핸들러 나온 속성값을 통해서 데이터 확인
+		- 속성값을 form하위 요소객체와 연결하여 출력 처리.
+		- dialogue 로딩
+			# 주의 : 입력과 상세화면은 같이 쓸 수 있게 속성값/hidden 구분하여 처리해놓는다.
+				- 입력창 로딩시 : 입력버튼만 보이게
+				- 상세화면 로딩시 : 수정, 삭제 버튼만 보이게 처리..
+	3) 수정/삭제 처리
+		- 버튼 클릭, 수정/삭제 확인
+			/updateCalendar.do
+			/deleteCalendar.do
+			submit() 처리
+		- sql
+		- dao
+			public void updateCalendar(Calendar upt)	
+			public void deleteCalendar(int id)	
+		- service
+		- controller
+			return "redirect:/calendar.do"
+		5조	
+			
+					
+
  	 
  	 
  	 

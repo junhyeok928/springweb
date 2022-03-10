@@ -16,4 +16,13 @@ public class A10_FullCalService {
 	public List<Calendar> getCalendarList(){
 		return dao.getCalendarList();
 	}
+	public void insertCalendar(Calendar ins) {
+		dao.insertCalendar(ins);
+	}
+	public void updateCalendar(Calendar upt) {
+		dao.updateCalendar(upt);
+	}
+	public void deleteCalendar(int id) {
+		dao.deleteCalendar(id);
+	}
 }
