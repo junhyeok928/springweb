@@ -24,6 +24,9 @@
 				cnt:{type:Number}
 			}
 		});
+		// props를 통해서 최종 화면에서 속성값을 지정하여 각 컴포넌트에 템플릿까지 
+		// 데이터를 전달 처리 : 상위 ==> 하위
+		//  <comp01 pname="사과" :price="2000" :cnt="2"></comp01>
 		var vm = new Vue({
 			el:".container",
 			data:{msg:"시작!!(뷰와함께)"}

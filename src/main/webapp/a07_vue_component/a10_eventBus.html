@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/springweb/a00_com/bootstrap.min.css" >
+<style>
+	td{text-align:center;}
+</style>
+<script src="/springweb/a00_com/jquery.min.js"></script>
+<script src="/springweb/a00_com/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<template id="sch-tmp">
+	<form id="frm01" class="form-inline"  method="post">
+	  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	  		<button  class="btn btn-danger" >{{title}},{{writer}}</button>
+		    <input class="form-control mr-sm-2" placeholder="제목" v-model="sch.title" />
+		    <input class="form-control mr-sm-2" placeholder="작성자"  v-model="sch.writer" />
+		    <button class="btn btn-info" @click="search" type="button">Search</button>
+	 	</nav>
+	</form>
+</template>
+<script type="text/javascript">
+	var eventBus = new Vue();
+	Vue.component("sch-comp",{
+		template:"#sch-tmp",
+		data:function(){
+			return {sch:{title:"",writer:""}}
+		},
+		props:["title","writer"],
+		methods:{
+			search:function(){  // search 메서드가 호출 되면 이벤트 버스로 현재 모델 값을 담기 처리..
+				console.log(this.sch)
+				eventBus.$emit("evntBus01",this.sch);	
+			}
+		}
+	})
+	// 	<sch-comp title="안녕" writer="홍길동" ></sch-comp>
+	// 	<sch-comp title="게시판" writer="김길동" ></sch-comp>
+	// 	<sch-comp title="답글" writer="오길동" ></sch-comp>
+	$(document).ready(function(){
+		var vm = new Vue({
+			el:".container",
+			data:{msg:"시작!!(뷰와함께)",list:[]},
+			created:function(){ // 생성할 때, 메모리 로딩
+				// 받은 이벤트 버스명과, 연결할 이벤트 핸들러 함수 선언..
+				eventBus.$on("evntBus01", this.search) 
+			},
+			methods:{
+				search:function(schObj){
+					this.list.push(schObj); // 추가 처리.
+				}
+			}
+		
+		});	
+	});
+</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="jumbotron text-center">
+	  <h2 >{{msg}}</h2>
+	</div>
+	<sch-comp title="안녕" writer="홍길동" ></sch-comp>
+	<sch-comp title="게시판" writer="김길동" ></sch-comp>
+	<sch-comp title="답글" writer="오길동" ></sch-comp>
+   <table class="table table-hover table-striped">
+   	<col width="10%">
+   	<col width="50%">
+   	<col width="15%">
+   	<col width="15%">
+   	<col width="10%">
+    <thead>
+    
+      <tr class="table-success text-center">
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회</th>
+      </tr>
+    </thead>	
+    <tbody>
+    	<tr v-for="(bd, idx) in list"><td>{{idx+1}}</td>
+    		<td>{{bd.title}}</td><td>{{bd.writer}}</td><td></td><td></td></tr>
+    </tbody>
+	</table>       
+</div>
+</body>
+</html>

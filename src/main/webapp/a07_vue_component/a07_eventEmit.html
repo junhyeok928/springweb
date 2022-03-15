@@ -77,13 +77,28 @@ a07_eventEmit.html
 			methods:{
 				clickEvent:function(){
 					console.log(this.cnt)	
-				
 					this.cnt=parseInt(this.cnt)+1;	
 					this.$emit("btnclick",this.cnt);
 					// 상위에 btnclick이라는 이벤트에 지금 카운트와 함께 넘긴다.
 					// 컴포넌트의 속성으로 이벤트가 정의 된 곳에 이벤트 명과 데이터를 넘기
-					// <child-comp @이벤트명="상위의함수">
-					// <child-comp @btnclick="parentClick">
+					// 1. 최대 하위 template에서 아래와 같이 선언하면
+					// <button @click="clickEvent">클릭클릭</button>
+					// 2. 컴포넌트의 기능 메서드를 통해서 이벤트는 상위로 보낼 수 있다.
+					//   clickEvent:function(){
+					// 		this.$emit("상위에보낼이벤트명", 전달데이터1, 전달데이터2...)
+					//   }
+					// 3. 컴포넌트명으로 선언되는 내용
+					// 	<child-comp @이벤트명="상위의함수">
+					// 	<child-comp @btnclick="parentClick">
+					// 4. 상위 인스턴스나/컴포넌트
+					// 	methods:{ parentClick:function(매개변수1, 매개변수2){
+					//               this.tot = this.price*cnt		
+					/*
+					# 이벤트에 의한 상위로 데이터 전달은 컴포넌트 레벨이 2계층 이상이고, 여러 컴포넌트를
+					화면에서 사용할 때는 복잡상이 너무가 많이 발생하게 된다.
+					
+					
+					*/
 					
 				}
 			}
@@ -93,7 +108,6 @@ a07_eventEmit.html
 			data:{msg:"상/하위 이벤트 발산",price:2500, tot:0},
 			methods:{
 				parentClick:function(cnt){
-				
 					this.tot = this.price*cnt		
 				}
 			}

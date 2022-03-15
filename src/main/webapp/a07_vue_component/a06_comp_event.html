@@ -11,9 +11,24 @@
 <script src="/springweb/a00_com/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
-	<template id="expTemplate">
-		<h3 @click="changeColor" :style="{background : background}">색상변경</h3>
+	<template id="timeTemplate">
+		<div>
+			<span>{{nowTS}}</span>
+			<button v-on:click="timeClick">현재시간확인</button>
+		</div>
 	</template>
+	<template id="expTemplate">
+		<div>
+			<button v-on:click="play">{{result}}</button>
+			<button v-on:click="countUp">번호:{{cnt}}</button>
+			<!--
+			템플릿으로 가장 하위 단위에서 이벤트를 선언하여 데이터를 처리할 수 있다. 
+				countUp:function(){
+					this.cnt=parseInt(this.cnt)+1;
+			 -->		
+		</div>
+	</template>
+	
 <script type="text/javascript">
 /*
 # 컴포넌트의 모델데이터와 메서드 활용..
@@ -51,13 +66,16 @@
 		Vue.component("exp01",{
 			template:"#expTemplate",
 			data:function(){
-				return {background:"red"}
+				return {result:"가위/바위/보",cnt:0}
 			},
 			methods:{
-				changeColor:function(e){
-					var bakColor = ["red","blue","orange"];
+				play:function(e){
+					var games = ["가위","바위","보"];
 					var rdIdx = Math.floor(Math.random()*3);
-					this.background=bakColor[rdIdx];
+					this.result=games[rdIdx];
+				},
+				countUp:function(){
+					this.cnt=parseInt(this.cnt)+1;
 				}
 			}
 		})

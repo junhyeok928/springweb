@@ -22,6 +22,8 @@ public class A10_MailService {
 		MimeMessage mmsg = sender.createMimeMessage();
 		// 2. 제목 설정.
 		try {
+//			mmsg.setXXXX(전달할 정보) :  기타 정보에 대한 할당 처리..
+			
 			mmsg.setSubject(email.getTitle());
 			// 3. 수신자 설정.
 			mmsg.setRecipient(RecipientType.TO, new InternetAddress(email.getReciever()));

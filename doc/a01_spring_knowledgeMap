@@ -341,10 +341,14 @@
 		gmail.com 계정 등록
 		보안 설정 부분 처리.
 	- 컨테이너에서 gmail 서버 활용 할 수 있게 등록 처리..	
-	main\webapp\WEB-INF\lib\activation.jar
-	에 필요하니 해당 위치로 설정
+		main\webapp\WEB-INF\lib\activation.jar
+		에 필요하니 해당 위치로 설정
+	<!-- 메일 발송 서버 설정(SMTP) -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		
 	
 2. 초기 메일 화면 구성
+
 	- controller/view단
 		발송할 메일 주소, 수신 메일 주소
 		메일 내용

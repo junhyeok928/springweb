@@ -192,7 +192,90 @@ ex) vo, dao, mapper, service, controller 호출해서 json데이터를 출력하
 			return "redirect:/calendar.do"
 		5조	
 			
-					
+# 개발 순서
+1. 기본 sample lib을 다운 받는다.
+	- webapp 하위에 폴드에서 샘플 화면을 확인
+
+2. jsp 적용을 위해서 필요로 하는 css/js를 공통 폴드로 설정하여 처리한다.
+	- webapp/a00_com/lib 폴드 복사 및 설정
+	- 
+	  <link href='${path}/a00_com/lib/main.css' rel='stylesheet' />
+	  <script src='${path}/a00_com/lib/main.js'></script>
+	- 사용한 sample  @@.html을 확인  					
+3. controller 선언과 함께 환경 설정이 된 jsp 파일으로 초기 화면을 호출 한다.
+	// http://localhost:7080/springweb/calendar.do
+	@GetMapping("calendar.do")
+	public String calendar() {
+		return "WEB-INF\\views\\a02_mvc\\a20_fullCalendar.jsp";
+		
+4. 사용하게 될 데이터베이스를 확인한다.
+	1) sample에서 나온 json 데이터
+	2) 사이트에서 지원하는 api 분석
+	      events: [
+	    	{
+	            title: '일정 등록^^',
+	            start: '2022-03-02'   			
+	    	},	
+	3) 데이터가 어느 정도 정리되었으면 테이블을 만들고,
+		사용하게될 sql, vo, mapper, dao, service, controller를 만든다.
+5. 초기화면로딩할 이벤트 핸들러를 확인(해당사이트 document 문서 참고)하고, 
+	ajax를 통해서 json 데이터를 불러오고, 할당한 기능 keyword를 확인하여 처리한다.
+      events: function(info, successCallback,failureCallback){
+    	  // 서버에 있는 json 데이터 가져와서, fullcalenar 입력하기
+    	  $.ajax({
+    		  type:"post",
+    		  url:"${path}/calList.do",
+    		  dataType:"json",
+    		  success:function(data){
+    			  console.log(data.calList)
+    			  successCallback(data.calList);
+ 6. 각종 기능 이벤트를 확인하고, 해당 이벤트에 처리한 화면 ui를 구성한 후,
+ 	데이터 로딩 방식을 결정한다.
+ 	1) 등록 처리
+ 		- 등록 이벤트 확인
+ 		- 등록 화면 ui 결정(dialogue box)
+      		 select: function(arg) {		
+ 		- 등록 버튼을 통해 기존에 있는 DB에 등록 처리
+ 			form화면 구성와 요청값을 통해서 controller단 호출 처리
+	    	$("[name=start]").val(arg.start.toISOString())
+	    	$("[name=end]").val(arg.end.toISOString())
+	    	$("[name=allDay]").val(""+arg.allDay) 		
+	         <button type="button" id="regBtn" class="btn btn-primary">일정등록</button>
+	 		<form id="frm01" class="form"  method="post">
+			 <input type="hidden" name="id" value="0"/>
+		     <div class="row">
+		      <div class="col">
+		        <input type="text" class="form-control" placeholder="제목 입력" name="title">
+	 	- 등록 sql 작성, dao/mapper/service
+	 	- 등록 처리하는 controller 선언
+		@RequestMapping("insertCalendar")
+		public String insertCalendar(Calendar ins){
+			service.insertCalendar(ins);
+			return "redirect:/calendar.do";
+		}	 		
+ 		$("#regBtn").click(function(){
+			if(confirm("일정등록하시겠습니까?")){
+				$("#frm01").attr("action","${path}/insertCalendar.do");
+				$("#frm01").submit();		
+ 	2) 상세확인 수정 삭제
+ 		- 해당 일정 클릭시 처리되는 이벤트 확인 
+ 			eventClick, eventDrop, eventResize
+ 		- 처리할 화면 구성 결정 (dialogue)
+ 		- form 화면에 로딩데이터 할당.
+ 		- 기능 처리를 통한 controller단 호출
+ 		- 기능에 해당하는 sql작성(수정/삭제), dao, mapper, service, controller단 연결 처리
+ 			
+ 
+ 
+ 
+    			  		
+		
+		
+		    					
+
+
+
+
 
  	 
  	 
