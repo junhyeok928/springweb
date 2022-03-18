@@ -87,9 +87,40 @@
 		});
 	3) 이벤트 버스를 통한 이벤트 공유
 		var eventBus = new Vue();
-			
-
+		<template>
+			<h2 @click="call"
+		Vue.component({
+			methods:{
+				call:function(){
+					eventBus.$emit("이벤트버스명",전달데이터1,전달데이터2...);
+					eventBus.$emit("evnt01",this.name, this.age);
+				}
+			}
+		})		
+		<컴포넌트명 상위이벤트="핸들러함수">
+		<com01 click="parentEvnt">
+		new Vue({
+			created:function(){  // 라이프 사이클에 의해서 호출되는 내용..
+				eventBus.$on("이벤트버스명", this.기능메서드)
+				eventBus.$on("evnt01", this.parentEvnt);
+			},
+			methods:{
+				parentEvnt:function(data1, data2){
+					// 이벤트 버스에 의해 연동한 메서드를 호출하여, 데이터를 받을 수 있다.
+				}
+			}
+		});
+		
 2. 채팅은 어떤 통신 방식을 이용할까?
+	웹 소켙 통신을 이용한 통신 방식으로, push 방식으로 처리 된다.
+	
+	소켙클라이언트1(브라우저)   ===>   소켙서버(백엔드)    
+	소켙클라이언트2(브라우저)          연결되어 있으면, 한명의 클라이언트를 통해 전달되어 온 데이터
+	소켙클라이언트3(브라우저)          모든 소켓클라이언트에게 push방식으로 전달한다.
+	소켙클라이언트4(브라우저)      
+	주로 채팅 처리를 하거나 결재 처리 되었습니다.
+	메시지 왔습니다. 등을 실시간으로 처리하게 될 때, 사용된다.		
+
 3. 
 
 

@@ -1,26 +1,26 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="${encoding}">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/a00_com/bootstrap.min.css" >
-<link rel="stylesheet" href="/a00_com/jquery-ui.css" >
+<style>
+	td{text-align:center;}
+</style>
 <script src="/a00_com/jquery.min.js"></script>
-<script src="/a00_com/popper.min.js"></script>
 <script src="/a00_com/bootstrap.min.js"></script>
-<script src="/a00_com/jquery-ui.js"></script>
 <script type="text/javascript">
 	$$(document).ready(function(){
 
 	});
 </script>
 </head>
-
 <body>
-<div class="jumbotron text-center">
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">타이틀</h2>
 
-</div>
 <div class="container">
+	<div class="jumbotron text-center">
+	  <h2 ></h2>
+	</div>
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	    <input class="form-control mr-sm-2" placeholder="제목" />
@@ -49,8 +49,7 @@
     	<tr><td></td><td></td><td></td><td></td><td></td></tr>
     	<tr><td></td><td></td><td></td><td></td><td></td></tr>
     </tbody>
-	</table>    
-    
+	</table>       
 </div>
 </body>
 </html>
